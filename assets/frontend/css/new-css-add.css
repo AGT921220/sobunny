@@ -306,3 +306,22 @@ span.popup_contents__close.popup_close i {
 
 
 
+
+nav,nav ul li a,nav button
+{
+    background: #000000 !important;
+}
+
+nav a
+{
+    color: #f1cf68 !important;
+}
+
+.homme-banner-img
+{
+    background-image: url("/assets/frontend/img/banner.png") !important;
+    min-height: 90vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
