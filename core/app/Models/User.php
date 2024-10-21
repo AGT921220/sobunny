@@ -102,10 +102,10 @@ class User extends Authenticatable
     {
         return $this->hasOne(IdentityVerification::class,'user_id','id');
     }
-    public function user_wallet()
-    {
-        return $this->hasOne(Wallet::class,'user_id','id');
-    }
+    // public function user_wallet()
+    // {
+    //     return $this->hasOne(Wallet::class,'user_id','id');
+    // }
 
     public function membershipUser()
     {

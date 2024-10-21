@@ -8,7 +8,7 @@ core/node_modules/
 bootstrap/compiled.php
 app/storage/
 docker/nginx/
-core/storage/
+/core/storage/
 
 # Laravel 5 & Lumen specific
 core/storage

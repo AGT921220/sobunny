@@ -177,7 +177,8 @@ class ModuleMetaData
         if (file_exists(base_path() . "/modules_statuses.json") && !is_dir(base_path() . "/modules_statuses.json")) {
             $modules_status_data = json_decode(file_get_contents(base_path() . "/modules_statuses.json"), true);
         }
-
+        info('modules_status_data', $modules_status_data);
+        info('allDirectories', $allDirectories);
         foreach ($allDirectories as $dire) {
             // scan all the json file
             $currFolderName = pathinfo($dire, PATHINFO_BASENAME);
