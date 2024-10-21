@@ -6450,16 +6450,16 @@ object {
   }
 }
 .navbar-area .nav-container .logo-wrapper .logo img {
-  max-width: 225px;
+  max-width: 185px;
 }
 @media (min-width: 992px) and (max-width: 1199.98px) {
   .navbar-area .nav-container .logo-wrapper .logo img {
-    max-width: 160px;
+    max-width: 140px;
   }
 }
 @media (min-width: 320px) and (max-width: 991.98px) {
   .navbar-area .nav-container .logo-wrapper .logo img {
-    max-width: 150px;
+    max-width: 130px;
   }
 }
 .navbar-area .nav-container .nav-right-content {

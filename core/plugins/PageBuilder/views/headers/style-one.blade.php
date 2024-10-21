@@ -1,7 +1,7 @@
 <!--Banner part Start-->
-<div class="home-banner homme-banner-img" data-padding-top="{{$padding_top}}" data-padding-bottom="{{$padding_bottom}}" {!! $background_image !!}>
+<div id="home-banner" class="home-banner homme-banner-img" data-padding-top="{{$padding_top}}" data-padding-bottom="{{$padding_bottom}}" {!! $background_image !!}>
 
-    {{-- <div class="container-1920 position-relative plr">
+     <div class="container-1920 position-relative plr">
         <div class="letf-part-img">
             <div class="img-wraper">
                 @foreach ($banner_left_images_01['banner_left_images_'] as $key => $banner_left_image)
@@ -54,6 +54,6 @@
                 </form>
             </div>
         </div>
-    </div> --}}
+    </div> 
 </div>
 <!--Banner part End-->
