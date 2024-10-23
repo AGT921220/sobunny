@@ -45,21 +45,21 @@ services:
       timeout: 10s
       retries: 5
 
-  # phpmyadmin:
-  #   image: phpmyadmin/phpmyadmin
-  #   container_name: pma-sobunny
-  #   environment:
-  #     PMA_HOST: mysql-sobunny
-  #     PMA_PORT: 3306
-  #     PMA_ARBITRARY: 1
-  #   restart: always
-  #   ports:
-  #     - "${PORT_PHPMYADMIN:-81}:80"      
-  #   networks:
-  #     - appnetwork
-  #   depends_on:
-  #     mysql:
-  #       condition: service_healthy
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: pma-sobunny
+    environment:
+      PMA_HOST: mysql-sobunny
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    restart: always
+    ports:
+      - "${PORT_PHPMYADMIN:-81}:80"      
+    networks:
+      - appnetwork
+    depends_on:
+      mysql:
+        condition: service_healthy
 
   php:
     build:
