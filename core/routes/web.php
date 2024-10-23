@@ -119,8 +119,8 @@ Route::group(['middleware' => ['globalVariable', 'maintains_mode','setlang']], f
     // guest listing add without login
     Route::controller(\App\Http\Controllers\Frontend\GuestListingController::class)->group(function () {
         Route::group(['prefix'=>'listing'],function(){
-            Route::match(['get','post'],'/guest/add-listing','guestAddListing')->name('guest.add.listing');
-            Route::post('/guest/request-check','guestRequestCheck')->name('guest.request.check');
+            Route::match(['get','post'],'/guest/add-listing','guestAddListing')->name('guest.add.listing')->middleware('auth:web');
+            Route::post('/guest/request-check','guestRequestCheck')->name('guest.request.check')->middleware('auth:web');
         });
     });
 
