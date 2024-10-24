@@ -5,10 +5,13 @@ yarn-error.log
 core/vendor/
 core/node_modules/
 core/storage/
+assets/uploads/
 # Laravel 4 specific
 bootstrap/compiled.php
 app/storage/
-docker/nginx/
+docker/nginx/logs/
+docker/nginx/certs/
+docker/nginx/log
 /core/storage/
 core/storage/
 # Laravel 5 & Lumen specific
