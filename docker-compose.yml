@@ -30,10 +30,10 @@ services:
     ports:
       - "${PORT_MYSQL:-3306}:3306"
     environment:
-      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_ROOT_PASSWORD=?(G{Y{zv1v9Qh'7P73-
       - MYSQL_USER=user
-      - MYSQL_PASSWORD=password
-      - MYSQL_DATABASE=db
+      - MYSQL_PASSWORD=?(G{Y{zv1v9Qh'7P73-
+      - MYSQL_DATABASE=sobynny_db
     volumes:
       - mysql_data:/var/lib/mysql
       - ./docker/mysql/sobunny.sql:/docker-entrypoint-initdb.d/sobunny.sql
@@ -41,7 +41,7 @@ services:
       - appnetwork
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 30s
+      interval: 90s
       timeout: 10s
       retries: 5
 
@@ -72,7 +72,7 @@ services:
       - ./docker/php/php.ini:/usr/local/etc/php/php.ini
       - ./.env:/var/www/html/.env
     ports:
-      - "9002:9000"
+      - "9000:9000"
     networks:
       - appnetwork
     depends_on:
