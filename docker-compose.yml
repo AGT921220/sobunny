@@ -30,9 +30,9 @@ services:
     ports:
       - "${PORT_MYSQL:-3306}:3306"
     environment:
-      - MYSQL_ROOT_PASSWORD=?(G{Y{zv1v9Qh'7P73-
+      - MYSQL_ROOT_PASSWORD=pA7kE3xW!s9QmL2z
       - MYSQL_USER=user
-      - MYSQL_PASSWORD=?(G{Y{zv1v9Qh'7P73-
+      - MYSQL_PASSWORD=pA7kE3xW!s9QmL2z
       - MYSQL_DATABASE=sobynny_db
     volumes:
       - mysql_data:/var/lib/mysql

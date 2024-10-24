@@ -318,7 +318,7 @@
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="right-sidebar">
-                                                <div class="box-shadow1 price p-24">
+                                                {{-- <div class="box-shadow1 price p-24">
                                                     <div class="price-wraper">
                                                         <label for="price">{{ __('Price') }} <span class="text-danger">*</span> </label>
                                                         <input type="number" name="price" id="price" value="{{ old('price') }}" class="input-filed w-100 mb-3" placeholder="{{__('0.00')}}">
@@ -327,7 +327,7 @@
                                                             <span class="ms-2">{{ __('Negotiable') }}</span>
                                                         </label>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                                 <div class="box-shadow1 hode-phone-number p-24 mt-3">
                                                     <label class="hide-number">
                                                         <input type="checkbox" class="custom-check-box" name="hide_phone_number" value="">

@@ -116,7 +116,7 @@ class ListingController extends Controller
                 'title' => 'required|max:191',
                 'description' => 'required|min:150',
                 'slug' => 'required|max:255|unique:listings',
-                'price' => 'required|numeric'
+                // 'price' => 'required|numeric'
             ], [
                 'title.required' => __('The title field is required.'),
                 'title.max' => __('The title must not exceed 191 characters.'),
@@ -124,8 +124,8 @@ class ListingController extends Controller
                 'description.min' => __('The description must be at least 150 characters.'),
                 'slug.required' => __('The slug field is required.'),
                 'slug.unique' => __('The slug has already been taken.'),
-                'price.required' => __('The price field is required.'),
-                'price.numeric' => __('The price must be a numeric value.')
+                // 'price.required' => __('The price field is required3.'),
+                // 'price.numeric' => __('The price must be a numeric value.')
             ]);
 
             $user = User::where('id', Auth::guard('web')->user()->id)->first();
