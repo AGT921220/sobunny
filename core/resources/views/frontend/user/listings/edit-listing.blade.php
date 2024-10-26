@@ -219,9 +219,9 @@
                                                         </div>
                                                         <div class="col-sm-4">
                                                             <div class="item-subcatagory-wraper">
-                                                                <label for="item-subcatagory">{{__('Child Category')}} </label>
+                                                                <label for="item-subcatagory">{{__('Age')}} </label>
                                                                 <select  name="child_category_id" id="child_category" class="select2_activation">
-                                                                    <option value="">{{__('Select Child Category')}}</option>
+                                                                    <option value="">{{__('Select Age')}}</option>
                                                                     @if(!empty($listing->child_category_id))
                                                                         @foreach($child_categories as $child_cat)
                                                                             <option value="{{$child_cat->id}}"  @if($child_cat->id == $listing->child_category_id) selected @endif>{{ $child_cat->name }}</option>
@@ -608,7 +608,7 @@
                     })
                 });
 
-                // listing sub category and child category
+                // listing sub category and Age
                 $(document).on('change','#subcategory', function() {
                     var sub_cat_id = $(this).val();
                     $.ajax({
@@ -620,8 +620,8 @@
                         success: function(res) {
 
                             if (res.status == 'success') {
-                                var alloptions = "<option value=''>{{__('Select Child Category')}}</option>";
-                                var allList = "<li data-value='' class='option'>{{__('Select Child Category')}}</li>";
+                                var alloptions = "<option value=''>{{__('Select Age')}}</option>";
+                                var allList = "<li data-value='' class='option'>{{__('Select Age')}}</li>";
                                 var allChildCategory = res.child_category;
 
                                 $.each(allChildCategory, function(index, value) {
@@ -633,7 +633,7 @@
 
                                 $("#child_category").html(alloptions);
                                 $(".child_category_wrapper ul.list").html(allList);
-                                $(".child_category_wrapper").find(".current").html("Select Child Category");
+                                $(".child_category_wrapper").find(".current").html("Select Age");
                             }
                         }
                     });

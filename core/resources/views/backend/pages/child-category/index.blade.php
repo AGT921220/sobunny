@@ -1,6 +1,6 @@
 @extends('backend.admin-master')
 @section('site-title')
-    {{__('All Child Categories')}}
+    {{__('All Age')}}
 @endsection
 @section('content')
     <div class="row g-4 mt-0">
@@ -9,14 +9,14 @@
                 <div class="dashboard__inner__header">
                     <div class="dashboard__inner__header__flex">
                         <div class="dashboard__inner__header__left">
-                            <h4 class="dashboard__inner__header__title">{{ __('All Child Categories') }}</h4>
+                            <h4 class="dashboard__inner__header__title">{{ __('All Age') }}</h4>
                             @can('child-category-bulk-delete')
                             <x-bulk-action.bulk-action/>
                             @endcan
                         </div>
                         <div class="dashboard__inner__header__right">
                             <div class="btn-wrapper">
-                                <a href="{{ route('admin.child.category.new') }}" class="cmnBtn btn_5 btn_bg_blue radius-5">{{ __('Add Child Category') }}</a>
+                                <a href="{{ route('admin.child.category.new') }}" class="cmnBtn btn_5 btn_bg_blue radius-5">{{ __('Add Age') }}</a>
                             </div>
                             <div class="d-flex text-right w-100 mt-3">
                                 <input class="form__control child_category_string_search" name="string_search" id="string_search" placeholder="{{ __('Search') }}">

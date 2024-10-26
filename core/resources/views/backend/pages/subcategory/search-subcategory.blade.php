@@ -9,9 +9,9 @@
     @endcan
 
     <th>{{__('ID')}}</th>
-    <th>{{__('Subcategory')}}</th>
+    <th>{{__('Ethnicity')}}</th>
     <th>{{__('Image')}}</th>
-    <th>{{__('Main Category')}}</th>
+    <th>{{__('Main Ethnicity')}}</th>
     <th>{{__('Status')}}</th>
     <th>{{__('Create Date')}}</th>
     <th>{{__('Action')}}</th>

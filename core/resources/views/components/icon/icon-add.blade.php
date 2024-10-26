@@ -1,5 +1,5 @@
 <div class="form__input__single">
-    <label for="icon" class="d-block form__input__single__label">{{__('Category Icon')}}</label>
+    <label for="icon" class="d-block form__input__single__label">{{__('Gender Icon')}}</label>
     <div class="btn-group icon">
         <button type="button" class="btn btn-primary iconpicker-component">
             <i class="fas fa-exclamation-triangle"></i>

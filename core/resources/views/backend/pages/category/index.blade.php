@@ -1,6 +1,6 @@
 @extends('backend.admin-master')
 @section('site-title')
-    {{__('All Categories')}}
+    {{__('All Genders')}}
 @endsection
 @section('content')
     <div class="row g-4 mt-0">
@@ -10,14 +10,14 @@
                 <div class="dashboard__inner__header">
                     <div class="dashboard__inner__header__flex">
                         <div class="dashboard__inner__header__left">
-                            <h4 class="dashboard__inner__header__title">{{ __('All Categories') }}</h4>
+                            <h4 class="dashboard__inner__header__title">{{ __('All Genders') }}</h4>
                             @can('category-bulk-delete')
                                 <x-bulk-action.bulk-action/>
                             @endcan
                         </div>
                         <div class="dashboard__inner__header__right">
                             @can('category-add')
-                                <a href="{{ route('admin.category.new') }}" class="cmnBtn btn_5 btn_bg_blue radius-5">{{ __('Add Category') }}</a>
+                                <a href="{{ route('admin.category.new') }}" class="cmnBtn btn_5 btn_bg_blue radius-5">{{ __('Add Gender') }}</a>
                             @endcan
                             <div class="btn-wrapper mt-3">
                                 <input class="form__control category_string_search" name="string_search" id="string_search" placeholder="{{ __('Search') }}">

@@ -1,6 +1,6 @@
 @extends('backend.admin-master')
 @section('site-title')
-    {{__('Add New Subcategory')}}
+    {{__('Add New Ethnicity')}}
 @endsection
 @section('style')
     <link rel="stylesheet" href="{{asset('assets/backend/css/bootstrap-tagsinput.css')}}">
@@ -21,10 +21,10 @@
             <div class="dashboard__card bg__white padding-20 radius-10">
                 <div class="header-wrap d-flex justify-content-between">
                     <div class="left-content">
-                        <h4 class="header-title">{{__('Add New Subcategory')}}   </h4>
+                        <h4 class="header-title">{{__('Add New Ethnicity')}}   </h4>
                     </div>
                     <div class="right-content">
-                        <a class="cmnBtn btn_5 btn_bg_blue radius-5" href="{{route('admin.subcategory')}}">{{__('All Subcategory')}}</a>
+                        <a class="cmnBtn btn_5 btn_bg_blue radius-5" href="{{route('admin.subcategory')}}">{{__('All Ethnicity')}}</a>
                     </div>
                 </div>
                 <x-validation.error/>
@@ -33,7 +33,7 @@
                     <div class="form__input__flex">
 
                         <div class="form__input__single">
-                            <label for="category_id" class="form__input__single__label">{{__('Parent Category')}}</label>
+                            <label for="category_id" class="form__input__single__label">{{__('Parent Ethnicity')}}</label>
                             <select name="category_id" id="category_id" class="select2_activation radius-5">
                                 @foreach($categories as $cat)
                                     <option value="{{$cat->id}}">{{$cat->name}}</option>
@@ -43,8 +43,8 @@
 
 
                         <div class="form__input__single">
-                            <label for="name" class="form__input__single__label">{{__('Sub Category')}}</label>
-                            <input type="text" class="form-control" name="name" id="name" placeholder="{{__('Sub Category')}}">
+                            <label for="name" class="form__input__single__label">{{__('Sub Ethnicity')}}</label>
+                            <input type="text" class="form-control" name="name" id="name" placeholder="{{__('Sub Ethnicity')}}">
                         </div>
                         <div class="form__input__single permalink_label">
                             <label class="text-dark form__input__single__label">{{__('Permalink * :')}}
@@ -62,7 +62,7 @@
                             <div class="summernote"></div>
                         </div>
                         <div class="form__input__single">
-                            <label for="image" class="form__input__single__label">{{__('Upload Sub Category Image')}}</label>
+                            <label for="image" class="form__input__single__label">{{__('Upload Sub Ethnicity Image')}}</label>
                             <div class="media-upload-btn-wrapper">
                                 <div class="img-wrap"></div>
                                 <input type="hidden" name="image">

@@ -2439,7 +2439,7 @@ function static_text(){
         'book_appoinment' => __('Book Appointment'),
         'read_more_btn' => __('View Details'),
         'select_category' => __('Select Category'),
-        'select_sub_category' => __('Select Subcategory'),
+        'select_sub_category' => __('Select Ethnicity'),
 
         'select_star' => __('Select Star'),
         'one_star' => __('One Star'),

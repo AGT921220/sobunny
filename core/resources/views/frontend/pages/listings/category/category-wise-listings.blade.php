@@ -41,7 +41,7 @@
                     </div>
                 @endif
 
-                    <h3 class="catagory-wise-title">{{ sprintf(__('Available Listing Categories in :category', ['category' => $category->name])) }}</h3>
+                    <h3 class="catagory-wise-title">{{ sprintf(__('Available Listing Genders in :category', ['category' => $category->name])) }}</h3>
                     <div class="catagory-wise-list-wraper exploreCategories">
                         <div id="services_sub_category_load_wrap">
                             <div class="services_sub_category_load_wraper mt-4">

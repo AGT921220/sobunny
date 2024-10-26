@@ -157,9 +157,9 @@ class ListingsOne extends PageBuilderBase
 
         $output .= Switcher::get([
             "name" => "child_category_on_off",
-            "label" => __("Child Category"),
+            "label" => __("Age"),
             "value" => $widget_saved_values["child_category_on_off"] ?? null,
-            "info" => __("Child Category wise listing Filtering Hide/Show"),
+            "info" => __("Age wise listing Filtering Hide/Show"),
         ]);
 
         $output .= Switcher::get([
@@ -223,19 +223,19 @@ class ListingsOne extends PageBuilderBase
 
         $output .= Text::get([
             "name" => "category",
-            "label" => __("Category Title Text"),
+            "label" => __("Ethnicity Title Text"),
             "value" => $widget_saved_values["category"] ?? null,
         ]);
 
         $output .= Text::get([
             "name" => "subcategory",
-            "label" => __("Subcategory Title Text"),
+            "label" => __("Ethnicity Title Text"),
             "value" => $widget_saved_values["subcategory"] ?? null,
         ]);
 
         $output .= Text::get([
             "name" => "child_category",
-            "label" => __("Child Category Title Text"),
+            "label" => __("Age Title Text"),
             "value" => $widget_saved_values["child_category"] ?? null,
         ]);
 
@@ -314,8 +314,8 @@ class ListingsOne extends PageBuilderBase
         $search_placeholder = $settings["listing_search_by_text"] ??  __("What are you looking for?");
 
         $category_text = $settings["category"] ?? __("Select Category");
-        $subcategory_text = $settings["subcategory"] ?? __("Select Subcategory");
-        $child_category_text = $settings["child_category"] ?? __("Select Child Category");
+        $subcategory_text = $settings["subcategory"] ?? __("Select Ethnicity");
+        $child_category_text = $settings["child_category"] ?? __("Select Age");
 
         $date_posted_title = $settings["date_posted_title"] ?? __("Date Posted");
         $date_posted = $settings["date_posted"] ?? "";
@@ -583,7 +583,7 @@ class ListingsOne extends PageBuilderBase
         $category_id = request()->get("cat");
         $sub_categories = SubCategory::where("status", 1)->where("category_id", $category_id)->get();
 
-        // no remove child category
+        // no remove Age
         $sub_category_id = request()->get("subcat");
         $child_categories = ChildCategory::select("id", "name")
             ->where("status", 1)
