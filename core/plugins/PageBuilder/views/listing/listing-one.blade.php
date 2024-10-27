@@ -287,7 +287,7 @@
                         @endif
 
                         <!--price range filter -->
-                        @if(!empty($price_range_on_off))
+                        {{-- @if(!empty($price_range_on_off))
                             <div class="catagoriesWraper mb-4">
                                 <div class="catagories priceRange">
                                     <h5 class="cateTitle mb-2 postdateTitle">{{ __('Price Range') }}</h5>
@@ -316,7 +316,7 @@
                                     </div>
                                 </div>
                             </div>
-                        @endif
+                        @endif --}}
                         <!--price range filter end -->
 
                         @if(!empty($listing_type_preferences))

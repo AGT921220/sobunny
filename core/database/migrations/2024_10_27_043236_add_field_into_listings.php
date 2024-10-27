@@ -12,8 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('listings', function (Blueprint $table) {
-            $table->decimal('price', 10, 2)->nullable()->change();
+            $table->unsignedInteger('eyecolor_id')->nullable();
+            $table->foreign('eyecolor_id')
+                ->references('id')
+                ->on('eye_colors')
+                ->onDelete('set null');
         });
+
     }
 
     /**
@@ -21,8 +26,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('listings', function (Blueprint $table) {
-            $table->decimal('price', 10, 2)->change();
+        Schema::table('listing', function (Blueprint $table) {
+            $table->dropForeign(['eyecolor_id']);
+            $table->dropColumn('eyecolor_id');
         });
     }
 };

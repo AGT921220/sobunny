@@ -3,6 +3,17 @@
 
 namespace plugins\PageBuilder\Addons\Listing;
 
+use App\Feature\Age\UseCases\GetAllAges;
+use App\Feature\BodyType\UseCases\GetAllBodyTypes;
+use App\Feature\Breast\UseCases\GetAllBreasts;
+use App\Feature\Cater\UseCases\GetAllCaters;
+use App\Feature\Ethnicity\UseCases\GetAllEthnicitys;
+use App\Feature\EyeColor\UseCases\GetAllEyeColors;
+use App\Feature\Geneder\UseCases\GetAllGenders;
+use App\Feature\HairColor\UseCases\GetAllHairColors;
+use App\Feature\Height\UseCases\GetAllHeights;
+use App\Feature\ServiceType\UseCases\GetAllServiceTypes;
+use App\Feature\Servicing\UseCases\GetAllServicings;
 use App\Models\Backend\Category;
 use App\Models\Backend\ListingTag;
 use App\Models\Backend\SubCategory;
@@ -30,6 +41,43 @@ use plugins\PageBuilder\PageBuilderBase;
 class ListingsOne extends PageBuilderBase
 {
     use LanguageFallbackForPageBuilder;
+
+    private $getAllGenders;
+    private $getAllEthnicitys;
+    private $getAllAges;
+    private $getAllBreasts;
+    private $getAllCaters;
+    private $getAllBodyTypes;
+    private $getAllEyeColors;
+    private $getAllHairColors;
+    private $getAllHeighs;
+    private $getAllServiceTypes;
+    private $getAllServicings;
+    // public function __construct(
+    //     // GetAllGenders $getAllGenders,
+    //     // GetAllEthnicitys $getAllEthnicitys,
+    //     // GetAllAges $getAllAges,
+    //     // GetAllCaters $getAllCaters,
+    //     // GetAllBreasts $getAllBreasts,
+    //     // GetAllEyeColors $getAllEyeColors,
+    //     // GetAllHairColors $getAllHairColors,
+    //     // GetAllHeights $getAllHeighs,
+    //     // GetAllServiceTypes $getAllServiceTypes,
+    //     // GetAllServicings $getAllServicings,
+    //     // GetAllBodyTypes $getAllBodyTypes
+    // ) {
+    //     // $this->getAllGenders = new GetAllGenders();
+    //     // $this->getAllEthnicitys = new GetAllEthnicitys();
+    //     // $this->getAllAges = new GetAllAges();
+    //     // $this->getAllBreasts = new GetAllBreasts();
+    //     // $this->getAllCaters = new GetAllCaters();
+    //     // $this->getAllBodyTypes = new GetAllBodyTypes();
+    //     // $this->getAllEyeColors = new GetAllEyeColors();
+    //     // $this->getAllHairColors = new GetAllHairColors();
+    //     // $this->getAllHeighs = new GetAllHeights();
+    //     // $this->getAllServiceTypes = new GetAllServiceTypes();
+    //     // $this->getAllServicings = new GetAllServicings();
+    // }
 
     public function preview_image()
     {
@@ -662,6 +710,20 @@ class ListingsOne extends PageBuilderBase
         // listing list page url
         $url_search_listings_list = get_static_option('select_home_page_search_listing_page_url') ?? '/listings';
 
+
+        $this->getAllGenders = new GetAllGenders();
+        $this->getAllEthnicitys = new GetAllEthnicitys();
+        $this->getAllAges = new GetAllAges();
+        $this->getAllBreasts = new GetAllBreasts();
+        $this->getAllCaters = new GetAllCaters();
+        $this->getAllBodyTypes = new GetAllBodyTypes();
+        $this->getAllEyeColors = new GetAllEyeColors();
+        $this->getAllHairColors = new GetAllHairColors();
+        $this->getAllHeighs = new GetAllHeights();
+        $this->getAllServiceTypes = new GetAllServiceTypes();
+        $this->getAllServicings = new GetAllServicings();
+
+        
         return $this->renderBlade('listing.listing-one',[
             'padding_top' => $padding_top,
             'padding_bottom' => $padding_bottom,
@@ -730,7 +792,24 @@ class ListingsOne extends PageBuilderBase
             'location_on_off' => $location_on_off,
             'price_range_on_off' => $price_range_on_off,
             'max_price_start_value' => $max_price_start_value,
-            'countryCodesStr' => $countryCodesStr
+            'countryCodesStr' => $countryCodesStr,
+
+
+
+
+
+            'genders' => $this->getAllGenders->__invoke(),
+            'ethnicities' => $this->getAllEthnicitys->__invoke(),
+            'ages' => $this->getAllAges->__invoke(),
+            'breasts' => $this->getAllBreasts->__invoke(),
+            'caters' => $this->getAllCaters->__invoke(),
+            'bodyTypes' => $this->getAllBodyTypes->__invoke(),
+            'eyeColors' => $this->getAllEyeColors->__invoke(),
+            'hairColors' => $this->getAllHairColors->__invoke(),
+            'serviceTypes' => $this->getAllServiceTypes->__invoke(),
+            'servicings' => $this->getAllServicings->__invoke(),
+            'heights' => $this->getAllHeighs->__invoke(),
+    
         ]);
 
     }
