@@ -411,11 +411,23 @@ class ListingController extends Controller
 
             // Validation start
             $request->validate([
-                'category_id' => 'required',
+                // 'category_id' => 'required',
                 'title' => 'required|max:191',
                 'description' => 'required|min:150',
                 'slug' => 'required|unique:listings,slug,' . $id . ',id',
-                'price' => 'required|numeric'
+                'gender_id'=>'required',
+                'ethnicity_id'=>'required',
+                'age_id'=>'required',
+                'breasts_id'=>'required',
+                'cater_id'=>'required',
+                'body_type_id'=>'required',
+                'eye_color_id'=>'required',
+                'hair_color_id'=>'required',
+                'service_type_id'=>'required',
+                'servicing_id'=>'required',
+                'heights_id'=>'required',
+
+                // 'price' => 'required|numeric'
             ], [
                 'title.required' => __('The title field is required.'),
                 'title.max' => __('The title must not exceed 191 characters.'),
@@ -423,8 +435,8 @@ class ListingController extends Controller
                 'description.min' => __('The description must be at least 150 characters.'),
                 'slug.required' => __('The slug field is required.'),
                 'slug.unique' => __('The slug has already been taken.'),
-                'price.required' => __('The price field is required.'),
-                'price.numeric' => __('The price must be a numeric value.')
+                // 'price.required' => __('The price field is required.'),
+                // 'price.numeric' => __('The price must be a numeric value.')
             ]);
 
             // country, state, city
@@ -473,6 +485,16 @@ class ListingController extends Controller
             $listing->lon = $request->longitude;
             $listing->is_featured = $request->is_featured ?? 0;
             $listing->status = $status;
+            $listing->ethnicity_id = $request->input('ethnicity_id');
+            $listing->age_id = $request->input('age_id');
+            $listing->breast_id = $request->input('breasts_id');
+            $listing->cater_id = $request->input('cater_id');
+            $listing->body_type_id = $request->input('body_type_id');
+            $listing->eyecolor_id = $request->input('eye_color_id');
+            $listing->hair_color_id = $request->input('hair_color_id');
+            $listing->service_type_id = $request->input('service_type_id');
+            $listing->servicing_id = $request->input('servicing_id');
+            $listing->height_id = $request->input('heights_id');
 
 
             $tags_name = '';
@@ -550,6 +572,18 @@ class ListingController extends Controller
             }
         }
 
+        $genders = $this->getAllGenders->__invoke();
+        $ethnicities = $this->getAllEthnicitys->__invoke();
+        $ages = $this->getAllAges->__invoke();
+        $breasts = $this->getAllBreasts->__invoke();
+        $caters = $this->getAllCaters->__invoke();
+        $bodyTypes = $this->getAllBodyTypes->__invoke();
+        $eyeColors = $this->getAllEyeColors->__invoke();
+        $hairColors = $this->getAllHairColors->__invoke();
+        $serviceTypes = $this->getAllServiceTypes->__invoke();
+        $servicings = $this->getAllServicings->__invoke();
+        $heights = $this->getAllHeighs->__invoke();
+
         return view('frontend.user.listings.edit-listing', compact(
             'membership_page_url',
             'user_featured_listing_enable',
@@ -562,7 +596,19 @@ class ListingController extends Controller
             'all_countries',
             'all_states',
             'all_cities',
-            'tags'
+            'tags',
+            'genders',
+            'ethnicities',
+            'ages',
+            'breasts',
+            'caters',
+            'bodyTypes',
+            'eyeColors',
+            'hairColors',
+            'serviceTypes',
+            'servicings',
+            'heights'
+
         ));
     }
 

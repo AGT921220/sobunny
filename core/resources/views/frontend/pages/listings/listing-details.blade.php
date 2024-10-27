@@ -272,7 +272,8 @@
                         <!-- Top -->
                         <div class="descriptionTop">
                             <div class="row gy-4">
-                                @if(!empty($listing->condition))
+                                @include('listingDetails.listingDetails')
+                                {{-- @if(!empty($listing->condition))
                                 <div class="col-4">
                                     {{ __('Condition:') }} <span class="text-bold"> {{ $listing->condition }} </span>
                                 </div>
@@ -286,7 +287,7 @@
                                     <div class="col-4">
                                         {{ __('Brand:') }} <span class="text-bold">{{ $listing->brand?->title }}</span>
                                     </div>
-                                @endif
+                                @endif --}}
                             </div>
                         </div>
                         <div class="devider"></div>
