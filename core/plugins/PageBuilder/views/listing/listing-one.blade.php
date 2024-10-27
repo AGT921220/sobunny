@@ -144,6 +144,7 @@
                 <div class="cateLeftContent">
                     <div class="cateSidebar1">
 
+                        
                         <!--Search any title filter start -->
                         @if(!empty($listing_search_by_text_on_off))
                             <div class="catagoriesWraper mb-4">
@@ -197,7 +198,7 @@
                         <!--google map Distance filter end -->
 
                         <!-- All Categories -->
-                        <div class="catagoriesWraper mb-4">
+                        {{-- <div class="catagoriesWraper mb-4">
                             @if(!empty($category_on_off))
                                 <div class="catagories w-100">
                                     <select id="search_by_category" name="cat" class="categorySelect">
@@ -228,7 +229,7 @@
                                     </select>
                                 </div>
                              @endif
-                        </div>
+                        </div> --}}
 
                         <!-- Location -->
                         @if(empty(get_static_option("google_map_settings_on_off")))
@@ -319,6 +320,8 @@
                         @endif --}}
                         <!--price range filter end -->
 
+                        @include('filters.filtersListing')  
+{{-- 
                         @if(!empty($listing_type_preferences))
                             <div class="catagoriesWraper mb-4">
                                 <div class="catagories">
@@ -329,9 +332,9 @@
                                     </ul>
                                 </div>
                             </div>
-                        @endif
+                        @endif --}}
 
-                        @if(!empty($listing_condition))
+                        {{-- @if(!empty($listing_condition))
                             <div class="catagoriesWraper mb-4">
                                 <div class="catagories">
                                     <h5 class="cateTitle mb-2 postdateTitle">{{ $listing_condition_title }}</h5>
@@ -341,9 +344,9 @@
                                     </ul>
                                 </div>
                             </div>
-                        @endif
+                        @endif --}}
 
-                        @if(!empty($date_posted))
+                        {{-- @if(!empty($date_posted))
                             <div class="catagoriesWraper mb-4">
                                 <div class="catagories">
                                     <h5 class="cateTitle mb-2 postdateTitle">{{ $date_posted_title }}</h5>
@@ -354,7 +357,7 @@
                                     </ul>
                                 </div>
                             </div>
-                        @endif
+                        @endif --}}
 
                         <!-- Sort-by filter start -->
                         @if(!empty($sort_by_on_off))

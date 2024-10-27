@@ -185,7 +185,7 @@ class ListingsOne extends PageBuilderBase
             "name" => "listing_search_by_text_on_off",
             "label" => __("listing search"),
             "value" =>
-                $widget_saved_values["listing_search_by_text_on_off"] ?? null,
+            $widget_saved_values["listing_search_by_text_on_off"] ?? null,
             "info" => __("listing search Hide/Show"),
         ]);
 
@@ -321,9 +321,8 @@ class ListingsOne extends PageBuilderBase
     }
 
 
-    public function frontend_render() : string
+    public function frontend_render(): string
     {
-
         $settings = $this->get_settings();
         $order_by = $settings["order_by"] ?? "";
         $IDorDate = $settings["order"] ?? "";
@@ -389,15 +388,15 @@ class ListingsOne extends PageBuilderBase
 
         $radius = 150;
         $distance_radius_km_get = 50;
-        if(!empty(get_static_option("google_map_settings_on_off"))){
-            if(!empty(request()->get('latitude')) && !empty(request()->get('longitude'))){
+        if (!empty(get_static_option("google_map_settings_on_off"))) {
+            if (!empty(request()->get('latitude')) && !empty(request()->get('longitude'))) {
                 // Calculate the radius in kilometers (adjust as needed)
                 $distance_radius_km_get = request()->get('distance_kilometers_value');
                 $distance_radius_km = (int) $distance_radius_km_get;
 
-                if($distance_radius_km == 0){
+                if ($distance_radius_km == 0) {
                     $radius = 50;
-                }else{
+                } else {
                     $radius = $distance_radius_km;
                 }
 
@@ -407,10 +406,10 @@ class ListingsOne extends PageBuilderBase
                             cos(radians(?)) * cos(radians(listings.lat)) * cos(radians(listings.lon) - radians(?)) +
                             sin(radians(?)) * sin(radians(listings.lat))
                         )) AS distance",
-                    [$latitude, $longitude, $latitude])
+                    [$latitude, $longitude, $latitude]
+                )
                     ->havingRaw('distance <= ?', [$radius])
                     ->orderBy('distance', 'asc');
-
             }
         }
 
@@ -449,7 +448,7 @@ class ListingsOne extends PageBuilderBase
             if ($listings_country) {
                 $listings_country_ids = $listings_country->states->pluck("id")->toArray();
             }
-           $listing_query->whereIn("state_id", $listings_country_ids)->get();
+            $listing_query->whereIn("state_id", $listings_country_ids)->get();
         }
 
         // get state
@@ -465,7 +464,6 @@ class ListingsOne extends PageBuilderBase
         if (!empty(request()->get("cat"))) {
             $listing_query->where("category_id", request()->get("cat"));
         }
-
         if (!empty(request()->get("subcat"))) {
             $listing_query->where("sub_category_id", request()->get("subcat"));
         }
@@ -476,7 +474,7 @@ class ListingsOne extends PageBuilderBase
                 request()->get("child_cat")
             );
         }
-
+        $listing_query = $this->applyFilters($listing_query);
 
         $tagIds = request()->get("tag_id");
         if (!empty($tagIds)) {
@@ -539,7 +537,7 @@ class ListingsOne extends PageBuilderBase
         }
 
         // date posted
-          $date_posted_value = request()->get("date_posted_listing");
+        $date_posted_value = request()->get("date_posted_listing");
         if (!empty(request()->get("date_posted_listing"))) {
             if (request()->get("date_posted_listing") == "yesterday") {
                 $listing_query->whereDate('published_at', now()->subDays(1));
@@ -561,11 +559,11 @@ class ListingsOne extends PageBuilderBase
 
         $memberIds = [0];
         // get all users ids from the users table according to listing table datas
-        if (moduleExists('Membership') && membershipModuleExistsAndEnable('Membership')){
+        if (moduleExists('Membership') && membershipModuleExistsAndEnable('Membership')) {
             $memberIds = Listing::query()->select('listings.user_id')
-                ->join('user_memberships', 'user_memberships.user_id','=','listings.user_id')
+                ->join('user_memberships', 'user_memberships.user_id', '=', 'listings.user_id')
                 ->whereNot('listings.user_id', 0)
-                ->where('user_memberships.expire_date','>=', date('Y-m-d'))
+                ->where('user_memberships.expire_date', '>=', date('Y-m-d'))
                 ->distinct()
                 ->pluck('user_id')
                 ->push(0)
@@ -573,13 +571,13 @@ class ListingsOne extends PageBuilderBase
         }
 
         // add filter for check user has set his zone or not
-        $all_listings = $listing_query->where(function ($query) use ($memberIds){
-                return $query->whereIn('listings.user_id', $memberIds)
-                    ->orWhereNotNull('admin_id');
-            })
+        $all_listings = $listing_query->where(function ($query) use ($memberIds) {
+            return $query->whereIn('listings.user_id', $memberIds)
+                ->orWhereNotNull('admin_id');
+        })
             ->where('status', 1)
             ->where('is_published', 1)
-            ->orderBy($order_by,$IDorDate)
+            ->orderBy($order_by, $IDorDate)
             ->paginate($items);
 
         $countries = Country::select("id", "country")
@@ -600,16 +598,16 @@ class ListingsOne extends PageBuilderBase
         }
 
         // no remove need for city
-        if(request()->get("country")){
+        if (request()->get("country")) {
             $country_id = request()->get("country");
-        }else{
+        } else {
             $find_country_id = State::where('id', request()->get("city"))->first();
             $country_id = $find_country_id->country_id ?? 0;
         }
 
         // if country is disable/off
-        if(!empty(request()->get("state"))){
-            if(empty($country_on_off)){
+        if (!empty(request()->get("state"))) {
+            if (empty($country_on_off)) {
                 $listing_state_id = request()->get("state");
                 $country_find = State::find($listing_state_id);
                 $country_id = $country_find->country_id;
@@ -623,7 +621,7 @@ class ListingsOne extends PageBuilderBase
         $listings_city = City::where("status", 1)->where("state_id", $listing_state_id)->get();
 
         // first check if country and city is disable get area list
-        if (empty($country_on_off) && empty($state_on_off)){
+        if (empty($country_on_off) && empty($state_on_off)) {
             $listings_city = City::where("status", 1)->get();
         }
 
@@ -666,11 +664,11 @@ class ListingsOne extends PageBuilderBase
                                         <path d="M4 0V3.88889H7L3 10V6.11111H0L4 0Z" fill="white"/>
                                     </svg>' . $featured_title . '
                                 </span>';
-                    }
+                }
 
-                if (!empty($listing->published_at)){
+                if (!empty($listing->published_at)) {
                     $listing_published_at = \Carbon\Carbon::parse($listing->published_at)->format('j M Y');
-                }else{
+                } else {
                     $listing_published_at = '';
                 }
 
@@ -690,8 +688,7 @@ class ListingsOne extends PageBuilderBase
             // KM Filter
             $countryCodes = Country::where('status', 1)->pluck('country_code')->toArray();
             $countryCodesStr = implode(',', $countryCodes);
-
-        }else{
+        } else {
             $all_listings_list_json = '';
             $google_api_key = '';
             $listing_details_route = '';
@@ -703,8 +700,8 @@ class ListingsOne extends PageBuilderBase
 
         // filter with listing card
         $listing_grid_and_list_view = 'grid';
-        if(!empty(request()->get("listing_grid_and_list_view"))){
-           $listing_grid_and_list_view = request()->get("listing_grid_and_list_view");
+        if (!empty(request()->get("listing_grid_and_list_view"))) {
+            $listing_grid_and_list_view = request()->get("listing_grid_and_list_view");
         }
 
         // listing list page url
@@ -723,8 +720,8 @@ class ListingsOne extends PageBuilderBase
         $this->getAllServiceTypes = new GetAllServiceTypes();
         $this->getAllServicings = new GetAllServicings();
 
-        
-        return $this->renderBlade('listing.listing-one',[
+
+        return $this->renderBlade('listing.listing-one', [
             'padding_top' => $padding_top,
             'padding_bottom' => $padding_bottom,
             'columns' => $columns,
@@ -809,13 +806,60 @@ class ListingsOne extends PageBuilderBase
             'serviceTypes' => $this->getAllServiceTypes->__invoke(),
             'servicings' => $this->getAllServicings->__invoke(),
             'heights' => $this->getAllHeighs->__invoke(),
-    
-        ]);
 
+        ]);
     }
 
     public function addon_title()
     {
         return __('Listings: 01');
+    }
+    private function applyFilters($listingQuery)
+    {
+
+        if (!empty(request()->get("gender"))) {
+            $listingQuery = $listingQuery->where("gender_id", request()->get("gender"));
+        }
+
+        if (!empty(request()->get("ethnicity_id"))) {
+            $listingQuery = $listingQuery->where("ethnicity_id", request()->get("ethnicity_id"));
+        }
+
+        if (!empty(request()->get("age_id"))) {
+            $listingQuery = $listingQuery->where("age_id", request()->get("age_id"));
+        }
+
+        if (!empty(request()->get("breasts_id"))) {
+            $listingQuery = $listingQuery->where("breast_id", request()->get("breasts_id"));
+        }
+
+        if (!empty(request()->get("cater_id"))) {
+            $listingQuery = $listingQuery->where("cater_id", request()->get("cater_id"));
+        }
+
+        if (!empty(request()->get("body_type_id"))) {
+            $listingQuery = $listingQuery->where("body_type_id", request()->get("body_type_id"));
+        }
+
+        if (!empty(request()->get("eye_color_id"))) {
+            $listingQuery = $listingQuery->where("eyecolor_id", request()->get("eye_color_id"));
+        }
+
+        if (!empty(request()->get("hair_color_id"))) {
+            $listingQuery = $listingQuery->where("hair_color_id", request()->get("hair_color_id"));
+        }
+
+        if (!empty(request()->get("service_type_id"))) {
+            $listingQuery = $listingQuery->where("service_type_id", request()->get("service_type_id"));
+        }
+
+        if (!empty(request()->get("servicing_id"))) {
+            $listingQuery = $listingQuery->where("servicing_id", request()->get("servicing_id"));
+        }
+
+        if (!empty(request()->get("heights_id"))) {
+            $listingQuery = $listingQuery->where("height_id", request()->get("heights_id"));
+        }
+        return $listingQuery;
     }
 }
