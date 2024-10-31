@@ -17,6 +17,7 @@ core/storage/
 # Laravel 5 & Lumen specific
 core/storage
 core/hot
+/assets/uploads/
 
 # Laravel 5 & Lumen specific with changed public path
 public_html/storage
