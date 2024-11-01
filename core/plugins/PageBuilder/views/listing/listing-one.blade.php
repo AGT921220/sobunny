@@ -445,14 +445,14 @@
                                             <div class="loader"></div>
                                         </div>
                                         <!--google map section start -->
-                                        <div class="service-locationMap" id="map-container">
+                                        {{-- <div class="service-locationMap" id="map-container">
                                             <div class="fullwidth-sidebar-container">
                                                 <div class="sidebar top-sidebar">
                                                     <div id="map-canvas" class="map-canvas"  style="height: 700px; width: 450px; position: relative; overflow: hidden;">
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                    </div>
                                 @endif
                             @endif
@@ -511,7 +511,6 @@
                                               </a>
                                            </h4>
                                            <span class="featurePricing d-flex justify-content-between align-items-center">
-                                           <span class="money">`+place.listing_main_price+`</span>
                                            <span class="date">`+place.listing_published_at+`</span>
                                           </span>
                                     </div>

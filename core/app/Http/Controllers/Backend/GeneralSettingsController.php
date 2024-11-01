@@ -105,7 +105,7 @@ class GeneralSettingsController extends Controller
             'site_loader_animation' => 'nullable|string',
             'site_force_ssl_redirection' => 'nullable|string',
             'admin_panel_rtl_status' => 'nullable|string',
-            'site_google_captcha_enable' => 'nullable|string',
+            // 'site_google_captcha_enable' => 'nullable|string',
             'site_title' => 'nullable|string',
             'site_tag_line' => 'nullable|string',
             'site_footer_copyright' => 'nullable|string',
@@ -135,7 +135,7 @@ class GeneralSettingsController extends Controller
             'site_loader_animation',
             'admin_panel_rtl_status',
             'site_force_ssl_redirection',
-            'site_google_captcha_enable',
+            // 'site_google_captcha_enable',
             'site_canonical_url_type'
         ];
         foreach ($all_fields as $field) {

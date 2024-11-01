@@ -365,7 +365,7 @@
                                                     <div class="col-lg-8">
                                                         <div class="single-dashboard-input mb-3">
                                                                @if(get_static_option('google_map_settings_on_off') == null)
-                                                                   <div class="d-flex justify-content-between gap-3">
+                                                                   {{-- <div class="d-flex justify-content-between gap-3">
                                                                        <div class="input-form input-form2 w-100">
                                                                            <label class="form__input__single__label">{{ __('Select Your Country') }}</label>
                                                                            <select name="country_id" id="country_id" class="select2_activation">
@@ -400,10 +400,10 @@
                                                                            </select><br>
                                                                            <span class="city_info"></span>
                                                                        </div>
-                                                                   </div>
+                                                                   </div> --}}
                                                                @else
                                                                    <!--Google Map -->
-                                                                   <div class="form__input__single">
+                                                                   {{-- <div class="form__input__single">
                                                                        <label class="form__input__single__label">{{ __('Google Map Location') }}
                                                                            <a href="https://drive.google.com/file/d/1BwDAjSLAeb4LaxzOkrdsgGO_Io2jM6S6/view?usp=sharing" target="_blank">
                                                                                <strong class="text-warning">{{__('Video link')}}</strong>
@@ -415,7 +415,7 @@
                                                                                <div id="map_canvas" style="height: 480px"></div>
                                                                            </div>
                                                                        </div>
-                                                                   </div>
+                                                                   </div> --}}
                                                                @endif
                                                                <!-- Address -->
                                                                <div class="form__input__single">

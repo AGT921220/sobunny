@@ -43,10 +43,10 @@
                                 <input class="banner-input-field w-100" name="autocomplete" id="autocomplete" type="text" placeholder="{{ __('Search location here') }}">
                             </div>
                         @endif
-                        <div class="search-with-any-texts">
+                        {{-- <div class="search-with-any-texts">
                             <input class="banner-input-field w-100" type="text" name="home_search" id="home_search" placeholder="{{ __('What are you looking for?') }}">
                             <span id="all_search_result" class="search_with_text_section"></span>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="banner-btn">
                         <button type="submit" class="new-cmn-btn rounded-red-btn setLocation_btn border-0">{{ get_static_option('search_button_title') ?? __('Search') }} </button>

@@ -158,27 +158,35 @@ class RegisterController extends Controller
     public function userRegister(Request $request){
 
         if($request->isMethod('POST')){
+            $request->validate([
+                'first_name' => 'required|max:191',
+                'last_name' => 'required|max:191',
+                'email' => 'required|email|unique:users|max:191',
+                'username' => 'required|unique:users|max:191',
+                'phone' => 'required|unique:users|max:191',
+                'password' => 'required|min:6|max:191',
+            ]);
 
-            if(!empty(get_static_option('site_google_captcha_enable'))){
-                $request->validate([
-                    'first_name' => 'required|max:191',
-                    'last_name' => 'required|max:191',
-                    'email' => 'required|email|unique:users|max:191',
-                    'username' => 'required|unique:users|max:191',
-                    'phone' => 'required|unique:users|max:191',
-                    'password' => 'required|min:6|max:191',
-                    'g-recaptcha-response' => 'required',
-                ]);
-            }else{
-                $request->validate([
-                    'first_name' => 'required|max:191',
-                    'last_name' => 'required|max:191',
-                    'email' => 'required|email|unique:users|max:191',
-                    'username' => 'required|unique:users|max:191',
-                    'phone' => 'required|unique:users|max:191',
-                    'password' => 'required|min:6|max:191',
-                ]);
-            }
+            // if(!empty(get_static_option('site_google_captcha_enable'))){
+            //     $request->validate([
+            //         'first_name' => 'required|max:191',
+            //         'last_name' => 'required|max:191',
+            //         'email' => 'required|email|unique:users|max:191',
+            //         'username' => 'required|unique:users|max:191',
+            //         'phone' => 'required|unique:users|max:191',
+            //         'password' => 'required|min:6|max:191',
+            //         'g-recaptcha-response' => 'required',
+            //     ]);
+            // }else{
+            //     $request->validate([
+            //         'first_name' => 'required|max:191',
+            //         'last_name' => 'required|max:191',
+            //         'email' => 'required|email|unique:users|max:191',
+            //         'username' => 'required|unique:users|max:191',
+            //         'phone' => 'required|unique:users|max:191',
+            //         'password' => 'required|min:6|max:191',
+            //     ]);
+            // }
 
             if($request->password != $request->confirm_password){
                 toastr_warning(__('Password does not match'));

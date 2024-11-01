@@ -41,7 +41,7 @@
                                                     <h5 class="add-heading head4 oneLine">
                                                         <a href="{{route('frontend.listing.details', $listing->slug ?? 'x')}}" target="_blank"> {{ $listing->title }}</a>
                                                     </h5>
-                                                    <div class="pricing head4">{{ amount_with_currency_symbol($listing->price)}}</div>
+                                                    {{-- <div class="pricing head4">{{ amount_with_currency_symbol($listing->price)}}</div> --}}
                                                     <div class="btn-wrapper">
                                                         @if($listing->is_featured === 1)
                                                             <span class="pro-btn2">
