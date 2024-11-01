@@ -7,7 +7,6 @@
                         {!! render_image_markup_by_attachment_id(get_static_option('site_logo')) !!}
                     </a>
                 </div>
-                @include('frontend.layout.partials.navbar-variant.mobile-responsive-icon')
             </div>
             <div class="NavWrapper">
                 <!-- Main Menu -->
@@ -20,8 +19,17 @@
             <!-- Menu Right -->
             <div class="nav-right-content active">
               @include('frontend.layout.partials.navbar-variant.user-menu')
+              @include('frontend.layout.partials.navbar-variant.mobile-responsive-icon')
             </div>
         </div>
     </nav>
+    <div class="NavWrapper menu-mobile">
+        <!-- Main Menu -->
+        <div class="collapse navbar-collapse" id="bizcoxx_main_menu_mobile">
+            <ul class="navbar-nav">
+                {!! render_frontend_menu($primary_menu) !!}
+            </ul>
+        </div>
+    </div>
 </header>
 
