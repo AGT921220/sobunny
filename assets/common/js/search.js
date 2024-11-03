@@ -54,3 +54,34 @@ $('.triggerSearchBar').click(function() {
 
 // // Ejecuta initialize cuando la API de Google Maps esté lista
 // google.maps.event.addDomListener(window, 'load', initialize);
+
+
+function loadGoogleMapsScript(callback) {
+    const script = document.createElement('script');
+    script.src = "https://maps.googleapis.com/maps/api/js?key=TU_API_KEY&libraries=places";
+    script.async = true;
+    script.defer = true;
+    script.onload = callback;
+    document.head.appendChild(script);
+}
+
+// Inicializa el Autocomplete solo cuando la API esté lista
+function initialize() {
+    const input = document.getElementById('autocomplete');
+    const autocomplete = new google.maps.places.Autocomplete(input);
+    
+    autocomplete.addListener('place_changed', () => {
+        const place = autocomplete.getPlace();
+        if (place.geometry) {
+            console.log("Ubicación seleccionada:", place.formatted_address);
+            console.log("Coordenadas:", place.geometry.location.lat(), place.geometry.location.lng());
+        } else {
+            alert("No se encontró información para esta ubicación.");
+        }
+    });
+}
+
+// Espera a que el DOM esté listo antes de cargar Google Maps
+$(document).ready(function () {
+    loadGoogleMapsScript(initialize);
+});

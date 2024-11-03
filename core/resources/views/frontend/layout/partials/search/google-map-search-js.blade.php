@@ -9,36 +9,6 @@
    <!-- google map for live location -->
     @if($check_google_map_for_page)
         <script src="https://maps.googleapis.com/maps/api/js?key={{get_static_option('google_map_api_key')}}&libraries=places&v=3.46.0"></script>
-        <script>
-        function loadGoogleMapsScript(callback) {
-            const script = document.createElement('script');
-            script.src = "https://maps.googleapis.com/maps/api/js?key=TU_API_KEY&libraries=places";
-            script.async = true;
-            script.defer = true;
-            script.onload = callback;
-            document.head.appendChild(script);
-        }
-
-        // Inicializa el Autocomplete solo cuando la API esté lista
-        function initialize() {
-            const input = document.getElementById('autocomplete');
-            const autocomplete = new google.maps.places.Autocomplete(input);
-            
-            autocomplete.addListener('place_changed', () => {
-                const place = autocomplete.getPlace();
-                if (place.geometry) {
-                    console.log("Ubicación seleccionada:", place.formatted_address);
-                    console.log("Coordenadas:", place.geometry.location.lat(), place.geometry.location.lng());
-                } else {
-                    alert("No se encontró información para esta ubicación.");
-                }
-            });
-        }
-
-        // Cargar Google Maps y luego inicializar
-        loadGoogleMapsScript(initialize);
-
-        </script>
     @endif
 
     @if($check_google_map_for_page)
