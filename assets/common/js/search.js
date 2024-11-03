@@ -87,6 +87,7 @@ function initialize() {
     
     autocomplete.addListener('place_changed', () => {
         const place = autocomplete.getPlace();
+        console.log(place);
         if (place.geometry) {
             alert("Ubicación seleccionada: " + place.formatted_address);
             alert("Coordenadas: " + place.geometry.location.lat() + ", " + place.geometry.location.lng());
