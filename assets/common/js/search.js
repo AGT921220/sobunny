@@ -34,3 +34,23 @@ $('.triggerSearchBar').click(function() {
     $('.cateLeftContent').toggleClass('active');
   });
   
+
+
+  function initialize() {
+    const input = document.getElementById('autocomplete');
+    const autocomplete = new google.maps.places.Autocomplete(input);
+    
+    // Escucha el evento de selección de lugar
+    autocomplete.addListener('place_changed', () => {
+        const place = autocomplete.getPlace();
+        if (place.geometry) {
+            console.log("Ubicación seleccionada:", place.formatted_address);
+            console.log("Coordenadas:", place.geometry.location.lat(), place.geometry.location.lng());
+        } else {
+            alert("No se encontró información para esta ubicación.");
+        }
+    });
+}
+
+// Ejecuta initialize cuando la API de Google Maps esté lista
+google.maps.event.addDomListener(window, 'load', initialize);
