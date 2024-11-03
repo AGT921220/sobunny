@@ -43,6 +43,21 @@
                                 <input class="banner-input-field w-100" name="autocomplete" id="autocomplete" type="text" placeholder="{{ __('Search location here') }}">
                             </div>
                         @endif
+
+                                                                            <!--Google Map -->
+                                                                            <div class="location-map mt-3">
+                                                                                <label class="infoTitle">{{ __('Google Map Location') }}
+                                                                                    <a href="https://drive.google.com/file/d/1BwDAjSLAeb4LaxzOkrdsgGO_Io2jM6S6/view?usp=sharing" target="_blank">
+                                                                                        <strong class="text-warning">{{__('Video link')}}</strong>
+                                                                                    </a><small class="text-info">{{__('Search your location, pick a location')}} </small>
+                                                                                </label>
+                                                                                <div class="input-form input-form2">
+                                                                                    <div class="map-warper dark-support rounded overflow-hidden">
+                                                                                        <input id="pac-input" class="controls rounded" type="text" placeholder="{{ __('Search your location')}}"/>
+                                                                                        <div id="map_canvas" style="height: 480px"></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
                         {{-- <div class="search-with-any-texts">
                             <input class="banner-input-field w-100" type="text" name="home_search" id="home_search" placeholder="{{ __('What are you looking for?') }}">
                             <span id="all_search_result" class="search_with_text_section"></span>
