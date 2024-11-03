@@ -63,21 +63,21 @@ $('.triggerSearchBar').click(function() {
 
 
 
-function loadGoogleMapsScript(callback) {
-    alert("Iniciando la carga de Google Maps...");
-    const script = document.createElement('script');
-    script.src = "https://maps.googleapis.com/maps/api/js?key=TU_API_KEY&libraries=places";
-    script.async = true;
-    script.defer = true;
-    script.onload = function() {
-        alert("Google Maps API cargado exitosamente.");
-        callback();
-    };
-    script.onerror = function() {
-        alert("Error al cargar Google Maps API.");
-    };
-    document.head.appendChild(script);
-}
+// function loadGoogleMapsScript(callback) {
+//     alert("Iniciando la carga de Google Maps...");
+//     const script = document.createElement('script');
+//     script.src = "https://maps.googleapis.com/maps/api/js?key=TU_API_KEY&libraries=places";
+//     script.async = true;
+//     script.defer = true;
+//     script.onload = function() {
+//         alert("Google Maps API cargado exitosamente.");
+//         callback();
+//     };
+//     script.onerror = function() {
+//         alert("Error al cargar Google Maps API.");
+//     };
+//     document.head.appendChild(script);
+// }
 
 // Inicializa el Autocomplete solo cuando la API esté lista
 function initializeSearchText() {
@@ -100,5 +100,5 @@ function initializeSearchText() {
 // Espera a que el DOM esté listo antes de cargar Google Maps
 $(document).ready(function () {
     alert("Documento listo. Cargando Google Maps...");
-    loadGoogleMapsScript(initializeSearchText);
+    // loadGoogleMapsScript(initializeSearchText);
 });
