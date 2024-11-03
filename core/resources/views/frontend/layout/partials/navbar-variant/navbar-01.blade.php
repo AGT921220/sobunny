@@ -9,14 +9,14 @@
                 </div>
                 @include('frontend.layout.partials.navbar-variant.mobile-responsive-icon')
             </div>
-            <div class="NavWrapper">
+            {{-- <div class="NavWrapper">
                 <!-- Main Menu -->
                 <div class="collapse navbar-collapse" id="bizcoxx_main_menu">
                     <ul class="navbar-nav">
                         {!! render_frontend_menu($primary_menu) !!}
                     </ul>
                 </div>
-            </div>
+            </div> --}}
             <!-- Menu Right -->
             <div class="nav-right-content active">
               @include('frontend.layout.partials.navbar-variant.user-menu')

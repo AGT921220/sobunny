@@ -12,6 +12,8 @@
 <script src="{{ asset('assets/frontend/js/main.js') }}"></script>
 <script src="{{asset('assets/frontend/js/dynamic-script.js')}}"></script>
 <script src="{{ asset('assets/common/js/toastr.min.js') }}"></script>
+<script src="{{ asset('assets/common/js/search.js') }}"></script>
+
 {!! Toastr::message() !!}
 <script src="{{asset('assets/backend/js/select2.min.js')}}"></script>
 @include('frontend.layout.partials.js.common-js')

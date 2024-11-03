@@ -14,6 +14,8 @@ use App\Feature\HairColor\UseCases\GetAllHairColors;
 use App\Feature\Height\UseCases\GetAllHeights;
 use App\Feature\ServiceType\UseCases\GetAllServiceTypes;
 use App\Feature\Servicing\UseCases\GetAllServicings;
+use App\Feature\Shared\UseCases\ApplyListingFilters;
+use App\Feature\Shared\UseCases\CreateDefaultFilters;
 use App\Models\Backend\Category;
 use App\Models\Backend\ListingTag;
 use App\Models\Backend\SubCategory;
@@ -330,7 +332,6 @@ class ListingsOne extends PageBuilderBase
         $columns = $settings["columns"] ?? "";
         $padding_top = $settings["padding_top"] ?? "";
         $padding_bottom = $settings["padding_bottom"] ?? "";
-
         // google map icon
         $google_map_maker_icon = render_image_markup_by_attachment_id($settings['google_map_maker_icon']) ?? '';
         $pattern = '/<img[^>]+src="([^"]+)"/';
@@ -338,8 +339,6 @@ class ListingsOne extends PageBuilderBase
             $imageUrl = $matches[1];
             $google_map_maker_icon = $imageUrl;
         }
-
-
         //listing Filtering Hide/Show
         $location_on_off = $settings["location_on_off"] ?? "";
         $price_range_on_off = $settings["price_range_on_off"] ?? "";
@@ -570,7 +569,12 @@ class ListingsOne extends PageBuilderBase
                 ->toArray(); // this gives us the user ids
         }
 
-        // add filter for check user has set his zone or not
+
+        $applyFilters = new ApplyListingFilters();
+        $listing_query = $applyFilters->__invoke($listing_query, ...(new CreateDefaultFilters())->__invoke());
+  
+
+// add filter for check user has set his zone or not
         $all_listings = $listing_query->where(function ($query) use ($memberIds) {
             return $query->whereIn('listings.user_id', $memberIds)
                 ->orWhereNotNull('admin_id');

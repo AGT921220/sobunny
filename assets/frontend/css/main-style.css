@@ -10233,6 +10233,10 @@ object {
   max-width: 456px;
 }
 
+.footerWrapper
+{
+  z-index: 0 !important;
+}
 .footerWrapper {
   background: var(--main-color-two);
 }
@@ -10349,7 +10353,7 @@ object {
 }
 .footerWrapper .footer-area .footer-form {
   position: relative;
-  z-index: 1;
+  z-index: 0;
 }
 .footerWrapper .footer-area .footer-form .newsletter-footer {
   position: relative;
