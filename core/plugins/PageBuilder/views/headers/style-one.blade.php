@@ -40,7 +40,7 @@
                                     <i class="fa-solid fa-location-crosshairs fs-4"></i>
                                 </div>
                                 <input class="form--control" name="change_address_new" id="change_address_new" type="hidden" value="">
-                                <input class="banner-input-field w-100" name="autocomplete" id="autocomplete" type="text" placeholder="{{ __('Search location here') }}">
+                                <input class="banner-input-field w-100" name="autocomplete" id="autocompleteSearchText" type="text" placeholder="{{ __('Search location here') }}">
                             </div>
                         @endif
                         {{-- <div class="search-with-any-texts">
@@ -59,4 +59,4 @@
 <!--Banner part End-->
 
 
-<input id="autocompleteSearchText" type="text" placeholder="Escribe una ubicación" style="width: 300px;" />
+{{-- <input id="autocompleteSearchText" type="text" placeholder="Escribe una ubicación" style="width: 300px;" /> --}}
