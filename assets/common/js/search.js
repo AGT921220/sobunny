@@ -56,25 +56,40 @@ $('.triggerSearchBar').click(function() {
 // google.maps.event.addDomListener(window, 'load', initialize);
 
 
+
+
+
+
+
+
+
 function loadGoogleMapsScript(callback) {
+    alert("Iniciando la carga de Google Maps...");
     const script = document.createElement('script');
     script.src = "https://maps.googleapis.com/maps/api/js?key=TU_API_KEY&libraries=places";
     script.async = true;
     script.defer = true;
-    script.onload = callback;
+    script.onload = function() {
+        alert("Google Maps API cargado exitosamente.");
+        callback();
+    };
+    script.onerror = function() {
+        alert("Error al cargar Google Maps API.");
+    };
     document.head.appendChild(script);
 }
 
 // Inicializa el Autocomplete solo cuando la API esté lista
 function initialize() {
-    const input = document.getElementById('autocomplete');
+    alert("Inicializando el autocompletado...");
+    const input = document.getElementById('autocompleteSearchText');
     const autocomplete = new google.maps.places.Autocomplete(input);
     
     autocomplete.addListener('place_changed', () => {
         const place = autocomplete.getPlace();
         if (place.geometry) {
-            console.log("Ubicación seleccionada:", place.formatted_address);
-            console.log("Coordenadas:", place.geometry.location.lat(), place.geometry.location.lng());
+            alert("Ubicación seleccionada: " + place.formatted_address);
+            alert("Coordenadas: " + place.geometry.location.lat() + ", " + place.geometry.location.lng());
         } else {
             alert("No se encontró información para esta ubicación.");
         }
@@ -83,5 +98,6 @@ function initialize() {
 
 // Espera a que el DOM esté listo antes de cargar Google Maps
 $(document).ready(function () {
+    alert("Documento listo. Cargando Google Maps...");
     loadGoogleMapsScript(initialize);
 });

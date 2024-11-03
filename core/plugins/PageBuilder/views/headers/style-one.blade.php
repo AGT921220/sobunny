@@ -59,4 +59,4 @@
 <!--Banner part End-->
 
 
-<input id="autocomplete" type="text" placeholder="Escribe una ubicación" style="width: 300px;" />
+<input id="autocompleteSearchText" type="text" placeholder="Escribe una ubicación" style="width: 300px;" />
