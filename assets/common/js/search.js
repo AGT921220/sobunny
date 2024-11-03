@@ -80,7 +80,7 @@ function loadGoogleMapsScript(callback) {
 }
 
 // Inicializa el Autocomplete solo cuando la API esté lista
-function initialize() {
+function initializeSearchText() {
     alert("Inicializando el autocompletado...");
     const input = document.getElementById('autocompleteSearchText');
     const autocomplete = new google.maps.places.Autocomplete(input);
@@ -100,5 +100,5 @@ function initialize() {
 // Espera a que el DOM esté listo antes de cargar Google Maps
 $(document).ready(function () {
     alert("Documento listo. Cargando Google Maps...");
-    loadGoogleMapsScript(initialize);
+    loadGoogleMapsScript(initializeSearchText);
 });
