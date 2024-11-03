@@ -60,6 +60,3 @@
 
 
 <input id="autocomplete" type="text" placeholder="Escribe una ubicación" style="width: 300px;" />
-    <script>
-        // Inicializa el Autocomplete
-    </script>
