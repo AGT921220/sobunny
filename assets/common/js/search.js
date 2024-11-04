@@ -98,7 +98,7 @@ function initializeSearchText() {
 }
 
 // Espera a que el DOM esté listo antes de cargar Google Maps
-$(document).ready(function () {
-    alert("Documento listo. Cargando Google Maps...");
-    // loadGoogleMapsScript(initializeSearchText);
-});
+// $(document).ready(function () {
+//     alert("Documento listo. Cargando Google Maps...");
+//     // loadGoogleMapsScript(initializeSearchText);
+// });
