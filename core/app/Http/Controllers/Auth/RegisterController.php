@@ -195,8 +195,11 @@ class RegisterController extends Controller
             $email_verify_tokn = sprintf("%d", random_int(123456, 999999));
 
             // phone number check
-            $phone_number = Str::replace(['-', '(' , ')' ,' '], '', $request->country_code ?? $request->phone);
+            // $phone_number = Str::replace(['-', '(' , ')' ,' '], '', $request->country_code ?? $request->phone);
+            $phone_number = Str::replace(['-', '(' , ')' ,' '], '','+'.$request->country_code. $request->phone);
+
             if (!empty($phone_number)){
+                info(User::where('phone', $phone_number)->toRawSql());
                 $existingUser = User::where('phone', $phone_number)->first();
                 if ($existingUser) {
                     return redirect()->back()->withErrors(['phone' => __('Phone number is already taken')]);
