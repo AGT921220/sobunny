@@ -324,10 +324,10 @@ nav a
     background-position: center;
     background-repeat: no-repeat;
 }
-ul .single a img
+/* ul .single a img
 {
     display: none;
-}
+} */
 @media (max-width: 768px) {
     .homme-banner-img {
         min-height: 50vh;
