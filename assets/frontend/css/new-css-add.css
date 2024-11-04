@@ -332,9 +332,9 @@ nav a
     .homme-banner-img {
         min-height: 50vh;
     }
-    .responsive-mobile-menu .logo-wrapper{
+    /* .responsive-mobile-menu .logo-wrapper{
         display: none !important;
-    }
+    } */
     ul .single a img {
         display: block !important;
     }
