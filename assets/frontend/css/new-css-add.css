@@ -335,10 +335,9 @@ ul .single a img
     .responsive-mobile-menu .logo-wrapper{
         display: none !important;
     }
-    ul .single a img
-{
-    display: block !important;
-}
+    ul .single a img {
+        display: block !important;
+    }
 }
 
 .home-banner
