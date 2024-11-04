@@ -324,21 +324,35 @@ nav a
     background-position: center;
     background-repeat: no-repeat;
 }
-/* ul .single a img
+ul .single a img
 {
     display: none;
-} */
+}
 @media (max-width: 768px) {
     .homme-banner-img {
         min-height: 50vh;
     }
-    /* .responsive-mobile-menu .logo-wrapper{
+    .responsive-mobile-menu .logo-wrapper{
         display: none !important;
-    } */
+    }
+    ul .single a img
+{
+    display: block;
+}
+}
+@media (min-width: 320px) and (max-width: 991.98px) {
+    .homme-banner-img {
+        min-height: 50vh;
+    }
+    .responsive-mobile-menu .logo-wrapper{
+        display: none !important;
+    }
     ul .single a img {
         display: block !important;
     }
+
 }
+
 
 .home-banner
 {
