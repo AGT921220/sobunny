@@ -337,7 +337,7 @@ ul .single a img
     }
     ul .single a img
 {
-    display: block;
+    display: block !important;
 }
 }
 
