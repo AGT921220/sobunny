@@ -1,4 +1,4 @@
-@if(!empty(get_static_option('google_map_settings_on_off')))
+@if (!empty(get_static_option('google_map_settings_on_off')))
     @php
         $root_url = url('/');
         $listing_page_url = $root_url . '/' . get_static_option('listing_filter_page_url');
@@ -6,12 +6,14 @@
         $check_google_map_for_page = !empty($root_url) || !empty($listing_page_url);
     @endphp
 
-   <!-- google map for live location -->
-    @if($check_google_map_for_page)
-        <script src="https://maps.googleapis.com/maps/api/js?key={{get_static_option('google_map_api_key')}}&libraries=places&v=3.46.0"></script>
+    <!-- google map for live location -->
+    @if ($check_google_map_for_page)
+        <script
+            src="https://maps.googleapis.com/maps/api/js?key={{ get_static_option('google_map_api_key') }}&libraries=places&v=3.46.0">
+        </script>
     @endif
 
-    @if($check_google_map_for_page)
+    @if ($check_google_map_for_page)
         <script>
             // Function to get a cookie
             function getCookie(name) {
@@ -27,7 +29,7 @@
         </script>
     @endif
 
-    @if($check_google_map_for_page)
+    @if ($check_google_map_for_page)
         <script>
             // Cookie add set of time
             function setCookie(name, value, days) {
@@ -71,7 +73,9 @@
                         var latLng = new google.maps.LatLng(latitude, longitude);
 
                         // Reverse geocode the coordinates to get the address
-                        geocoder.geocode({ 'location': latLng }, function(results, status) {
+                        geocoder.geocode({
+                            'location': latLng
+                        }, function(results, status) {
                             if (status === 'OK') {
                                 if (results[0]) {
                                     // Get the country component from the address
@@ -90,14 +94,18 @@
                                     $('#myLocationGetAddress').on('click', function() {
                                         if ('permissions' in navigator) {
                                             // Request location permission using the Permissions API
-                                            navigator.permissions.query({ name: 'geolocation' }).then(function(permissionStatus) {
+                                            navigator.permissions.query({
+                                                name: 'geolocation'
+                                            }).then(function(permissionStatus) {
                                                 if (permissionStatus.state === 'granted') {
                                                     // Location permission granted
                                                     $("#autocomplete").val(address);
-                                                } else if (permissionStatus.state === 'prompt') {
+                                                } else if (permissionStatus.state ===
+                                                    'prompt') {
                                                     // Location permission prompt
                                                     permissionStatus.onchange = function() {
-                                                        if (permissionStatus.state === 'granted') {
+                                                        if (permissionStatus.state ===
+                                                            'granted') {
                                                             // Location permission granted
                                                             $("#autocomplete").val(address);
                                                         }
@@ -107,11 +115,11 @@
                                             });
                                         } else if ('geolocation' in navigator) {
                                             // Request location permission using the Geolocation API
-                                            navigator.geolocation.getCurrentPosition(function(position) {
+                                            navigator.geolocation.getCurrentPosition(function(
+                                            position) {
                                                 // Location permission granted
                                                 $("#autocomplete").val(address);
-                                            }, function(error) {
-                                            });
+                                            }, function(error) {});
                                         }
                                     });
 
@@ -120,8 +128,7 @@
                                 }
                             }
                         });
-                    }, function() {
-                    });
+                    }, function() {});
                 }
             }
             getVisitorLocation();
@@ -130,7 +137,7 @@
 
         <!-- autocomplete address js start -->
         <script>
-            $(document).ready(function () {
+            $(document).ready(function() {
                 $("#latitudeArea").addClass("d-none");
                 $("#longtitudeArea").addClass("d-none");
             });
@@ -138,12 +145,12 @@
 
         <!-- search user address wise-->
         <script>
-            $(document).ready(function () {
-                $('#autocomplete').on('keyup change click', function () {
+            $(document).ready(function() {
+                $('#autocomplete').on('keyup change click', function() {
                     var input = document.getElementById("pac-input");
                     var autocomplete = new google.maps.places.Autocomplete(input);
                     autocomplete.setFields(["address_components", "geometry"]);
-                    autocomplete.addListener("place_changed", function () {
+                    autocomplete.addListener("place_changed", function() {
                         var place = autocomplete.getPlace();
                         if (!place.geometry || !place.geometry.location) {
                             return;
@@ -185,7 +192,7 @@
                 var input = document.getElementById('autocompleteSearchText');
                 var autocomplete = new google.maps.places.Autocomplete(input);
 
-                autocomplete.addListener('place_changed', function () {
+                autocomplete.addListener('place_changed', function() {
                     var place = autocomplete.getPlace();
                     $('#latitude').val(place.geometry.location.lat());
                     $('#longitude').val(place.geometry.location.lng());
@@ -207,16 +214,45 @@
                     }
                     setCookie('placeId', placeId, 7);
                     setCookie('address', place.formatted_address, 7);
+
+
+
+
+
+
+
+                    let country = "";
+                    let state = "";
+                    let city = "";
+
+                    place.address_components.forEach(component => {
+                        const types = component.types;
+
+                        if (types.includes("country")) {
+                            country = component.long_name;
+                        }
+                        if (types.includes("administrative_area_level_1")) {
+                            state = component.long_name;
+                        }
+                        if (types.includes("locality")) {
+                            city = component.long_name;
+                        }
+                    });
+
+                    console.log("Country:", country);
+                    console.log("State:", state);
+                    console.log("City:", city);
                 });
 
 
-                $('.setLocation_btn').on('click', function () {
+                $('.setLocation_btn').on('click', function() {
                     var changeAddress = $('#change_address_new').val();
                     if (changeAddress === '') {
                         // User didn't change the address, use current location-wise service
                         var place = autocomplete.getPlace();
 
-                        if (typeof place !== 'undefined' && place.hasOwnProperty('place_id') && place.hasOwnProperty('formatted_address')) {
+                        if (typeof place !== 'undefined' && place.hasOwnProperty('place_id') && place.hasOwnProperty(
+                                'formatted_address')) {
                             var placeId = place.place_id;
                             var address = place.formatted_address;
                             var id_add = setCookie('placeId', placeId, 7);
@@ -230,14 +266,14 @@
 
         <!-- location address validation -->
         <script>
-            $(document).ready(function () {
+            $(document).ready(function() {
                 // remove  disabled
                 var autocompleteInput = $('#autocomplete');
                 autocompleteInput.on('keyup click change', function() {
                     var getAutocompleteInputValue = $('#autocomplete').val();
                     if (getAutocompleteInputValue !== null) {
                         $('.setLocation_btn').removeAttr('disabled');
-                    }else {
+                    } else {
                         $(this).prop("disabled", false);
                     }
                 });
