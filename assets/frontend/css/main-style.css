@@ -6494,7 +6494,7 @@ object {
   .navbar-area .nav-container .nav-right-content.active {
     visibility: visible;
     opacity: 1;
-    margin-top: 10px !important;
+    /* margin-top: 10px !important; */
   }
 }
 .navbar-area .nav-container .nav-right-content .info-bar-item {

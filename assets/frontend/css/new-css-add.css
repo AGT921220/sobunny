@@ -333,14 +333,25 @@ ul .single a img
         min-height: 50vh;
     }
     .responsive-mobile-menu .logo-wrapper{
-        display: none !important;
+        /* display: none !important; */
     }
     ul .single a img
 {
-    display: block;
+    /* display: block; */
 }
 }
-@media (min-width: 320px) and (max-width: 991.98px) {
+.new-style .container-1920 {
+    display: flex  !important;
+}
+  
+.btn-wrapper .cmn-btn1 {
+    padding: 5px 5px !important;
+}
+.new-style .nav-right-content .sign-in {
+    border-radius: 100px;
+    padding: 12px 15px;
+}
+/* @media (min-width: 320px) and (max-width: 991.98px) {
     .homme-banner-img {
         min-height: 50vh;
     }
@@ -351,7 +362,7 @@ ul .single a img
         display: block !important;
     }
 
-}
+} */
 
 
 .home-banner
