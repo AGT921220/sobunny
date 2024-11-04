@@ -527,6 +527,17 @@
                                                 </div> --}}
                                             @endif
                                             <div class="address-text mt-3">
+                                                <div class="city">
+                                                    <label for="city">{{ __('Select Your City') }}</label>
+                                                    <select name="city_id" id="city_id" class="select2_activation">
+                                                        <option value="">{{ __('Select City') }}</option>
+                                                        @foreach ($all_cities as $city)
+                                                            <option @if($listing->city_id == $city->id) selected @endif value="{{ $city->id }}">{{ $city->city }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="address-text mt-3">
                                                 <input type="hidden" name="latitude" id="latitude" value="{{$listing->lat}}">
                                                 <input type="hidden" name="longitude" id="longitude" value="{{$listing->lon}}">
                                                 <label for="address-text">{{ __('Address') }}</label>

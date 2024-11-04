@@ -317,14 +317,30 @@ nav a
     color: #f1cf68 !important;
 }
 
-.homme-banner-img
-{
+.homme-banner-img {
     background-image: url("/assets/frontend/img/banner.png") !important;
     min-height: 90vh;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
+ul .single a img
+{
+    display: none;
+}
+@media (max-width: 768px) {
+    .homme-banner-img {
+        min-height: 50vh;
+    }
+    .responsive-mobile-menu .logo-wrapper{
+        display: none !important;
+    }
+    ul .single a img
+{
+    display: block;
+}
+}
+
 .home-banner
 {
     border-top: 0px !important;

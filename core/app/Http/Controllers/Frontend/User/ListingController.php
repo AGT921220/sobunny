@@ -248,6 +248,7 @@ class ListingController extends Controller
             $listing->service_type_id = $request->input('service_type_id');
             $listing->servicing_id = $request->input('servicing_id');
             $listing->height_id = $request->input('heights_id');
+            $listing->city_id = $request->input('city_id');
 
             $tags_name = '';
             if (!empty($request->tags)) {
@@ -495,6 +496,7 @@ class ListingController extends Controller
             $listing->service_type_id = $request->input('service_type_id');
             $listing->servicing_id = $request->input('servicing_id');
             $listing->height_id = $request->input('heights_id');
+            $listing->city_id = $request->input('city_id');
 
 
             $tags_name = '';

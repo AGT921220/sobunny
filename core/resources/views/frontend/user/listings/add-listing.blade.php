@@ -658,7 +658,7 @@
                                                     </div> 
                                                 @else
                                                     <!--Google Map -->
-                                                     <div class="location-map mt-3">
+                                                     {{-- <div class="location-map mt-3">
                                                         <label class="infoTitle">{{ __('Google Map Location') }}
                                                             <a href="https://drive.google.com/file/d/1BwDAjSLAeb4LaxzOkrdsgGO_Io2jM6S6/view?usp=sharing"
                                                                 target="_blank">
@@ -676,8 +676,22 @@
                                                                 <div id="map_canvas" style="height: 480px"></div>
                                                             </div>
                                                         </div>
-                                                    </div> 
+                                                    </div>  --}}
                                                 @endif
+
+
+                                                <div class="address-text mt-3">
+                                                    <div class="city">
+                                                        <label for="city">{{ __('Select Your City') }}</label>
+                                                        <select name="city_id" id="city_id" class="select2_activation">
+                                                            <option value="">{{ __('Select City') }}</option>
+                                                            @foreach ($all_cities as $city)
+                                                                <option value="{{ $city->id }}">{{ $city->city }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+
                                                 <div class="address-text mt-3">
                                                     <input type="hidden" name="latitude" id="latitude">
                                                     <input type="hidden" name="longitude" id="longitude">

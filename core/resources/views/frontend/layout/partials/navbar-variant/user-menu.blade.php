@@ -8,7 +8,7 @@
                 )->first();
             @endphp
             @if (!empty($member_find))
-                <li class="single chatBar">
+                {{-- <li class="single chatBar">
                     <a href="{{ route('member.live.chat') }}" class="reload_unseen_message_count">
                         <button class="chat"><i class="fa-regular fa-comment-dots"></i>
                             @php
@@ -29,9 +29,9 @@
                             @endif
                         </button>
                     </a>
-                </li>
+                </li> --}}
             @else
-                <li class="single chatBar">
+                {{-- <li class="single chatBar">
                     <a href="{{ route('user.live.chat') }}" class="reload_unseen_message_count">
                         <button class="chat"><i class="fa-regular fa-comment-dots"></i>
                             @php
@@ -53,12 +53,19 @@
                             @endif
                         </button>
                     </a>
-                </li>
+                </li> --}}
             @endif
         @endif
 
-        <li class="single"><a href="{{ route('user.listing.favorite.all') }}" class="heart"><i
-                    class="lar la-heart icon"></i></a></li>
+        {{-- <li class="single"><a href="{{ route('user.listing.favorite.all') }}" class="heart"><i
+                    class="lar la-heart icon"></i></a></li> --}}
+                    <li class="single">
+                        <div class="btn-wrapper">
+                            <a href="http://localhost:8088" class="logo">
+                                    <img src="http://localhost:8088/assets/uploads/media-uploader/logo1717328157.png" alt="">
+                                </a>
+                        </div>
+                    </li>   
         <li class="single userAccount">
             <x-frontend.user.user-profile-image />
             <div class="userAccount-wrapper">
@@ -236,6 +243,13 @@
             <!-- End User AC -->
         </li>
     @else
+    <li class="single">
+        <div class="btn-wrapper">
+            <a href="http://localhost:8088" class="logo">
+                    <img src="http://localhost:8088/assets/uploads/media-uploader/logo1717328157.png" alt="">
+                </a>
+        </div>
+    </li>
         <li class="single userAccount">
             <x-frontend.user.user-profile-image />
         </li>

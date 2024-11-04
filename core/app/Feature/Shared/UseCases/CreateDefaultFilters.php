@@ -20,6 +20,7 @@ class CreateDefaultFilters
         $serviceTypeId = request()->get('service_type_id') ?? null;
         $servicingId = request()->get('servicing_id')?? null;
         $heightId = request()->get('height_id') ?? null;
+        $cityId = request()->get('city_id') ?? null;
         $params = [];
         
 
@@ -56,6 +57,9 @@ class CreateDefaultFilters
         if($heightId !== null) {
             $params[] = new FilterParam('height_id', $heightId);
         }        
+        if($cityId !== null) {
+            $params[] = new FilterParam('city_id', $cityId);
+        }
         return $params;
     }
 }
