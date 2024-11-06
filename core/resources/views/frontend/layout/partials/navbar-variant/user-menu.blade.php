@@ -59,13 +59,13 @@
 
         {{-- <li class="single"><a href="{{ route('user.listing.favorite.all') }}" class="heart"><i
                     class="lar la-heart icon"></i></a></li> --}}
-                    <li class="single">
+                    {{-- <li class="single">
                         <div class="btn-wrapper">
                             <a href="http://localhost:8088" class="logo">
                                     <img src="http://localhost:8088/assets/uploads/media-uploader/logo1717328157.png" alt="">
                                 </a>
                         </div>
-                    </li>   
+                    </li>    --}}
         <li class="single userAccount">
             <x-frontend.user.user-profile-image />
             <div class="userAccount-wrapper">

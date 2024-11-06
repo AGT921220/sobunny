@@ -7212,7 +7212,7 @@ object {
   .navbar-area .nav-container .responsive-mobile-menu {
     display: block;
     position: relative;
-    width: 100%;
+    /* width: 100%; */
   }
   .navbar-area .nav-container .responsive-mobile-menu .navbar-toggler {
     position: absolute;
@@ -19257,7 +19257,7 @@ object {
       .sidebar-menu-wraper{
         position: absolute;
         width: 234px;
-        left: -100%;
+        left: -200%;
         top: 0;
         z-index: 99999;
         background: #fff;

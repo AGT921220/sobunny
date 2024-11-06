@@ -294,7 +294,7 @@
                                                 <div class="reset-btn cmn-filter-btn">
                                                     <a href="{{ url()->current() }}">
                                                         <button type="button">
-                                                            <i class="las la-undo-alt"></i> {{ __('Reset Filter') }}
+                                                            <i class="las la-undo-alt"></i> {{ __('Reset Filters') }}
                                                         </button>
                                                     </a>
                                                 </div>

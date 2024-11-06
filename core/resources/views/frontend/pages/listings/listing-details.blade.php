@@ -148,11 +148,11 @@
                             <div class="product-name-price">
                                 <div class="product-name">{{ $listing->title }}</div>
                                 <div class="right-part text-right">
-                                    <div class="price text-end"><span>{{ float_amount_with_currency_symbol($listing->price) }}</span>
+                                    {{-- <div class="price text-end"><span>{{ float_amount_with_currency_symbol($listing->price) }}</span>
                                         @if($listing->negotiable === 1)
                                             <div class="token">{{ __('NEGOTIABLE') }}</div>
                                         @endif
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                             <div class="date-location">
@@ -347,12 +347,12 @@
                         @endif
 
                         @if(get_static_option('safety_tips_info') !== null)
-                            <div class="safety-tips">
+                            {{-- <div class="safety-tips">
                                 <h3 class="head5">{{ get_static_option('listing_safety_tips_title') ?? __('Safety Tips') }}</h3>
                                 <div class="safety-wraper">
                                     {!! get_static_option('safety_tips_info') !!}
                                 </div>
-                            </div>
+                            </div> --}}
                         @endif
 
                         <div class="share-on-wraper">

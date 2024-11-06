@@ -45,9 +45,9 @@
                         @endif
 
                         
-                        <div class="address-text mt-3">
+                        <div class="address-text">
                             <div class="city">
-                                <label for="city">{{ __('Select Your City') }}</label>
+                                {{-- <label for="city">{{ __('Select Your City') }}</label> --}}
                                 <select name="city_id" id="city_id" class="select2_activation">
                                     <option value="">{{ __('Select City') }}</option>
                                     @foreach ($cities as $city)

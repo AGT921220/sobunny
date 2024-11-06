@@ -18,7 +18,7 @@
                 </div>
             </div> --}}
             <!-- Menu Right -->
-            <div class="nav-right-content active">
+            <div class="active">
               @include('frontend.layout.partials.navbar-variant.user-menu')
             </div>
         </div>
