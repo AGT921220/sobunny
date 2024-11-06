@@ -256,7 +256,7 @@
                             </div>
                         @endif
 
-                        @include('filters.filtersListing')  
+                        {{-- @include('filters.filtersListing')   --}}
 
                         @if(!empty($sort_by_on_off))
                             <div class="catagoriesWraper px-0">

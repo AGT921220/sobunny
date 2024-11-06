@@ -423,9 +423,10 @@
         position: absolute;
         height: 100%;
         top: 95px;
-        z-index: 10000000000000000;
+        z-index: -10;
         background: white;
         right: 25px;
+        display: none !important;
     }
 
     .cateSidebar1 {
@@ -445,5 +446,7 @@
     .cateLeftContent.active {
         transform: translateX(0);
         opacity: 1;
+        z-index: 10000000000000000;
+        display: block !important;
     }
 </style>
