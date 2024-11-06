@@ -437,7 +437,7 @@
     }
 
     .cateLeftContent {
-        transform: translateX(100%);
+        /* transform: translateX(100%); */
         opacity: 0;
         transition: transform 0.5s ease, opacity 0.5s ease;
     }
