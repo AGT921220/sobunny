@@ -6484,11 +6484,11 @@ object {
 @media (min-width: 320px) and (max-width: 991.98px) {
   .navbar-area .nav-container .nav-right-content {
     /* visibility: hidden; */
-    opacity: 0;
+    /* opacity: 0; */
     margin-left: auto !important;
     -webkit-transition: all 0.3s;
     transition: all 0.3s;
-    margin-top: -40px !important;
+    /* margin-top: -40px !important; */
     background: transparent;
   }
   .navbar-area .nav-container .nav-right-content.active {
