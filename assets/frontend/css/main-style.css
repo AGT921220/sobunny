@@ -6483,7 +6483,7 @@ object {
 }
 @media (min-width: 320px) and (max-width: 991.98px) {
   .navbar-area .nav-container .nav-right-content {
-    visibility: hidden;
+    /* visibility: hidden; */
     opacity: 0;
     margin-left: auto !important;
     -webkit-transition: all 0.3s;
