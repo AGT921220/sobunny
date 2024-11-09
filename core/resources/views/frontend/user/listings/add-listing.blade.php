@@ -694,14 +694,14 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="address-text mt-3">
+                                                {{-- <div class="address-text mt-3">
                                                     <input type="hidden" name="latitude" id="latitude">
                                                     <input type="hidden" name="longitude" id="longitude">
                                                     <label for="address-text">{{ __('Address') }}</label>
                                                     <input type="text" class="w-100 input-filed" name="address"
                                                         id="user_address" value="{{ old('address') }}"
                                                         placeholder="{{ __('Address') }}">
-                                                </div>
+                                                </div> --}}
                                             </div>
                                             <div class="video box-shadow1 p-24 mt-3 mb-3">
                                                 <label for="vedio-link">{{ __('Video Url') }}</label>

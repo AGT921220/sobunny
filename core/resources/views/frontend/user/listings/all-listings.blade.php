@@ -82,9 +82,9 @@
                                             <div class="right-buttons">
                                                 <span class="text">
                                                     @if($listing->is_published === 1)
-                                                        {{ __('Published') }}
+                                                        {{ __('ON') }}
                                                     @else
-                                                        {{ __('Unpublished') }}
+                                                        {{ __('OFF') }}
                                                     @endif
                                                 </span>
                                                     <div class="publish-btn">
