@@ -370,7 +370,7 @@
                                 </div>
                             </div>
 
-                            <div class="share-on">
+                            {{-- <div class="share-on">
                                 <span class="social-icons">
                                      @php
                                          $image_url = get_attachment_image_by_id($listing->image);
@@ -378,13 +378,13 @@
                                      @endphp
                                     {!! single_post_share(route('frontend.listing.details',$listing->slug), $listing->title, $img_url) !!}
                                 </span>
-                            </div>
+                            </div> --}}
                         </div>
 
                         @include('frontend.pages.listings.frontend-business-hours')
                         @include('frontend.pages.listings.frontend-enquiry-form')
 
-                        <div class="map-wraper box-shadow1">
+                        {{-- <div class="map-wraper box-shadow1">
                             <h3 class="head5">{{ __('Map') }}</h3>
                             <p>{{ $listing->address }}</p>
                             <div class="map">
@@ -393,7 +393,7 @@
                                     </div>
                                 @endif
                             </div>
-                        </div>
+                        </div> --}}
 
                         @if(!empty($listing->video_url))
                             <div class="map-wraper box-shadow1">

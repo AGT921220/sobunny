@@ -256,7 +256,10 @@
 
                                                         <!-- Description -->
                                                         <div class="form__input__single mt-3">
-                                                            <label class="form__input__single__label">{{ __('Description') }} <span class="text-danger">*</span> <span class="text-danger">{{ __('minimum 150 characters.') }}</span> </label>
+                                                            <label class="form__input__single__label">{{ __('Description') }} 
+                                                                {{--<span class="text-danger">*</span> 
+                                                                 <span class="text-danger">{{ __('minimum 150 characters.') }}</span> --}}
+                                                             </label>
                                                             <div class="input-form input-form2">
                                                                 <textarea class="textarea--form summernote" name="description" placeholder="{{__('Type Description')}}">{{ old('description') }}</textarea>
                                                             </div>
