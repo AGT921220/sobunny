@@ -1,5 +1,5 @@
 server-enter:
-	@ssh root@194.62.96.38
+	@ssh root@5.199.168.121
 
 # rsync -avz ~/Alfredo/Personal/Proyectos/jorgeUsa/listoclean/assets/ root@194.62.96.38:/home/sobunny/core/public/assets/ &
 # 194.62.96.38
