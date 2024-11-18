@@ -267,21 +267,18 @@ function laravelSubRequest(
 	request()->merge($data);
 	
 	try {
-		dump(1);
+		
 		// Request segments are not available when making sub requests,
 		// The 'X-API-CALLED' header is set for the function isFromApi()
 		$localHeaders = ['X-API-CALLED' => true];
 		$headers = array_merge($headers, $localHeaders);
-		dump(2);
-
+		
 		// Create the request to the internal API
 		$cookies = [];
 		$request = request()->create($endpoint, strtoupper($method), $data, $cookies, $files);
-		dump(3);
-
+		
 		// Set the request files in the new request
 		if (!empty($files)) {
-			dump('files');
 			foreach ($files as $key => $file) {
 				request()->files->set($key, $file);
 			}
@@ -289,8 +286,8 @@ function laravelSubRequest(
 		
 		// Apply the available headers to the request
 		if (!empty($headers)) {
-			dump('headers');
 			foreach ($headers as $key => $value) {
+				dump($key, $value);
 				request()->headers->set($key, $value);
 			}
 		}
@@ -321,27 +318,21 @@ function laravelSubRequest(
 		 * Use Route::dispatch($request) when you want to handle routing specifically, without running the entire middleware stack.
 		 */
 		// $response = app()->handle($request);
-		dump($request);
 		$response = Route::dispatch($request);
-		dump(4);
-
+		
 		// Fetch the response
 		// dd($response->getData());
 		$json = $response->getContent();
-		dump(5);
-
+		
 		// dd($json); // debug!
 		$array = json_decode($json, true);
-		dump(6);
-
+		
 		// Throw an exception if the returned type is not an array
 		if (!is_array($array)) {
-			dump('is no array');
 			showApiResponseBodyTypeError($response->getData(), $baseUrl, $endpoint);
 		}
 		
 		$array['isSuccessful'] = $response->isSuccessful();
-		dump($array);
 		$array['status'] = (method_exists($response, 'status')) ? $response->status() : $response->getStatusCode();
 		
 	} catch (\Throwable $e) {
