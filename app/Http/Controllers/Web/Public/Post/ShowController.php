@@ -98,8 +98,6 @@ class ShowController extends FrontController
 		
 		// Call API endpoint
 		$endpoint = '/posts/' . $postId;
-		dump('endpoint');
-		dump($endpoint);
 		$queryParams = [
 			'detailed' => 1,
 		];
@@ -108,16 +106,14 @@ class ShowController extends FrontController
 		}
 		$queryParams = array_merge(request()->all(), $queryParams);
 		$headers = session()->has('postIsVisited') ? ['X-VISITED-BY-SAME-SESSION' => $postId] : [];
+		dump($endpoint);
+		dump($queryParams);
 		$data = makeApiRequest(method: 'get', uri: $endpoint, data: $queryParams, headers: $headers);
-		dump('data');
-		dump($data);
+		
 		$message = $this->handleHttpError($data);
-		dump('message');
-		dump($message);
 		$post = data_get($data, 'result');
 		$customFields = data_get($data, 'extra.fieldsValues');
-		dump('post');
-		dump($post);
+		
 		// Listing isn't found
 		abort_if(empty($post), 404, $message ?? t('post_not_found'));
 		
