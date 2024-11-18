@@ -56,16 +56,26 @@ class ShowController extends FrontController
 	 */
 	public function index($postId)
 	{
+		dump($postId);
 		// Get and Check the Controller's Method Parameters
 		$parameters = request()->route()->parameters();
-		
+		dump($parameters);
 		// Check if the Listing's ID key exists
 		$idKey = array_key_exists('hashableId', $parameters) ? 'hashableId' : 'id';
+		dump($idKey);
+		dump('isEmpty');
+		dump(empty($parameters[$idKey]));
+
+		dump('isHashedId');
+		dump((!isHashedId($parameters[$idKey])));
+		dump('is_numeric');
+		dump((!is_numeric($parameters[$idKey])));
 		$idKeyDoesNotExist = (
 			empty($parameters[$idKey])
 			|| (!isHashedId($parameters[$idKey]) && !is_numeric($parameters[$idKey]))
 		);
-		
+		dump('idKeyDoesNotExist');
+		dump($idKeyDoesNotExist);
 		// Show 404 error if the Listing's ID key cannot be found
 		abort_if($idKeyDoesNotExist, 404);
 		
