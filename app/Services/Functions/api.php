@@ -287,7 +287,6 @@ function laravelSubRequest(
 		// Apply the available headers to the request
 		if (!empty($headers)) {
 			foreach ($headers as $key => $value) {
-				dump($key, $value);
 				request()->headers->set($key, $value);
 			}
 		}
