@@ -40,7 +40,6 @@
 							@foreach ($ethnicities as $item)
 								<option @if(!empty(request()->get("ethnicity_id")) && request()->get("ethnicity_id") == $item->id) selected @endif value="{{ $item->id }}">{{ $item->name }}</option>
 							@endforeach
-                            @endforeach
                         </select>
                     </div>
 
