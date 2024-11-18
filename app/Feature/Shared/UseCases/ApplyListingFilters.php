@@ -3,12 +3,13 @@
 namespace App\Feature\Shared\UseCases;
 
 use App\Feature\Shared\Dto\FilterParam;
+use App\Models\Builders\Classes\GlobalBuilder;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 
 class ApplyListingFilters
 {
     private $filters;
-    public function __invoke(Builder $builder, FilterParam ...$filters): Builder
+    public function __invoke(GlobalBuilder $builder, FilterParam ...$filters): GlobalBuilder
     {
         $this->filters = $filters;
         foreach ($this->filters as $filter) {
@@ -16,7 +17,7 @@ class ApplyListingFilters
         }
         return $builder;
     }
-    private function applyFilter(Builder $builder, FilterParam $filter): Builder
+    private function applyFilter(GlobalBuilder $builder, FilterParam $filter): GlobalBuilder
     {
         $field = $filter->getField();
         $operator = $filter->getOperator();

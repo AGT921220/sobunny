@@ -16,6 +16,17 @@
 
 namespace App\Providers;
 
+use App\Feature\Age\UseCases\GetAllAges;
+use App\Feature\BodyType\UseCases\GetAllBodyTypes;
+use App\Feature\Breast\UseCases\GetAllBreasts;
+use App\Feature\Cater\UseCases\GetAllCaters;
+use App\Feature\Ethnicity\UseCases\GetAllEthnicitys;
+use App\Feature\EyeColor\UseCases\GetAllEyeColors;
+use App\Feature\Geneder\UseCases\GetAllGenders;
+use App\Feature\HairColor\UseCases\GetAllHairColors;
+use App\Feature\Height\UseCases\GetAllHeights;
+use App\Feature\ServiceType\UseCases\GetAllServiceTypes;
+use App\Feature\Servicing\UseCases\GetAllServicings;
 use App\Models\Sanctum\PersonalAccessToken;
 use App\Providers\AppService\AclSystemTrait;
 use App\Providers\AppService\ConfigTrait;
@@ -27,6 +38,7 @@ use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Sanctum\Sanctum;
 
@@ -84,6 +96,35 @@ class AppServiceProvider extends ServiceProvider
 		
 		// Send Mails Always To
 		$this->setupMailsAlwaysTo();
+		// $genders = (new GetAllGenders())->__invoke();
+		View::composer('search.inc.sidebar', function ($view){
+			
+			$genders = (new GetAllGenders())->__invoke();
+			$ethnicities = (new GetAllEthnicitys())->__invoke();
+			$ages = (new GetAllAges())->__invoke();
+			$breasts = (new GetAllBreasts())->__invoke();
+			$caters = (new GetAllCaters())->__invoke();
+			$bodyTypes = (new GetAllBodyTypes())->__invoke();
+			$eyeColors = (new GetAllEyeColors())->__invoke();
+			$hairColors = (new GetAllHairColors())->__invoke();
+			$serviceTypes = (new GetAllServiceTypes())->__invoke();
+			$servicings = (new GetAllServicings())->__invoke();
+			$heights = (new GetAllHeights())->__invoke();
+
+			$view->with('genders', $genders);
+			$view->with('ethnicities', $ethnicities);
+			$view->with('ages', $ages);
+			$view->with('breasts', $breasts);
+			$view->with('caters', $caters);
+			$view->with('bodyTypes', $bodyTypes);
+			$view->with('eyeColors', $eyeColors);
+			$view->with('hairColors', $hairColors);
+			$view->with('serviceTypes', $serviceTypes);
+			$view->with('servicings', $servicings);
+			$view->with('heights', $heights);
+
+			// $view->with('variable2', ['key' => 'value']);
+		});
 	}
 	
 	/**

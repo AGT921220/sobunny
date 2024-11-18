@@ -1,4 +1,4 @@
-@php
+{{-- @php
 	// Fix: 404 error page don't know language and country objects.
 	$countryCode = 'us'; /* @fixme - Issue only in multi-country mode. Get the real default country. */
 	$searchUrl = \App\Services\UrlGen::searchWithoutQuery();
@@ -52,4 +52,4 @@
 		</div>
 	</div>
 	
-</div>
+</div> --}}

@@ -32,7 +32,7 @@ class CategoriesSeeder extends Seeder
 
         // Ethnicities
         Ethnicity::insert([
-            ['name' => 'Asia'],
+            ['name' => 'Asian'],
             ['name' => 'Caucasian'],
             ['name' => 'Pacific Islander'],
             ['name' => 'Ebony'],

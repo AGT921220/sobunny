@@ -17,6 +17,8 @@
 namespace App\Services\Search;
 
 use App\Enums\PostType;
+use App\Feature\Shared\UseCases\ApplyListingFilters;
+use App\Feature\Shared\UseCases\CreateDefaultFilters;
 use App\Helpers\DBTool;
 use App\Jobs\GeneratePostCollectionThumbnails;
 use App\Services\Search\Traits\Filters;
@@ -127,8 +129,14 @@ class PostQueries
 		
 		// Get Results
 		$perPage = data_get($this->input, 'perPage');
-		$posts = $this->posts->paginate((int)$perPage);
+		// $posts = $this->posts->paginate((int)$perPage);
 		
+
+		$applyFilters = new ApplyListingFilters();
+		$postsBuilder = $applyFilters->__invoke(Post::query()->with('picture'), ...(new CreateDefaultFilters())->__invoke());
+		$posts = $postsBuilder->paginate((int)$perPage);
+
+
 		// Generate listings images thumbnails
 		GeneratePostCollectionThumbnails::dispatch($posts);
 		
