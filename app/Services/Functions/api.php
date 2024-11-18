@@ -321,6 +321,7 @@ function laravelSubRequest(
 		 * Use Route::dispatch($request) when you want to handle routing specifically, without running the entire middleware stack.
 		 */
 		// $response = app()->handle($request);
+		dump($request);
 		$response = Route::dispatch($request);
 		dump(4);
 
