@@ -17,6 +17,17 @@
 namespace App\Http\Controllers\Web\Public\Post\CreateOrEdit\MultiSteps;
 
 use App\Enums\PostType;
+use App\Feature\Age\UseCases\GetAllAges;
+use App\Feature\BodyType\UseCases\GetAllBodyTypes;
+use App\Feature\Breast\UseCases\GetAllBreasts;
+use App\Feature\Cater\UseCases\GetAllCaters;
+use App\Feature\Ethnicity\UseCases\GetAllEthnicitys;
+use App\Feature\EyeColor\UseCases\GetAllEyeColors;
+use App\Feature\Geneder\UseCases\GetAllGenders;
+use App\Feature\HairColor\UseCases\GetAllHairColors;
+use App\Feature\Height\UseCases\GetAllHeights;
+use App\Feature\ServiceType\UseCases\GetAllServiceTypes;
+use App\Feature\Servicing\UseCases\GetAllServicings;
 use App\Helpers\Files\TmpUpload;
 use App\Services\UrlGen;
 use App\Http\Controllers\Api\Payment\HasPaymentTrigger;
@@ -52,40 +63,69 @@ class CreateController extends FrontController
 	use PictureTrait, ClearTmpInputTrait;
 	use SubmitTrait;
 	use HasPaymentTrigger, SingleStepPayment, HasPaymentRedirection;
-	
+
 	protected string $baseUrl = '/posts/create';
 	protected string $cfTmpUploadDir = 'temporary';
 	protected string $tmpUploadDir = 'temporary';
-	
-	/**
-	 * CreateController constructor.
-	 *
-	 * @throws \App\Exceptions\Custom\CustomException
-	 */
-	public function __construct()
-	{
+
+	private $getAllGenders;
+	private $getAllEthnicitys;
+	private $getAllAges;
+	private $getAllBreasts;
+	private $getAllCaters;
+	private $getAllBodyTypes;
+	private $getAllEyeColors;
+	private $getAllHairColors;
+	private $getAllHeighs;
+	private $getAllServiceTypes;
+	private $getAllServicings;
+
+	public function __construct(
+		GetAllGenders $getAllGenders,
+		GetAllEthnicitys $getAllEthnicitys,
+		GetAllAges $getAllAges,
+		GetAllCaters $getAllCaters,
+		GetAllBreasts $getAllBreasts,
+		GetAllEyeColors $getAllEyeColors,
+		GetAllHairColors $getAllHairColors,
+		GetAllHeights $getAllHeighs,
+		GetAllServiceTypes $getAllServiceTypes,
+		GetAllServicings $getAllServicings,
+		GetAllBodyTypes $getAllBodyTypes
+	) {
 		parent::__construct();
-		
+
 		$this->commonQueries();
-		
+
 		$this->baseUrl = url($this->baseUrl);
+		$this->getAllGenders = $getAllGenders;
+		$this->getAllEthnicitys = $getAllEthnicitys;
+		$this->getAllAges = $getAllAges;
+		$this->getAllBreasts = $getAllBreasts;
+		$this->getAllCaters = $getAllCaters;
+		$this->getAllBodyTypes = $getAllBodyTypes;
+		$this->getAllEyeColors = $getAllEyeColors;
+		$this->getAllHairColors = $getAllHairColors;
+		$this->getAllHeighs = $getAllHeighs;
+		$this->getAllServiceTypes = $getAllServiceTypes;
+		$this->getAllServicings = $getAllServicings;
 	}
-	
+
 	/**
 	 * Get the middleware that should be assigned to the controller.
 	 */
 	public static function middleware(): array
 	{
 		$array = [];
-		
+
 		// Check if guests can post listings
 		if (!doesGuestHaveAbilityToCreateListings()) {
 			$array[] = 'auth';
 		}
-		
+
 		return array_merge(parent::middleware(), $array);
 	}
-	
+
 	/**
 	 * @return void
 	 */
@@ -93,19 +133,19 @@ class CreateController extends FrontController
 	{
 		$this->getPaymentReferrersData();
 		$this->setPaymentSettingsForPromotion();
-		
+
 		if (config('settings.listing_form.show_listing_type')) {
 			$postTypes = PostType::all();
 			view()->share('postTypes', $postTypes);
 		}
-		
+
 		// Meta Tags
 		[$title, $description, $keywords] = getMetaTag('create');
 		MetaTag::set('title', $title);
 		MetaTag::set('description', strip_tags($description));
 		MetaTag::set('keywords', $keywords);
 	}
-	
+
 	/**
 	 * Checking for the current step
 	 *
@@ -119,35 +159,35 @@ class CreateController extends FrontController
 				$request->session()->forget('postId');
 			}
 		}
-		
+
 		$postId = $request->session()->get('postId');
-		
+
 		$step = 0;
-		
+
 		$data = $request->session()->get('postInput');
 		if (isset($data) || !empty($postId)) {
 			$step = 1;
 		} else {
 			return $step;
 		}
-		
+
 		$data = $request->session()->get('picturesInput');
 		if (isset($data) || !empty($postId)) {
 			$step = 2;
 		} else {
 			return $step;
 		}
-		
+
 		$data = $request->session()->get('paymentInput');
 		if (isset($data) || !empty($postId)) {
 			$step = 3;
 		} else {
 			return $step;
 		}
-		
+
 		return $step;
 	}
-	
+
 	/**
 	 * Post's Step
 	 *
@@ -161,27 +201,53 @@ class CreateController extends FrontController
 		if (!empty($pricingUrl)) {
 			return redirect()->to($pricingUrl)->withHeaders(config('larapen.core.noCacheHeaders'));
 		}
-		
+
 		// Check if the form type is 'Single-Step Form' and make redirection to it (permanently).
 		$isSingleStepFormEnabled = (config('settings.listing_form.publication_form_type') == '2');
 		if ($isSingleStepFormEnabled) {
 			$url = url('create');
-			
+
 			return redirect()->to($url, 301)->withHeaders(config('larapen.core.noCacheHeaders'));
 		}
-		
+
 		// Create an unique temporary ID
 		if (!$request->session()->has('cfUid')) {
 			$request->session()->put('cfUid', 'cf-' . uniqueCode(9));
 		}
-		
+
 		$this->shareWizardMenu($request);
-		
+
 		$postInput = $request->session()->get('postInput');
-		
-		return appView('post.createOrEdit.multiSteps.create', compact('postInput'));
+
+		//AQUI
+		$genders = $this->getAllGenders->__invoke();
+		$ethnicities = $this->getAllEthnicitys->__invoke();
+		$ages = $this->getAllAges->__invoke();
+		$breasts = $this->getAllBreasts->__invoke();
+		$caters = $this->getAllCaters->__invoke();
+		$bodyTypes = $this->getAllBodyTypes->__invoke();
+		$eyeColors = $this->getAllEyeColors->__invoke();
+		$hairColors = $this->getAllHairColors->__invoke();
+		$serviceTypes = $this->getAllServiceTypes->__invoke();
+		$servicings = $this->getAllServicings->__invoke();
+		$heights = $this->getAllHeighs->__invoke();
+		return appView('post.createOrEdit.multiSteps.create', compact(
+			'postInput',
+			'genders',
+			'ethnicities',
+			'ages',
+			'breasts',
+			'caters',
+			'bodyTypes',
+			'eyeColors',
+			'hairColors',
+			'serviceTypes',
+			'servicings',
+			'heights'
+
+		));
 	}
-	
+
 	/**
 	 * Post's Step (POST)
 	 *
@@ -196,7 +262,7 @@ class CreateController extends FrontController
 		if ($request->session()->has('cfUid')) {
 			$this->cfTmpUploadDir = $this->cfTmpUploadDir . '/' . $request->session()->get('cfUid');
 		}
-		
+
 		// Save uploaded files
 		// Get Category's Fields details
 		$fields = CategoryField::getFields($request->input('category_id'));
@@ -206,29 +272,29 @@ class CreateController extends FrontController
 					if ($request->hasFile('cf.' . $field->id)) {
 						// Get the file
 						$file = $request->file('cf.' . $field->id);
-						
+
 						// Check if the file is valid
 						if (!$file->isValid()) {
 							continue;
 						}
-						
+
 						$postInput['cf'][$field->id] = TmpUpload::file($this->cfTmpUploadDir, $file);
 					}
 				}
 			}
 		}
-		
+
 		$request->session()->put('postInput', $postInput);
-		
+
 		// Get the next URL
 		$nextUrl = url('posts/create/photos');
 		$nextUrl = urlQuery($nextUrl)
 			->setParameters(request()->only(['package']))
 			->toString();
-		
+
 		return redirect()->to($nextUrl);
 	}
-	
+
 	/**
 	 * Pictures' Step
 	 *
@@ -241,25 +307,25 @@ class CreateController extends FrontController
 			$backUrl = urlQuery($this->baseUrl)
 				->setParameters(request()->only(['package']))
 				->toString();
-			
+
 			return redirect()->to($backUrl);
 		}
-		
+
 		// Check if the 'Pricing Page' must be started first, and make redirection to it.
 		$pricingUrl = $this->getPricingPage($this->getSelectedPackage());
 		if (!empty($pricingUrl)) {
 			return redirect()->to($pricingUrl)->withHeaders(config('larapen.core.noCacheHeaders'));
 		}
-		
+
 		$this->shareWizardMenu($request);
-		
+
 		// Create an unique temporary ID
 		if (!$request->session()->has('uid')) {
 			$request->session()->put('uid', uniqueCode(9));
 		}
-		
+
 		$picturesInput = $request->session()->get('picturesInput');
-		
+
 		// Get next step URL
 		if (
 			isset($this->countPackages, $this->countPaymentMethods)
@@ -275,13 +341,13 @@ class CreateController extends FrontController
 		$nextUrl = urlQuery($nextUrl)
 			->setParameters(request()->only(['package']))
 			->toString();
-		
+
 		view()->share('nextStepUrl', $nextUrl);
 		view()->share('nextStepLabel', $nextStepLabel);
-		
+
 		return appView('post.createOrEdit.multiSteps.photos.create', compact('picturesInput'));
 	}
-	
+
 	/**
 	 * Pictures' Step (POST)
 	 *
@@ -295,27 +361,27 @@ class CreateController extends FrontController
 				$backUrl = urlQuery($this->baseUrl)
 					->setParameters(request()->only(['package']))
 					->toString();
-				
+
 				return redirect()->to($backUrl);
 			}
 		}
-		
+
 		$savedPicturesInput = (array)$request->session()->get('picturesInput');
-		
+
 		// Get default/global pictures limit
 		$defaultPicturesLimit = (int)config('settings.listing_form.pictures_limit', 5);
-		
+
 		// Get the picture number limit
 		$countExistingPictures = count($savedPicturesInput);
 		$picturesLimit = $defaultPicturesLimit - $countExistingPictures;
-		
+
 		// Use unique ID to store post's pictures
 		if ($request->session()->has('uid')) {
 			$this->tmpUploadDir = $this->tmpUploadDir . '/' . $request->session()->get('uid');
 		}
-		
+
 		$picturesInput = [];
-		
+
 		// Save uploaded files
 		$files = $request->file('pictures');
 		if (is_array($files) && count($files) > 0) {
@@ -323,20 +389,20 @@ class CreateController extends FrontController
 				if (empty($file)) {
 					continue;
 				}
-				
+
 				$picturesInput[] = TmpUpload::image($this->tmpUploadDir, $file);
-				
+
 				// Check the picture number limit
 				if ($key >= ($picturesLimit - 1)) {
 					break;
 				}
 			}
-			
+
 			$newPicturesInput = array_merge($savedPicturesInput, $picturesInput);
-			
+
 			$request->session()->put('picturesInput', $newPicturesInput);
 		}
-		
+
 		// AJAX response
 		$data = [];
 		$data['initialPreview'] = [];
@@ -347,19 +413,19 @@ class CreateController extends FrontController
 					if (empty($filePath)) {
 						continue;
 					}
-					
+
 					// $isTemporary = str_starts_with($filePath, 'temporary/');
 					// $pictureUrl = thumbParam($filePath)->setOption('picture-md')->url();
 					// $pictureUrl = $isTemporary ? $this->disk->url($filePath) : $pictureUrl;
 					$pictureUrl = thumbService($filePath)->resize('picture-md')->url();
 					$deleteUrl = url('posts/create/photos/' . $key . '/delete');
-					
+
 					try {
 						$fileSize = $this->disk->exists($filePath) ? (int)$this->disk->size($filePath) : 0;
 					} catch (\Throwable $e) {
 						$fileSize = 0;
 					}
-					
+
 					// Build Bootstrap-FileInput plugin's parameters
 					$data['initialPreview'][] = $pictureUrl;
 					$data['initialPreviewConfig'][] = [
@@ -371,10 +437,10 @@ class CreateController extends FrontController
 					];
 				}
 			}
-			
+
 			return response()->json($data);
 		}
-		
+
 		// Response
 		// Get the next URL & button label
 		if (
@@ -385,20 +451,20 @@ class CreateController extends FrontController
 			if (is_array($picturesInput) && count($picturesInput) > 0) {
 				flash(t('The pictures have been updated'))->success();
 			}
-			
+
 			$nextUrl = url('posts/create/payment');
 			$nextUrl = urlQuery($nextUrl)
 				->setParameters(request()->only(['package']))
 				->toString();
-			
+
 			return redirect()->to($nextUrl);
 		} else {
 			$request->session()->flash('message', t('your_listing_is_created'));
-			
+
 			return $this->storeInputDataInDatabase($request);
 		}
 	}
-	
+
 	/**
 	 * Payment's Step
 	 *
@@ -413,24 +479,24 @@ class CreateController extends FrontController
 				$backUrl = urlQuery($backUrl)
 					->setParameters(request()->only(['package']))
 					->toString();
-				
+
 				return redirect()->to($backUrl);
 			}
 		}
-		
+
 		// Check if the 'Pricing Page' must be started first, and make redirection to it.
 		$pricingUrl = $this->getPricingPage($this->getSelectedPackage());
 		if (!empty($pricingUrl)) {
 			return redirect()->to($pricingUrl)->withHeaders(config('larapen.core.noCacheHeaders'));
 		}
-		
+
 		$this->shareWizardMenu($request);
-		
+
 		$payment = $request->session()->get('paymentInput');
-		
+
 		return appView('post.createOrEdit.multiSteps.packages.create', compact('payment'));
 	}
-	
+
 	/**
 	 * Payment's Step (POST)
 	 *
@@ -445,16 +511,16 @@ class CreateController extends FrontController
 				$backUrl = urlQuery($backUrl)
 					->setParameters(request()->only(['package']))
 					->toString();
-				
+
 				return redirect()->to($backUrl);
 			}
 		}
-		
+
 		$request->session()->put('paymentInput', $request->validated());
-		
+
 		return $this->storeInputDataInDatabase($request);
 	}
-	
+
 	/**
 	 * End of the steps (Confirmation)
 	 *
@@ -474,12 +540,12 @@ class CreateController extends FrontController
 				->withoutGlobalScopes([VerifiedScope::class, ReviewedScope::class])
 				->where('id', session('postId'))
 				->first();
-			
+
 			abort_if(empty($post), 404, t('post_not_found'));
-			
+
 			session()->forget('postId');
 		}
-		
+
 		// Redirect to the Post,
 		// - If User is logged
 		// - Or if Email and Phone verification option is not activated
@@ -487,18 +553,18 @@ class CreateController extends FrontController
 		if (auth()->check() || $doesVerificationIsDisabled) {
 			if (!empty($post)) {
 				flash(session('message'))->success();
-				
+
 				return redirect()->to(UrlGen::postUri($post));
 			}
 		}
-		
+
 		// Meta Tags
 		MetaTag::set('title', session('message'));
 		MetaTag::set('description', session('message'));
-		
+
 		return appView('post.createOrEdit.multiSteps.finish');
 	}
-	
+
 	/**
 	 * Remove a picture
 	 *
@@ -509,10 +575,10 @@ class CreateController extends FrontController
 	public function removePicture($pictureId, Request $request): JsonResponse|RedirectResponse
 	{
 		$picturesInput = $request->session()->get('picturesInput');
-		
+
 		$message = t('The picture cannot be deleted');
 		$result = ['status' => 0, 'message' => $message];
-		
+
 		if (isset($picturesInput[$pictureId])) {
 			$res = true;
 			try {
@@ -520,40 +586,40 @@ class CreateController extends FrontController
 			} catch (\Throwable $e) {
 				$res = false;
 			}
-			
+
 			if ($res) {
 				unset($picturesInput[$pictureId]);
-				
+
 				if (!empty($picturesInput)) {
 					$request->session()->put('picturesInput', $picturesInput);
 				} else {
 					$request->session()->forget('picturesInput');
 				}
-				
+
 				$message = t('The picture has been deleted');
-				
+
 				if (isFromAjax()) {
 					$result['status'] = 1;
 					$result['message'] = $message;
-					
+
 					return response()->json($result);
 				} else {
 					flash($message)->success();
-					
+
 					return redirect()->back();
 				}
 			}
 		}
-		
+
 		if (isFromAjax()) {
 			return response()->json($result);
 		} else {
 			flash($message)->error();
-			
+
 			return redirect()->back();
 		}
 	}
-	
+
 	/**
 	 * Reorder pictures
 	 *
@@ -563,15 +629,15 @@ class CreateController extends FrontController
 	public function reorderPictures(Request $request): JsonResponse
 	{
 		$params = $request->input('params');
-		
+
 		$result = ['status' => 0];
-		
+
 		if (isset($params['stack']) && count($params['stack']) > 0) {
 			// Use unique ID to store post's pictures
 			if ($request->session()->has('uid')) {
 				$this->tmpUploadDir = $this->tmpUploadDir . '/' . $request->session()->get('uid');
 			}
-			
+
 			$newPicturesInput = [];
 			$statusOk = false;
 			foreach ($params['stack'] as $position => $item) {
@@ -586,7 +652,7 @@ class CreateController extends FrontController
 				$result['message'] = t('Your picture has been reorder successfully');
 			}
 		}
-		
+
 		return response()->json($result, 200, [], JSON_UNESCAPED_UNICODE);
 	}
 }

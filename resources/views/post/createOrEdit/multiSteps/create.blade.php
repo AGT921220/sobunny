@@ -57,26 +57,7 @@
 										
 										{{-- category_id --}}
 										<?php $categoryIdError = (isset($errors) && $errors->has('category_id')) ? ' is-invalid' : ''; ?>
-										<div class="row mb-3 required">
-											<label class="col-md-3 col-form-label{{ $categoryIdError }}">{{ t('category') }} <sup>*</sup></label>
-											<div class="col-md-8">
-												<div id="catsContainer" class="rounded{{ $categoryIdError }}">
-													<a href="#browseCategories" data-bs-toggle="modal" class="cat-link" data-id="0">
-														{{ t('select_a_category') }}
-													</a>
-												</div>
-											</div>
-											<input type="hidden"
-											       name="category_id"
-											       id="categoryId"
-											       value="{{ old('category_id', data_get($postInput, 'category_id', 0)) }}"
-											>
-											<input type="hidden"
-											       name="category_type"
-											       id="categoryType"
-											       value="{{ old('category_type', data_get($postInput, 'category_type')) }}"
-											>
-										</div>
+								
 										
 										@if (config('settings.listing_form.show_listing_type'))
 											{{-- post_type_id --}}
@@ -121,6 +102,157 @@
 											</div>
 										</div>
 										
+
+										<div>
+											<div class="row g-3 mt-3">
+												<div class="col-sm-4">
+													<div class="item-catagory-wraper">
+														<label for="item-catagory">{{ __('Gender') }} <span class="text-danger">*</span> </label>
+														<select name="gender_id" id="gender" class="form-control input-md">
+															<option value="">{{ __('Select Gender') }}</option>
+															@foreach ($genders as $cat)
+																<option value="{{ $cat->id }}" @selected(old('gender_id') == $cat->id)>{{ $cat->name }}</option>
+															@endforeach
+														</select>
+													</div>
+												</div>
+
+												<div class="col-sm-4">
+													<div class="item-catagory-wraper">
+														<label for="item-catagory">{{ __('Ethnicity') }} <span class="text-danger">*</span> </label>
+														<select name="ethnicity_id" id="ethincity" class="form-control input-md">
+															<option value="">{{ __('Select Ethnicity') }}</option>
+															@foreach ($ethnicities as $item)
+																<option value="{{ $item->id }}" @selected(old('ethnicity_id') == $item->id)>{{ $item->name }}</option>
+															@endforeach
+														</select>
+													</div>
+												</div>
+
+												<div class="col-sm-4">
+													<div class="item-age-wraper">
+														<label for="item-age">{{ __('Age') }} <span class="text-danger">*</span> </label>
+														<select name="age_id" id="age" class="form-control input-md">
+															<option value="">{{ __('Select Age') }}</option>
+															@foreach ($ages as $item)
+																<option value="{{ $item->id }}" @selected(old('age_id') == $item->id)>{{ $item->name }}</option>
+															@endforeach
+														</select>
+													</div>
+												</div>
+											</div>
+
+											<div class="row g-3 mt-3">
+												<div class="col-sm-4">
+													<div class="item-catagory-wraper">
+														<label for="item-catagory">{{ __('Breasts') }} <span class="text-danger">*</span> </label>
+														<select name="breast_id" id="breasts" class="form-control input-md">
+															<option value="">{{ __('Select Breasts') }}</option>
+															@foreach ($breasts as $cat)
+																<option value="{{ $cat->id }}" @selected(old('breast_id') == $cat->id)>{{ $cat->name }}</option>
+															@endforeach
+														</select>
+													</div>
+												</div>
+
+												<div class="col-sm-4">
+													<div class="item-catagory-wraper">
+														<label for="item-catagory">{{ __('Caters') }} <span class="text-danger">*</span> </label>
+														<select name="cater_id" id="cater" class="form-control input-md">
+															<option value="">{{ __('Select Cater') }}</option>
+															@foreach ($caters as $item)
+																<option value="{{ $item->id }}" @selected(old('cater_id') == $item->id)>{{ $item->name }}</option>
+															@endforeach
+														</select>
+													</div>
+												</div>
+
+												<div class="col-sm-4">
+													<div class="item-age-wraper">
+														<label for="item-age">{{ __('Body Type') }} <span class="text-danger">*</span> </label>
+														<select name="body_type_id" id="body_type" class="form-control input-md">
+															<option value="">{{ __('Select Body Type') }}</option>
+															@foreach ($bodyTypes as $item)
+																<option value="{{ $item->id }}" @selected(old('body_type_id') == $item->id)>{{ $item->name }}</option>
+															@endforeach
+														</select>
+													</div>
+												</div>
+											</div>
+
+											<div class="row g-3 mt-3">
+												<div class="col-sm-4">
+													<div class="item-catagory-wraper">
+														<label for="item-catagory">{{ __('EyeColor') }} <span class="text-danger">*</span> </label>
+														<select name="eye_color_id" id="eyeColor" class="form-control input-md">
+															<option value="">{{ __('Select EyeColor') }}</option>
+															@foreach ($eyeColors as $cat)
+																<option value="{{ $cat->id }}" @selected(old('eye_color_id') == $cat->id)>{{ $cat->name }}</option>
+															@endforeach
+														</select>
+													</div>
+												</div>
+
+												<div class="col-sm-4">
+													<div class="item-catagory-wraper">
+														<label for="item-catagory">{{ __('HairColor') }} <span class="text-danger">*</span> </label>
+														<select name="hair_color_id" id="HairColor" class="form-control input-md">
+															<option value="">{{ __('Select HairColor') }}</option>
+															@foreach ($hairColors as $item)
+																<option value="{{ $item->id }}" @selected(old('hair_color_id') == $item->id)>{{ $item->name }}</option>
+															@endforeach
+														</select>
+													</div>
+												</div>
+
+												<div class="col-sm-4">
+													<div class="item-age-wraper">
+														<label for="item-age">{{ __('Service Type') }} <span class="text-danger">*</span> </label>
+														<select name="service_type_id" id="service_type" class="form-control input-md">
+															<option value="">{{ __('Select Service Type') }}</option>
+															@foreach ($serviceTypes as $item)
+																<option value="{{ $item->id }}" @selected(old('service_type_id') == $item->id)>{{ $item->name }}</option>
+															@endforeach
+														</select>
+													</div>
+												</div>
+											</div>
+
+											<div class="row g-3 mt-3">
+												<div class="col-sm-4">
+													<div class="item-catagory-wraper">
+														<label for="item-catagory">{{ __('Servicing') }} <span class="text-danger">*</span> </label>
+														<select name="servicing_id" id="servicing" class="form-control input-md">
+															<option value="">{{ __('Select Servicing') }}</option>
+															@foreach ($servicings as $cat)
+																<option value="{{ $cat->id }}" @selected(old('servicing_id') == $cat->id)>{{ $cat->name }}</option>
+															@endforeach
+														</select>
+													</div>
+												</div>
+											</div>
+
+
+												<div class="col-sm-4">
+													<div class="item-catagory-wraper">
+														<label for="item-catagory">{{ __('Heights') }} <span class="text-danger">*</span> </label>
+														<select name="height_id" id="heights" class="form-control input-md">
+															<option value="">{{__('Select Heights')}}</option>
+															@foreach($heights as $item)
+																<option value="{{ $item->id }}" @selected(old('height_id') == $item->id)>{{ $item->name }}</option>
+															@endforeach
+														</select>
+													</div>
+												</div>
+											</div>
+
+
+										</div>
+
+
+
+										
+
 										{{-- description --}}
 										@php
 											$descriptionError = (isset($errors) && $errors->has('description')) ? ' is-invalid' : '';
@@ -146,78 +278,6 @@
 												<div class="form-text text-muted">{{ t('describe_what_makes_your_listing_unique') }}...</div>
 											</div>
 										</div>
-										
-										{{-- cfContainer --}}
-										<div id="cfContainer"></div>
-										
-										{{-- price --}}
-										@php
-											$priceError = (isset($errors) && $errors->has('price')) ? ' is-invalid' : '';
-											$currencySymbol = config('currency.symbol', 'X');
-											$price = old('price', data_get($postInput, 'price'));
-											$price = \App\Helpers\Num::format($price, 2, '.', '');
-											$isPriceMandatory = (config('settings.listing_form.price_mandatory') == '1');
-										@endphp
-										<div id="priceBloc" class="row mb-3">
-											<label class="col-md-3 col-form-label{{ $priceError }}" for="price">
-												{{ t('price') }}{!! $isPriceMandatory ? ' <sup>*</sup>' : '' !!}
-											</label>
-											<div class="col-md-8">
-												<div class="input-group{{ $priceError }}">
-													<span class="input-group-text">{!! $currencySymbol !!}</span>
-													<input id="price"
-													       name="price"
-													       class="form-control{{ $priceError }}"
-													       placeholder="{{ t('ei_price') }}"
-													       type="number"
-													       min="0"
-													       step="{{ getInputNumberStep((int)config('currency.decimal_places', 2)) }}"
-													       value="{!! $price !!}"
-													>
-													<span class="input-group-text">
-														<input id="negotiable" name="negotiable" type="checkbox"
-														       value="1" @checked(old('negotiable', data_get($postInput, 'negotiable')) == '1')>&nbsp;
-														<small>{{ t('negotiable') }}</small>
-													</span>
-												</div>
-												@if (config('settings.listing_form.price_mandatory') != '1')
-													<div class="form-text text-muted">{{ t('price_hint') }}</div>
-												@endif
-											</div>
-										</div>
-										
-										{{-- country_code --}}
-										@php
-											$countryCodeError = (isset($errors) && $errors->has('country_code')) ? ' is-invalid' : '';
-											$countryCodeValue = (!empty(config('ipCountry.code'))) ? config('ipCountry.code') : 0;
-											$countryCodeValue = data_get($postInput, 'country_code', $countryCodeValue);
-											$countryCodeValueOld = old('country_code', $countryCodeValue);
-										@endphp
-										@if (empty(config('country.code')))
-											<div class="row mb-3 required">
-												<label class="col-md-3 col-form-label{{ $countryCodeError }}" for="country_code">
-													{{ t('your_country') }} <sup>*</sup>
-												</label>
-												<div class="col-md-8">
-													<select id="countryCode" name="country_code"
-													        class="form-control large-data-selecter{{ $countryCodeError }}">
-														<option value="0" data-admin-type="0" @selected(empty(old('country_code')))>
-															{{ t('select_a_country') }}
-														</option>
-														@foreach ($countries as $item)
-															<option value="{{ data_get($item, 'code') }}"
-															        data-admin-type="{{ data_get($item, 'admin_type') }}"
-																	@selected($countryCodeValueOld == data_get($item, 'code'))
-															>
-																{{ data_get($item, 'name') }}
-															</option>
-														@endforeach
-													</select>
-												</div>
-											</div>
-										@else
-											<input id="countryCode" name="country_code" type="hidden" value="{{ config('country.code') }}">
-										@endif
 										
 										@php
 											$adminType = config('country.admin_type', 0);
@@ -278,57 +338,10 @@
 											</div>
 										</div>
 										
-										{{-- tags --}}
-										@php
-											$tagsError = (isset($errors) && $errors->has('tags.*')) ? ' is-invalid' : '';
-											$tags = old('tags', data_get($postInput, 'tags'));
-										@endphp
-										<div class="row mb-3">
-											<label class="col-md-3 col-form-label{{ $tagsError }}" for="tags">{{ t('Tags') }}</label>
-											<div class="col-md-8">
-												<select id="tags" name="tags[]" class="form-control tags-selecter" multiple="multiple">
-													@if (!empty($tags))
-														@foreach($tags as $iTag)
-															<option selected="selected">{{ $iTag }}</option>
-														@endforeach
-													@endif
-												</select>
-												<div class="form-text text-muted">
-													{!! t('tags_hint', [
-															'limit' => (int)config('settings.listing_form.tags_limit', 15),
-															'min'   => (int)config('settings.listing_form.tags_min_length', 2),
-															'max'   => (int)config('settings.listing_form.tags_max_length', 30)
-														]) !!}
-												</div>
-											</div>
+										<div class="row mb-b">
+
 										</div>
-										
-										{{-- is_permanent --}}
-										@if (config('settings.listing_form.permanent_listings_enabled') == '3')
-											<input type="hidden" name="is_permanent" id="isPermanent" value="0">
-										@else
-											@php
-												$isPermanentError = (isset($errors) && $errors->has('is_permanent')) ? ' is-invalid' : '';
-											@endphp
-											<div id="isPermanentBox" class="row mb-3 required hide">
-												<label class="col-md-3 col-form-label"></label>
-												<div class="col-md-8">
-													<div class="form-check">
-														<input id="isPermanent"
-														       name="is_permanent"
-														       class="form-check-input mt-1{{ $isPermanentError }}"
-														       value="1"
-														       type="checkbox" @checked(old('is_permanent', data_get($postInput, 'is_permanent')) == '1')
-														>
-														<label class="form-check-label mt-0" for="is_permanent">
-															{!! t('is_permanent_label') !!}
-														</label>
-													</div>
-													<div class="form-text text-muted">{{ t('is_permanent_hint') }}</div>
-													<div style="clear:both"></div>
-												</div>
-											</div>
-										@endif
+
 										
 										
 										<div class="content-subheading">

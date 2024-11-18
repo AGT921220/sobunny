@@ -18,6 +18,8 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install mbstring exif pcntl bcmath soap \
     && pecl install redis && docker-php-ext-enable redis
 
+RUN apt-get update && apt-get install -y libicu-dev && docker-php-ext-install intl
+
 # Instalar Xdebug
 RUN pecl install xdebug \
     && docker-php-ext-enable xdebug
