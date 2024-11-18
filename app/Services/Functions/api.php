@@ -136,7 +136,7 @@ function makeApiRequest(
 		 * i.e.The endpoint is a valid URL starting with 'http', except the website's URL
 		 */
 		$isRemoteEndpoint = (str_starts_with($uri, 'http') && !str_starts_with($uri, url('/')));
-		
+		dump('isRemoteEndpoint: ' . $isRemoteEndpoint);
 		if (!$isRemoteEndpoint) {
 			$createMethods = ['POST', 'CREATE'];
 			$updateMethods = ['PUT', 'PATCH', 'UPDATE'];
@@ -148,6 +148,7 @@ function makeApiRequest(
 				'countryCode'  => config('country.code'),
 				'languageCode' => config('app.locale'),
 			];
+			info('defaultData: ' . json_encode($defaultData));
 			if (in_array(request()->method(), $nonCacheableMethods)) {
 				$defaultData['country_code'] = (!empty($data['country_code']))
 					? $data['country_code']
@@ -190,14 +191,18 @@ function makeApiRequest(
 				}
 			}
 			$headers = array_merge($defaultHeaders, $headers);
+			dump('headers: ' . json_encode($headers));
 		}
 		
 		if (isApiCurlRequestsEnabled() || $isRemoteEndpoint) {
+			dump('isApiCurlRequestsEnabled: ' . isApiCurlRequestsEnabled());
 			$array = curlHttpRequest($method, $uri, $data, $files, $headers, $forInternalEndpoint);
 		} else {
+			dump('isApiCurlRequestsEnabled: ' . isApiCurlRequestsEnabled());
 			$array = laravelSubRequest($method, $uri, $data, $files, $headers, $forInternalEndpoint);
 		}
 	} catch (\Throwable $e) {
+		dump($e->getMessage());
 		$message = $e->getMessage();
 		$message = !empty($message) ? $message : 'Error encountered during API request.';
 		$status = method_exists($e, 'getStatusCode') ? $e->getStatusCode() : 500;
@@ -248,6 +253,7 @@ function laravelSubRequest(
 	bool   $forInternalEndpoint = true
 ): array
 {
+	dump('laravelSubRequest');
 	$baseUrl = '/api';
 	$endpoint = $forInternalEndpoint ? ($baseUrl . $uri) : $uri;
 	
@@ -386,6 +392,7 @@ function curlHttpRequest(
 	bool   $forInternalEndpoint = true
 ): array
 {
+	dump('curlHttpRequest');
 	// Guzzle Options
 	$options = ['debug' => false];
 	$asMultipart = !empty($files);

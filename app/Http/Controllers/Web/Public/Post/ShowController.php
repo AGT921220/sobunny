@@ -106,8 +106,6 @@ class ShowController extends FrontController
 		}
 		$queryParams = array_merge(request()->all(), $queryParams);
 		$headers = session()->has('postIsVisited') ? ['X-VISITED-BY-SAME-SESSION' => $postId] : [];
-		dump($endpoint);
-		dump($queryParams);
 		$data = makeApiRequest(method: 'get', uri: $endpoint, data: $queryParams, headers: $headers);
 		
 		$message = $this->handleHttpError($data);
