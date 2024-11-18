@@ -56,26 +56,16 @@ class ShowController extends FrontController
 	 */
 	public function index($postId)
 	{
-		dump($postId);
 		// Get and Check the Controller's Method Parameters
 		$parameters = request()->route()->parameters();
-		dump($parameters);
+		
 		// Check if the Listing's ID key exists
 		$idKey = array_key_exists('hashableId', $parameters) ? 'hashableId' : 'id';
-		dump($idKey);
-		dump('isEmpty');
-		dump(empty($parameters[$idKey]));
-
-		dump('isHashedId');
-		dump((!isHashedId($parameters[$idKey])));
-		dump('is_numeric');
-		dump((!is_numeric($parameters[$idKey])));
 		$idKeyDoesNotExist = (
 			empty($parameters[$idKey])
 			|| (!isHashedId($parameters[$idKey]) && !is_numeric($parameters[$idKey]))
 		);
-		dump('idKeyDoesNotExist');
-		dump($idKeyDoesNotExist);
+		
 		// Show 404 error if the Listing's ID key cannot be found
 		abort_if($idKeyDoesNotExist, 404);
 		
@@ -105,9 +95,11 @@ class ShowController extends FrontController
 		
 		// Decode Hashed ID
 		$postId = hashId($postId, true) ?? $postId;
-		dump($postId);
+		
 		// Call API endpoint
 		$endpoint = '/posts/' . $postId;
+		dump('endpoint');
+		dump($endpoint);
 		$queryParams = [
 			'detailed' => 1,
 		];
@@ -117,11 +109,14 @@ class ShowController extends FrontController
 		$queryParams = array_merge(request()->all(), $queryParams);
 		$headers = session()->has('postIsVisited') ? ['X-VISITED-BY-SAME-SESSION' => $postId] : [];
 		$data = makeApiRequest(method: 'get', uri: $endpoint, data: $queryParams, headers: $headers);
-		
+		dump('data');
+		dump($data);
 		$message = $this->handleHttpError($data);
+		dump('message');
+		dump($message);
 		$post = data_get($data, 'result');
 		$customFields = data_get($data, 'extra.fieldsValues');
-		
+		dump('post');
 		dump($post);
 		// Listing isn't found
 		abort_if(empty($post), 404, $message ?? t('post_not_found'));
