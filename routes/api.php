@@ -56,6 +56,34 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+// posts
+Route::prefix('posts')
+	->controller(PostController::class)
+	->group(function ($router) {
+		$router->pattern('id', '[0-9]+');
+		
+		Route::get('/', 'index')->name('posts.index');
+		Route::get('{id}', 'show')->name('posts.show');
+		Route::post('/', 'store')->name('posts.store');
+		Route::middleware(['auth:sanctum'])
+			->group(function ($router) {
+				$router->pattern('ids', '[0-9,]+');
+				Route::put('{id}/offline', 'offline')->name('posts.offline');
+				Route::put('{id}/repost', 'repost')->name('posts.repost');
+				Route::put('{id}', 'update')->name('posts.update');
+				Route::delete('{ids}', 'destroy')->name('posts.destroy');
+			});
+		
+		// listings - Email Address or Phone Number verification
+		$router->pattern('field', 'email|phone');
+		$router->pattern('token', '.*');
+		Route::get('{id}/verify/resend/email', 'reSendEmailVerification');
+		Route::get('{id}/verify/resend/sms', 'reSendPhoneVerification');
+		Route::get('verify/{field}/{token?}', 'verification');
+	});
+
+
 // auth
 Route::namespace('Auth')
 	->group(function ($router) {
@@ -235,31 +263,6 @@ Route::prefix('users')
 		Route::get('verify/{field}/{token?}', 'verification');
 	});
 
-// posts
-Route::prefix('posts')
-	->controller(PostController::class)
-	->group(function ($router) {
-		$router->pattern('id', '[0-9]+');
-		
-		Route::get('/', 'index')->name('posts.index');
-		Route::get('{id}', 'show')->name('posts.show');
-		Route::post('/', 'store')->name('posts.store');
-		Route::middleware(['auth:sanctum'])
-			->group(function ($router) {
-				$router->pattern('ids', '[0-9,]+');
-				Route::put('{id}/offline', 'offline')->name('posts.offline');
-				Route::put('{id}/repost', 'repost')->name('posts.repost');
-				Route::put('{id}', 'update')->name('posts.update');
-				Route::delete('{ids}', 'destroy')->name('posts.destroy');
-			});
-		
-		// listings - Email Address or Phone Number verification
-		$router->pattern('field', 'email|phone');
-		$router->pattern('token', '.*');
-		Route::get('{id}/verify/resend/email', 'reSendEmailVerification');
-		Route::get('{id}/verify/resend/sms', 'reSendPhoneVerification');
-		Route::get('verify/{field}/{token?}', 'verification');
-	});
 
 // savedPosts
 Route::prefix('savedPosts')
