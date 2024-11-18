@@ -16,7 +16,7 @@ class CreateDefaultFilters
         $caterId = request()->get('cater_id') ?? null;
         $bodyTypeId = request()->get('body_type_id') ?? null;
         $eyeColorId = request()->get('eye_color_id') ?? null;
-        $hairColorId = request()->get('hair_color_id') ??
+        $hairColorId = request()->get('hair_color_id') ?? null;
         $serviceTypeId = request()->get('service_type_id') ?? null;
         $servicingId = request()->get('servicing_id')?? null;
         $heightId = request()->get('height_id') ?? null;
@@ -43,7 +43,7 @@ class CreateDefaultFilters
             $params[] = new FilterParam('body_type_id', $bodyTypeId);
         }
         if($eyeColorId !== null) {
-            $params[] = new FilterParam('eyecolor_id', $eyeColorId);
+            $params[] = new FilterParam('eye_color_id', $eyeColorId);
         }
         if($hairColorId !== null) {
             $params[] = new FilterParam('hair_color_id', $hairColorId);
