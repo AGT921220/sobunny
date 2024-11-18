@@ -105,7 +105,7 @@ class ShowController extends FrontController
 		
 		// Decode Hashed ID
 		$postId = hashId($postId, true) ?? $postId;
-		
+		dump($postId);
 		// Call API endpoint
 		$endpoint = '/posts/' . $postId;
 		$queryParams = [
@@ -122,6 +122,7 @@ class ShowController extends FrontController
 		$post = data_get($data, 'result');
 		$customFields = data_get($data, 'extra.fieldsValues');
 		
+		dump($post);
 		// Listing isn't found
 		abort_if(empty($post), 404, $message ?? t('post_not_found'));
 		
