@@ -19,13 +19,15 @@
                     </h5>
                 </div>
 
+
+
                 <!-- Gender Selector -->
                 <div class="itemFilter">
                     <label for="item-catagory">{{ __('Gender') }} <span class="text-danger">*</span> </label>
                     <select name="gender_id" id="gender" class="form-control input-md">
                         <option value="">{{ __('Select Gender') }}</option>
                         @foreach ($genders as $cat)
-                            <option value="{{ $cat->id }}" @selected(old('gender_id') == $cat->id)>{{ $cat->name }}
+							<option @if(!empty(request()->get("gender_id")) && request()->get("gender_id") == $cat->id) selected @endif value="{{ $cat->id }}">{{ $cat->name }}</option>
                             </option>
                         @endforeach
                     </select>
@@ -35,30 +37,29 @@
                         <label for="item-catagory">{{ __('Ethnicity') }} <span class="text-danger">*</span> </label>
                         <select name="ethnicity_id" id="ethincity" class="form-control input-md">
                             <option value="">{{ __('Select Ethnicity') }}</option>
-                            @foreach ($ethnicities as $item)
-                                <option value="{{ $item->id }}" @selected(old('ethnicity_id') == $item->id)>{{ $item->name }}
-                                </option>
+							@foreach ($ethnicities as $item)
+								<option @if(!empty(request()->get("ethnicity_id")) && request()->get("ethnicity_id") == $item->id) selected @endif value="{{ $item->id }}">{{ $item->name }}</option>
+							@endforeach
                             @endforeach
                         </select>
                     </div>
 
 					<div class="itemFilter">
-                        <label for="item-age">{{ __('Age') }} <span class="text-danger">*</span> </label>
-                        <select name="age_id" id="age" class="form-control input-md">
-                            <option value="">{{ __('Select Age') }}</option>
-                            @foreach ($ages as $item)
-                                <option value="{{ $item->id }}" @selected(old('age_id') == $item->id)>{{ $item->name }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
+						<label for="item-age">{{ __('Age') }} <span class="text-danger">*</span> </label>
+						<select name="age_id" id="age" class="form-control input-md">
+							<option value="">{{ __('Select Age') }}</option>
+							@foreach ($ages as $item)
+								<option @if(!empty(request()->get("age_id")) && request()->get("age_id") == $item->id) selected @endif value="{{ $item->id }}">{{ $item->name }}</option>
+							@endforeach
+						</select>
+					</div>
 
 					<div class="itemFilter">
 						<label for="item-catagory">{{ __('Breasts') }} <span class="text-danger">*</span> </label>
 						<select name="breast_id" id="breasts" class="form-control input-md">
 							<option value="">{{ __('Select Breasts') }}</option>
 							@foreach ($breasts as $cat)
-								<option value="{{ $cat->id }}" @selected(old('breast_id') == $cat->id)>{{ $cat->name }}</option>
+								<option @if(!empty(request()->get("breast_id")) && request()->get("breast_id") == $cat->id) selected @endif value="{{ $cat->id }}">{{ $cat->name }}</option>
 							@endforeach
 						</select>
 					</div>
@@ -68,7 +69,7 @@
 						<select name="cater_id" id="cater" class="form-control input-md">
 							<option value="">{{ __('Select Cater') }}</option>
 							@foreach ($caters as $item)
-								<option value="{{ $item->id }}" @selected(old('cater_id') == $item->id)>{{ $item->name }}</option>
+								<option @if(!empty(request()->get("cater_id")) && request()->get("cater_id") == $item->id) selected @endif value="{{ $item->id }}">{{ $item->name }}</option>
 							@endforeach
 						</select>
 					</div>
@@ -78,7 +79,7 @@
 						<select name="body_type_id" id="body_type" class="form-control input-md">
 							<option value="">{{ __('Select Body Type') }}</option>
 							@foreach ($bodyTypes as $item)
-								<option value="{{ $item->id }}" @selected(old('body_type_id') == $item->id)>{{ $item->name }}</option>
+								<option @if(!empty(request()->get("body_type_id")) && request()->get("body_type_id") == $item->id) selected @endif value="{{ $item->id }}">{{ $item->name }}</option>
 							@endforeach
 						</select>
 					</div>
@@ -88,25 +89,27 @@
 						<select name="eye_color_id" id="eyeColor" class="form-control input-md">
 							<option value="">{{ __('Select EyeColor') }}</option>
 							@foreach ($eyeColors as $cat)
-								<option value="{{ $cat->id }}" @selected(old('eye_color_id') == $cat->id)>{{ $cat->name }}</option>
+								<option @if(!empty(request()->get("eye_color_id")) && request()->get("eye_color_id") == $cat->id) selected @endif value="{{ $cat->id }}">{{ $cat->name }}</option>
 							@endforeach
 						</select>
 					</div>
+
 					<div class="itemFilter">
 						<label for="item-catagory">{{ __('HairColor') }} <span class="text-danger">*</span> </label>
 						<select name="hair_color_id" id="HairColor" class="form-control input-md">
 							<option value="">{{ __('Select HairColor') }}</option>
 							@foreach ($hairColors as $item)
-								<option value="{{ $item->id }}" @selected(old('hair_color_id') == $item->id)>{{ $item->name }}</option>
+								<option @if(!empty(request()->get("hair_color_id")) && request()->get("hair_color_id") == $item->id) selected @endif value="{{ $item->id }}">{{ $item->name }}</option>
 							@endforeach
 						</select>
 					</div>
+
 					<div class="itemFilter">
 						<label for="item-age">{{ __('Service Type') }} <span class="text-danger">*</span> </label>
 						<select name="service_type_id" id="service_type" class="form-control input-md">
 							<option value="">{{ __('Select Service Type') }}</option>
 							@foreach ($serviceTypes as $item)
-								<option value="{{ $item->id }}" @selected(old('service_type_id') == $item->id)>{{ $item->name }}</option>
+								<option @if(!empty(request()->get("service_type_id")) && request()->get("service_type_id") == $item->id) selected @endif value="{{ $item->id }}">{{ $item->name }}</option>
 							@endforeach
 						</select>
 					</div>
@@ -116,16 +119,17 @@
 						<select name="servicing_id" id="servicing" class="form-control input-md">
 							<option value="">{{ __('Select Servicing') }}</option>
 							@foreach ($servicings as $cat)
-								<option value="{{ $cat->id }}" @selected(old('servicing_id') == $cat->id)>{{ $cat->name }}</option>
+								<option @if(!empty(request()->get("servicing_id")) && request()->get("servicing_id") == $cat->id) selected @endif value="{{ $cat->id }}">{{ $cat->name }}</option>
 							@endforeach
 						</select>
 					</div>
+
 					<div class="itemFilter">
 						<label for="item-catagory">{{ __('Heights') }} <span class="text-danger">*</span> </label>
 						<select name="height_id" id="heights" class="form-control input-md">
-							<option value="">{{__('Select Heights')}}</option>
-							@foreach($heights as $item)
-								<option value="{{ $item->id }}" @selected(old('height_id') == $item->id)>{{ $item->name }}</option>
+							<option value="">{{ __('Select Heights') }}</option>
+							@foreach ($heights as $item)
+								<option @if(!empty(request()->get("height_id")) && request()->get("height_id") == $item->id) selected @endif value="{{ $item->id }}">{{ $item->name }}</option>
 							@endforeach
 						</select>
 					</div>
