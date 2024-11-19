@@ -123,7 +123,6 @@ class PostController extends BaseController
 	 */
 	public function show($id): \Illuminate\Http\JsonResponse
 	{
-		return $id;
 		$isDetailed = (request()->filled('detailed') && request()->integer('detailed') == 1);
 		if ($isDetailed) {
 			$defaultEmbed = [
