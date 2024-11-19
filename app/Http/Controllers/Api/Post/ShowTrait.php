@@ -135,15 +135,15 @@ trait ShowTrait
 		
 		// Reset caching parameters
 		$this->resetCachingParameters();
-		dump(1);
+		
 		abort_if(empty($post), 404, t('post_not_found'));
-			dump(2);
+		
 		// Increment the listing's visits counter
 		Event::dispatch(new PostWasVisited($post));
-		dump(3);
+		
 		// Generate the listing's images thumbnails
 		GeneratePostThumbnails::dispatch($post);
-		dump(4);
+		
 		$fieldsValues = [];
 		if (in_array('fieldsValues', $embed)) {
 			if (isset($post->category)) {
