@@ -158,18 +158,8 @@ class Post extends BaseModel implements Feedable
 		'partner',
 		'created_at',
 		'updated_at',
-		'gender_id',
-		'ethnicity_id',
-		'age_id',
-		'breast_id',
-		'cater_id',
-		'body_type_id',
-		'eye_color_id',
-		'hair_color_id',
-		'service_type_id',
-		'servicing_id',
-		'height_id',		
 	];
+	
 	/*
 	|--------------------------------------------------------------------------
 	| FUNCTIONS

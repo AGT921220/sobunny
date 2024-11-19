@@ -78,38 +78,38 @@ class PostRequest extends Request
 			$input['description'] = RemoveFromString::contactInfo($input['description'], true);
 		}
 		
-		// // price
-		// if ($this->has('price')) {
-		// 	if ($this->filled('price')) {
-		// 		$input['price'] = $this->input('price');
-		// 		// If field's value contains only numbers and dot,
-		// 		// Then decimal separator is set as dot.
-		// 		if (preg_match('/^[\d.]*$/', $input['price'])) {
-		// 			$input['price'] = Num::formatForDb($input['price'], '.');
-		// 		} else {
-		// 			if ($this->filled('currency_decimal_separator')) {
-		// 				$input['price'] = Num::formatForDb($input['price'], $this->input('currency_decimal_separator'));
-		// 			} else {
-		// 				$input['price'] = Num::formatForDb($input['price'], config('currency.decimal_separator', '.'));
-		// 			}
-		// 		}
-		// 	} else {
-		// 		$input['price'] = null;
-		// 	}
-		// }
+		// price
+		if ($this->has('price')) {
+			if ($this->filled('price')) {
+				$input['price'] = $this->input('price');
+				// If field's value contains only numbers and dot,
+				// Then decimal separator is set as dot.
+				if (preg_match('/^[\d.]*$/', $input['price'])) {
+					$input['price'] = Num::formatForDb($input['price'], '.');
+				} else {
+					if ($this->filled('currency_decimal_separator')) {
+						$input['price'] = Num::formatForDb($input['price'], $this->input('currency_decimal_separator'));
+					} else {
+						$input['price'] = Num::formatForDb($input['price'], config('currency.decimal_separator', '.'));
+					}
+				}
+			} else {
+				$input['price'] = null;
+			}
+		}
 		
-		// // currency_code
-		// if ($this->filled('currency_code')) {
-		// 	$input['currency_code'] = $this->input('currency_code');
-		// } else {
-		// 	$input['currency_code'] = config('currency.code', 'USD');
-		// }
+		// currency_code
+		if ($this->filled('currency_code')) {
+			$input['currency_code'] = $this->input('currency_code');
+		} else {
+			$input['currency_code'] = config('currency.code', 'USD');
+		}
 		
-		// // contact_name
-		// if ($this->filled('contact_name')) {
-		// 	$input['contact_name'] = singleLineStringCleaner($this->input('contact_name'));
-		// 	$input['contact_name'] = preventStringContainingOnlyNumericChars($input['contact_name']);
-		// }
+		// contact_name
+		if ($this->filled('contact_name')) {
+			$input['contact_name'] = singleLineStringCleaner($this->input('contact_name'));
+			$input['contact_name'] = preventStringContainingOnlyNumericChars($input['contact_name']);
+		}
 		
 		// auth_field
 		$input['auth_field'] = getAuthField();
@@ -162,7 +162,7 @@ class PostRequest extends Request
 		
 		$rules = [];
 		
-		// $rules['category_id'] = ['required', 'not_in:0', 'exists:categories,id'];
+		$rules['category_id'] = ['required', 'not_in:0', 'exists:categories,id'];
 		if (config('settings.listing_form.show_listing_type')) {
 			$rules['post_type_id'] = ['required', Rule::in(PostType::values())];
 		}
@@ -188,31 +188,21 @@ class PostRequest extends Request
 			new MbAlphanumericRule(),
 			new BlacklistWordRule(),
 		];
-		// if (config('settings.listing_form.price_mandatory') == '1') {
-		// 	if ($this->filled('category_id')) {
-		// 		$category = Category::find($this->input('category_id'));
-		// 		if (!empty($category)) {
-		// 			if ($category->type != 'not-salable') {
-		// 				$rules['price'] = ['required', 'numeric', 'gt:0'];
-		// 			}
-		// 		}
-		// 	}
-		// }
-		// $rules['contact_name'] = ['required', new BetweenRule(2, 200)];
+		if (config('settings.listing_form.price_mandatory') == '1') {
+			if ($this->filled('category_id')) {
+				$category = Category::find($this->input('category_id'));
+				if (!empty($category)) {
+					if ($category->type != 'not-salable') {
+						$rules['price'] = ['required', 'numeric', 'gt:0'];
+					}
+				}
+			}
+		}
+		$rules['contact_name'] = ['required', new BetweenRule(2, 200)];
 		$rules['auth_field'] = ['required', Rule::in($authFields)];
-		// $rules['phone'] = ['max:30'];
-		// $rules['phone_country'] = ['required_with:phone'];
-		$rules['gender_id'] = ['required', 'exists:genders,id'];
-		$rules['ethnicity_id'] = ['required', 'exists:ethnicities,id'];
-		$rules['age_id'] = ['required', 'exists:ages,id'];
-		$rules['breast_id'] = ['required', 'exists:breasts,id'];
-		$rules['cater_id'] = ['required', 'exists:caters,id'];
-		$rules['body_type_id'] = ['required', 'exists:body_types,id'];
-		$rules['eye_color_id'] = ['required', 'exists:eye_colors,id'];
-		$rules['hair_color_id'] = ['required', 'exists:hair_colors,id'];
-		$rules['service_type_id'] = ['required', 'exists:service_types,id'];
-		$rules['servicing_id'] = ['required', 'exists:servicings,id'];
-		$rules['height_id'] = ['required', 'exists:heights,id'];
+		$rules['phone'] = ['max:30'];
+		$rules['phone_country'] = ['required_with:phone'];
+		$rules['city_id'] = ['required', 'not_in:0', 'exists:cities,id'];
 		
 		
 		if (!auth($guard)->check()) {
@@ -393,11 +383,11 @@ class PostRequest extends Request
 	{
 		$messages = [];
 		
-		// // Category & Sub-Category
-		// if ($this->filled('parent_id') && !empty($this->input('parent_id'))) {
-		// 	$messages['category_id.required'] = t('The field is required', ['field' => mb_strtolower(t('sub_category'))]);
-		// 	$messages['category_id.not_in'] = t('The field is required', ['field' => mb_strtolower(t('sub_category'))]);
-		// }
+		// Category & Sub-Category
+		if ($this->filled('parent_id') && !empty($this->input('parent_id'))) {
+			$messages['category_id.required'] = t('The field is required', ['field' => mb_strtolower(t('sub_category'))]);
+			$messages['category_id.not_in'] = t('The field is required', ['field' => mb_strtolower(t('sub_category'))]);
+		}
 		
 		$isSingleStepForm = (config('settings.listing_form.publication_form_type') == '2');
 		if ($isSingleStepForm) {
