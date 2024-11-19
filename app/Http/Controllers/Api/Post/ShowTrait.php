@@ -135,7 +135,7 @@ trait ShowTrait
 		
 		// Reset caching parameters
 		$this->resetCachingParameters();
-		
+		dd(4);
 		abort_if(empty($post), 404, t('post_not_found'));
 		
 		// Increment the listing's visits counter
