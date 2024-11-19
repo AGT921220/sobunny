@@ -66,8 +66,9 @@ Route::prefix('posts')
 		Route::get('/', 'index')->name('posts.index');
 		Route::get('{id}', 'show')->name('posts.show');
 		Route::post('/', 'store')->name('posts.store');
-		Route::middleware(['auth:sanctum'])
-			->group(function ($router) {
+		Route::
+		// middleware(['auth:sanctum'])->
+			group(function ($router) {
 				$router->pattern('ids', '[0-9,]+');
 				Route::put('{id}/offline', 'offline')->name('posts.offline');
 				Route::put('{id}/repost', 'repost')->name('posts.repost');
