@@ -51,7 +51,7 @@
 		: '';
 @endphp
 @includeFirst([config('larapen.core.customizedViewPath') . 'sections.spacer', 'sections.spacer'])
-{{-- <div class="container mb-2 serp-search-bar">
+<div class="container mb-2 serp-search-bar">
 	<form id="searchForm"
 	      name="search"
 	      action="{{ \App\Services\UrlGen::searchWithoutQuery() }}"
@@ -112,7 +112,7 @@
 			</div>
 		</div>
 	</form>
-</div> --}}
+</div>
 
 @section('after_scripts')
 	@parent
