@@ -29,7 +29,7 @@
 @endphp
 @if ($isLangOrCountryCanBeSelected)
 	{{-- Language & Country Selector --}}
-	<li class="nav-item dropdown lang-menu no-arrow open-on-hover">
+	{{-- <li class="nav-item dropdown lang-menu no-arrow open-on-hover">
 		<a href="#" class="dropdown-toggle nav-link pt-1" data-bs-toggle="dropdown" id="langDropdown">
 			@if (!empty($countryFlagImg))
 				<span>
@@ -113,5 +113,5 @@
 				@endif
 			@endif
 		</ul>
-	</li>
+	</li> --}}
 @endif
