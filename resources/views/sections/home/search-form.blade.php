@@ -56,15 +56,7 @@
 					>
 						<div class="row search-row animated fadeInUp">
 							
-							<div class="col-md-5 col-sm-12 search-col relative mb-1 mb-xxl-0 mb-xl-0 mb-lg-0 mb-md-0">
-								<div class="search-col-inner">
-									<i class="fa-solid {{ (config('lang.direction')=='rtl') ? 'fa-angles-left' : 'fa-angles-right' }} icon-append"></i>
-									<div class="search-col-input">
-										<input class="form-control has-icon" name="q" placeholder="{{ t('what') }}" type="text" value="">
-									</div>
-								</div>
-							</div>
-							
+			
 							<input type="hidden" id="lSearch" name="l" value="">
 							
 							<div class="col-md-5 col-sm-12 search-col relative locationicon mb-1 mb-xxl-0 mb-xl-0 mb-lg-0 mb-md-0">
