@@ -1,5 +1,5 @@
 server-enter:
-	@ssh root@5.199.168.121
+	@ssh root@74.208.190.170
 
 # rsync -avz ~/Alfredo/Personal/Proyectos/jorgeUsa/listoclean/assets/ root@194.62.96.38:/home/sobunny/core/public/assets/ &
 # 194.62.96.38
@@ -20,6 +20,8 @@ import-db:
 	@docker exec -i mysql-sobunny mysql -u user -ppassword -e "DROP DATABASE IF EXISTS db; CREATE DATABASE db;"
 	@docker exec -i mysql-sobunny mysql -u user -ppassword db < sobunny.sql
 pull-server-database:
-	scp root@5.199.168.121:/home/sobunny/sobunny.sql .
+	scp root@74.208.190.170:/home/sobunny/sobunny.sql .
 pull-report-virus:
-	scp root@5.199.168.121:/var/log/rkhunter.log .
+	scp root@74.208.190.170:/var/log/rkhunter.log .
+iqnews-server:
+	@ssh root@74.208.190.170
