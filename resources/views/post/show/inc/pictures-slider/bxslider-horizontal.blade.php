@@ -3,9 +3,9 @@
 @endphp
 {{-- bxSlider - Horizontal Thumbnails --}}
 <div class="gallery-container">
-	@if (!empty($price))
+	{{-- @if (!empty($price))
 		<div class="p-price-tag">{!! $price !!}</div>
-	@endif
+	@endif --}}
 	<div class="bxslider">
 		@forelse($pictures as $key => $image)
 			<div class="bx-item">

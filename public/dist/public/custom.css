@@ -1,2 +1,10 @@
 /* Your custom CSS here */
 
+.search-row{
+    box-shadow: none !important;
+}
+.row .search-row .animated .fadeInUp
+{
+    margin: auto;
+    justify-content: center;
+}

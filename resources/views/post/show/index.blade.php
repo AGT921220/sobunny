@@ -138,12 +138,12 @@
 							<span class="item-location"{!! (config('lang.direction')=='rtl') ? ' dir="rtl"' : '' !!}>
 								<i class="bi bi-geo-alt"></i> {{ data_get($post, 'city.name') }}
 							</span>&nbsp;
-							<span class="category"{!! (config('lang.direction')=='rtl') ? ' dir="rtl"' : '' !!}>
+							{{-- <span class="category"{!! (config('lang.direction')=='rtl') ? ' dir="rtl"' : '' !!}>
 								<i class="bi bi-eye"></i> {{ data_get($post, 'visits_formatted') }}
-							</span>
-							<span class="category float-md-end"{!! (config('lang.direction')=='rtl') ? ' dir="rtl"' : '' !!}>
+							</span> --}}
+							{{-- <span class="category float-md-end"{!! (config('lang.direction')=='rtl') ? ' dir="rtl"' : '' !!}>
 								{{ t('reference') }}: {{ data_get($post, 'reference') }}
-							</span>
+							</span> --}}
 						</span>
 						
 						@include('post.show.inc.pictures-slider')

@@ -158,7 +158,7 @@
 											$price = \App\Helpers\Num::format($price, 2, '.', '');
 											$isPriceMandatory = (config('settings.listing_form.price_mandatory') == '1');
 										@endphp
-										<div id="priceBloc" class="row mb-3">
+										{{-- <div id="priceBloc" class="row mb-3">
 											<label class="col-md-3 col-form-label{{ $priceError }}" for="price">
 												{{ t('price') }}{!! $isPriceMandatory ? ' <sup>*</sup>' : '' !!}
 											</label>
@@ -184,7 +184,7 @@
 													<div class="form-text text-muted">{{ t('price_hint') }}</div>
 												@endif
 											</div>
-										</div>
+										</div> --}}
 										
 										{{-- country_code --}}
 										@php

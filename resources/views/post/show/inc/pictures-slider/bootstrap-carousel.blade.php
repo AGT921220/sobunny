@@ -26,9 +26,9 @@
 			></button>
 		@endforelse
 	</div>
-	@if (!empty($price))
+	{{-- @if (!empty($price))
 		<div class="p-price-tag">{!! $price !!}</div>
-	@endif
+	@endif --}}
 	<div class="carousel-inner">
 		@forelse($pictures as $key => $image)
 			@php

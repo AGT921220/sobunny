@@ -54,7 +54,7 @@
 					      method="GET"
 					      data-csrf-token="{{ csrf_token() }}"
 					>
-						<div class="row search-row animated fadeInUp">
+					<div class="row search-row animated fadeInUp" style="margin:auto; justify-content:center">
 							
 			
 							<input type="hidden" id="lSearch" name="l" value="">
@@ -102,7 +102,7 @@
 			
 			@if ($hideForm != '1')
 				<form id="search" name="search" action="{{ \App\Services\UrlGen::searchWithoutQuery() }}" method="GET">
-					<div class="row search-row animated fadeInUp">
+					<div class="row search-row animated fadeInUp" style="margin:auto; justify-content:center">
 						
 						<div class="col-md-5 col-sm-12 search-col relative mb-1 mb-xxl-0 mb-xl-0 mb-lg-0 mb-md-0">
 							<div class="search-col-inner">
