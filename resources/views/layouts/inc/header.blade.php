@@ -98,8 +98,7 @@
 			
 			<div class="navbar-collapse collapse" id="navbarsDefault">
 				<ul class="nav navbar-nav me-md-auto navbar-left">
-					{{-- Country Flag --}}
-					@if ($showCountryFlagNextLogo)
+					{{-- @if ($showCountryFlagNextLogo)
 						@if (!empty($countryFlag32Url))
 							<li class="flag-menu country-flag d-md-block d-sm-none d-none nav-item"
 							    data-bs-toggle="tooltip"
@@ -117,7 +116,7 @@
 								@endif
 							</li>
 						@endif
-					@endif
+					@endif --}}
 				</ul>
 				
 				<ul class="nav navbar-nav ms-auto navbar-right">
