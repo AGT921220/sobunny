@@ -19,3 +19,5 @@ export-db:
 import-db:
 	@docker exec -i mysql-sobunny mysql -u user -ppassword -e "DROP DATABASE IF EXISTS db; CREATE DATABASE db;"
 	@docker exec -i mysql-sobunny mysql -u user -ppassword db < sobunny.sql
+pull-server-database:
+	scp root@5.199.168.121:/home/sobunny/sobunny.sql .
