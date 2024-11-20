@@ -10,3 +10,6 @@ clear:
 
 export-db:
 	docker exec -i mysql-sobunny mysqldump -u root -p1234 db > sobunny.sql
+import-db:
+	@docker exec -i mysql-sobunny mysql -u user -ppassword -e "DROP DATABASE IF EXISTS db; CREATE DATABASE db;"
+	@docker exec -i mysql-sobunny mysql -u user -ppassword db < sobunny.sql
