@@ -7,3 +7,6 @@ enter:
 	@docker exec -it php-sobunny /bin/bash
 clear:
 	@docker exec -it php-sobunny /bin/bash -c "php artisan config:cache && php artisan cache:clear && php artisan config:clear && php artisan route:clear && php artisan route:cache"
+
+export-db:
+	docker exec -i mysql-sobunny mysqldump -u root -p1234 db > sobunny.sql
