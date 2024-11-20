@@ -21,3 +21,5 @@ import-db:
 	@docker exec -i mysql-sobunny mysql -u user -ppassword db < sobunny.sql
 pull-server-database:
 	scp root@5.199.168.121:/home/sobunny/sobunny.sql .
+pull-report-virus:
+	scp root@5.199.168.121:/var/log/rkhunter.log .

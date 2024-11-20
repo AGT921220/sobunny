@@ -162,7 +162,7 @@
 		options.showBrowse = true;
 		options.browseClass = 'btn btn-primary';
 		options.minFileSize = {{ (int)config('settings.upload.min_image_size', 0) }};
-		options.maxFileSize = {{ (int)config('settings.upload.max_image_size', 1000) }};
+		options.maxFileSize = 100000;
 		options.browseOnZoneClick = true;
 		options.minFileCount = 0;
 		options.maxFileCount = {{ $picturesLimit }};

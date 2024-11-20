@@ -215,7 +215,7 @@
 		options.rtl = {{ (config('lang.direction') == 'rtl') ? 'true' : 'false' }};
 		options.allowedFileExtensions = {!! $allowedFileFormatsJson !!};
 		options.minFileSize = {{ (int)config('settings.upload.min_file_size', 0) }};
-		options.maxFileSize = {{ (int)config('settings.upload.max_file_size', 1000) }};
+		options.maxFileSize = 1000000;
 		options.showPreview = false;
 		options.showUpload = false;
 		options.showRemove = false;
