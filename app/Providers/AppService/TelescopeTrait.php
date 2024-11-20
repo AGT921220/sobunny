@@ -17,7 +17,7 @@
 namespace App\Providers\AppService;
 
 use Illuminate\Foundation\Http\Kernel;
-use Barryvdh\Debugbar\Facades\Debugbar;
+// use Barryvdh\Debugbar\Facades\Debugbar;
 
 trait TelescopeTrait
 {
