@@ -59,9 +59,9 @@
 											@endif
 										@endif
 										
-										<span class="price h5 fw-bold">
+										{{-- <span class="price h5 fw-bold">
 											{!! data_get($post, 'price_formatted') !!}
-										</span>
+										</span> --}}
 									</a>
 								</div>
 							@endforeach
