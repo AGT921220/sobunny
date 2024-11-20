@@ -17,7 +17,7 @@
 					<img src="{{ data_get($post, 'user_photo_url') }}" alt="{{ data_get($post, 'contact_name') }}">
 				</div>
 				<div class="cell-content">
-					<h5 class="title">{{ t('Posted by') }}</h5>
+					{{-- <h5 class="title">{{ t('Posted by') }}</h5>
 					<span class="name">
 						@if (!empty($user))
 							<a href="{{ \App\Services\UrlGen::user($user) }}">
@@ -26,7 +26,7 @@
 						@else
 							{{ data_get($post, 'contact_name') }}
 						@endif
-					</span>
+					</span> --}}
 					
 					@if (config('plugins.reviews.installed'))
 						@if (view()->exists('reviews::ratings-user'))
