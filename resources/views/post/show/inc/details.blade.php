@@ -56,7 +56,7 @@
 						</div>
 						
 						{{-- Price / Salary --}}
-						<div class="col-md-6 col-sm-6 col-6 text-end">
+						{{-- <div class="col-md-6 col-sm-6 col-6 text-end">
 							<h4 class="fw-normal p-0">
 								<span class="fw-bold">
 									{{ data_get($post, 'price_label') }}
@@ -68,7 +68,7 @@
 									@endif
 								</span>
 							</h4>
-						</div>
+						</div> --}}
 					</div>
 					<hr class="border-0 bg-secondary">
 					
