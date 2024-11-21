@@ -91,6 +91,12 @@ return [
 	
 	'faker_locale' => (function_exists('env')) ? env('APP_FAKER_LOCALE', 'en_US') : 'en_US',
 	
+
+    /*HIDDEN ELEMENTS*/
+    'hide_adversing' => env('HIDE_ADVERSING', true),
+
+
+
     /*
     |--------------------------------------------------------------------------
     | Encryption Key

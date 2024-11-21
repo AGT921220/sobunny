@@ -26,10 +26,14 @@ class HomeController extends FrontController
 	 */
 	public function index()
 	{
+		$isFromHome = currentRouteActionContains('HomeController');
+
+//		return view('index', compact('isFromHome'));
+
+		
 		// Call API endpoint
 		$endpoint = '/sections';
 		$data = makeApiRequest(method: 'get', uri: $endpoint);
-		
 		$message = $this->handleHttpError($data);
 		$sections = (array)data_get($data, 'result.data');
 		
@@ -62,8 +66,8 @@ class HomeController extends FrontController
 			view()->share($optionName, $options);
 		}
 		
-		$isFromHome = currentRouteActionContains('HomeController');
-		
+		// $isFromHome = currentRouteActionContains('HomeController');
+
 		// Get SEO
 		$searchFormOptions = data_get($sections, 'search_form.options') ?? [];
 		$this->setSeo($searchFormOptions);

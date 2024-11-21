@@ -72,7 +72,7 @@ trait SectionDataTrait
 				->when($isItWithPostsCount, fn ($query) => $query->withCount('posts'))
 				->take($maxItems)
 				->orderByDesc('population')
-				->orderBy('name')
+				// ->orderBy('name')
 				->get();
 		});
 		

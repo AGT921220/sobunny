@@ -155,6 +155,8 @@ trait SettingsTrait
 		}
 		
 		// Advertising (Warning: The 'integration' column added during updates)
+		if(!config('app.hide_adversing'))
+		{
 		if (!request()->expectsJson()) {
 			$topAdvertising = null;
 			$bottomAdvertising = null;
@@ -175,7 +177,8 @@ trait SettingsTrait
 			view()->share('bottomAdvertising', $bottomAdvertising);
 			view()->share('autoAdvertising', $autoAdvertising);
 		}
-		
+	}
+
 		// Get Payment Methods
 		$this->paymentMethods = new EloquentCollection;
 		try {
