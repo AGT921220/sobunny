@@ -30,6 +30,9 @@ class TmpUpload
 	 */
 	public static function image($tmpUploadDir, $file): ?string
 	{
+		ini_set('memory_limit', '512M'); // Ajusta según tus necesidades
+		ini_set('max_execution_time', 300); // 300 segundos
+
 		if (!$file instanceof UploadedFile) {
 			return null;
 		}

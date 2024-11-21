@@ -45,7 +45,7 @@ class PhotoRequest extends Request
 					'file',
 					'mimes:' . $serverAllowedImageFormats,
 					'min:' . (int)config('settings.upload.min_image_size', 0),
-					'max:' . (int)config('settings.upload.max_image_size', 1000),
+					// 'max:' . (int)config('settings.upload.max_image_size', 1000),
 				];
 			}
 		}

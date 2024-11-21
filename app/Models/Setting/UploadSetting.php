@@ -43,13 +43,13 @@ class UploadSetting
 			
 			$value['file_types'] = $defaultFileTypes;
 			$value['min_file_size'] = '0';
-			$value['max_file_size'] = '2500';
+			$value['max_file_size'] = '25000';
 			
 			$value['image_types'] = $defaultImageTypes;
 			$value['image_quality'] = '90';
 			$value['client_image_types'] = 'jpg,png';
 			$value['min_image_size'] = '0';
-			$value['max_image_size'] = '2500';
+			$value['max_image_size'] = '25000';
 			
 			// default
 			$settingKeyPrefix = 'img_resize_default';
