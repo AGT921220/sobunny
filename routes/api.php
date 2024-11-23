@@ -56,6 +56,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+Route::resource('cities-search', CityController::class)->only(['index']);
+
+
 // auth
 Route::namespace('Auth')
 	->group(function ($router) {
@@ -454,6 +458,8 @@ Route::prefix('captcha')
 // fallback
 // catch all routes where the path does not start with 'plugins'
 // regex: ^(?!plugins).*$
+
+
 Route::any('{any}', function () {
 	return response()->json([
 		'success' => false,

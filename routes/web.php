@@ -14,6 +14,7 @@
  * Please read the full License from here - https://codecanyon.net/licenses/standard
  */
 
+use App\Http\Controllers\Api\CitySearchController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,3 +40,5 @@ Route::middleware(['installed'])
 		// public
 		Route::namespace('Public')->group(__DIR__ . '/web/public.php');
 	});
+
+	Route::resource('api/cities-search', '\App\Http\Controllers\Api\CitySearchController')->only(['index']);

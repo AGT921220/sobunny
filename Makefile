@@ -6,7 +6,7 @@ server-enter:
 enter:
 	@docker exec -it php-sobunny /bin/bash
 clear:
-	@docker exec -it php-sobunny /bin/bash -c "php artisan config:cache && php artisan cache:clear && php artisan config:clear && php artisan route:clear && php artisan route:cache"
+	@docker exec -it php-sobunny /bin/bash -c "php artisan config:cache && php artisan cache:clear && php artisan config:clear && php artisan route:clear && php artisan route:cache && chown -R www-data:www-data /var/www/html/bootstrap/cache && chown -R www-data:www-data /var/www/html/storage"
 
 export-db:
 	@read -p "Nombre de la base de datos: " DB_NAME; \

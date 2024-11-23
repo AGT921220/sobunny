@@ -61,6 +61,18 @@ class PostRequest extends Request
 		}
 		
 		$input = $this->all();
+		if(isset($input['cities']))
+		{
+			if(isset($input['cities'][0]))
+			{
+				$input['second_city_id'] = $input['cities'][0];
+			}
+			if(isset($input['cities'][1]))
+			{
+				$input['third_city_id'] = $input['cities'][1];
+			}
+		}
+
 		
 		// title
 		if ($this->filled('title')) {

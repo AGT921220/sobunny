@@ -296,6 +296,12 @@
 											       name="selected_city_name"
 											       value="{{ old('selected_city_name') }}"
 											>
+											<input type="hidden"
+											id="selectedCityName"
+											name="selected_city_name"
+											value="{{ old('selected_city_name') }}"
+									 >
+
 										@endif
 										
 										{{-- city_id --}}
@@ -314,7 +320,22 @@
 												</select>
 											</div>
 										</div>
+
 										
+										{{-- <div id="cityBox" class="row mb-3 required">
+											<label class="col-md-3 col-form-label{{ $cityIdError }}" for="second_city_id">
+												{{ t('city') }} <sup>*</sup>
+											</label>
+											<div class="col-md-8">
+												<select id="cityId" name="second_city_id" class="form-control large-data-selecter{{ $cityIdError }}">
+													<option value="0" @selected(empty(old('second_city_id')))>
+														{{ t('select_a_city') }}
+													</option>
+												</select>
+											</div>
+										</div> --}}
+
+
 										{{-- tags --}}
 										@php
 											$tagsError = (isset($errors) && $errors->has('tags.*')) ? ' is-invalid' : '';

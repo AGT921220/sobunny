@@ -35,6 +35,7 @@ use App\Models\CategoryField;
 use App\Models\Post;
 use App\Models\Scopes\VerifiedScope;
 use App\Http\Controllers\Web\Public\FrontController;
+use App\Models\City;
 use App\Models\Scopes\ReviewedScope;
 use App\Observers\Traits\PictureTrait;
 use Illuminate\Contracts\View\View;
@@ -179,6 +180,11 @@ class CreateController extends FrontController
 		
 		$postInput = $request->session()->get('postInput');
 		
+		// $cities = City::where('active', 1)->get();
+		// $cities = City::whereRaw("JSON_EXTRACT(name, '$.en') IS NOT NULL")->get();
+
+
+		// dd($cities);
 		return appView('post.createOrEdit.multiSteps.create', compact('postInput'));
 	}
 	
