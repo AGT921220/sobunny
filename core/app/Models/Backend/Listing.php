@@ -2,9 +2,20 @@
 
 namespace App\Models\Backend;
 
+use App\Models\Age;
+use App\Models\BodyType;
+use App\Models\Breast;
+use App\Models\Cater;
 use App\Models\Common\ListingReport;
+use App\Models\Ethnicity;
+use App\Models\EyeColor;
 use App\Models\Frontend\GuestListing;
 use App\Models\Frontend\ListingFavorite;
+use App\Models\Gender;
+use App\Models\HairColor;
+use App\Models\Height;
+use App\Models\ServiceType;
+use App\Models\Servicing;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -157,6 +168,59 @@ class Listing extends Model
         return $this->hasOne(GuestListing::class, 'listing_id', 'id');
     }
 
-
-
+    public function gender()
+    {
+        return $this->belongsTo(Gender::class);
+    }
+    
+    public function ethnicity()
+    {
+        return $this->belongsTo(Ethnicity::class);
+    }
+    
+    public function age()
+    {
+        return $this->belongsTo(Age::class);
+    }
+    
+    public function breasts()
+    {
+        return $this->belongsTo(Breast::class);
+    }
+    
+    public function cater()
+    {
+        return $this->belongsTo(Cater::class);
+    }
+    
+    public function bodyType()
+    {
+        return $this->belongsTo(BodyType::class);
+    }
+    
+    public function eyeColor()
+    {
+        return $this->belongsTo(EyeColor::class);
+    }
+    
+    public function hairColor()
+    {
+        return $this->belongsTo(HairColor::class);
+    }
+    
+    public function serviceType()
+    {
+        return $this->belongsTo(ServiceType::class);
+    }
+    
+    public function servicing()
+    {
+        return $this->belongsTo(Servicing::class);
+    }
+    
+    public function height()
+    {
+        return $this->belongsTo(Height::class);
+    }
+    
 }

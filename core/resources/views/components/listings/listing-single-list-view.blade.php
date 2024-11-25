@@ -23,7 +23,7 @@
                 </div>
 
                 <span class="featurePricing d-flex justify-content-between align-items-center">
-                <span class="money">{{ amount_with_currency_symbol($listing->price) }}</span>
+                {{-- <span class="money">{{ amount_with_currency_symbol($listing->price) }}</span> --}}
                 <span class="date">
                     @if(!empty($listing->published_at))
                         {{ \Carbon\Carbon::parse($listing->published_at)->diffForHumans() }}

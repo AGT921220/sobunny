@@ -68,11 +68,11 @@
                         </div>
                         <div class="form__input__single">
                             <label for="featured" class="form__input__single__label">
-                                <strong>{{__('Select Categories')}} <span class="text-danger">*</span> </strong>
+                                <strong>{{__('Select Genders')}} <span class="text-danger">*</span> </strong>
                             </label>
                             <div class="category-section">
                                 <select name="category_id" id="category_id" class="form__control select2_activation">
-                                    <option value="">{{ __('Select Category') }}</option>
+                                    <option value="">{{ __('Select Gender') }}</option>
                                     @foreach($all_category as $category)
                                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                                     @endforeach

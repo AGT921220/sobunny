@@ -196,9 +196,9 @@
                                                             </div>
 
                                                             <div class="form__input__single child_category_wrapper w-100">
-                                                                <label for="child_category" class="form__input__single__label"> {{__('Child Category')}} </label>
+                                                                <label for="child_category" class="form__input__single__label"> {{__('Age')}} </label>
                                                                 <select  name="child_category_id" id="child_category" class="select2_activation">
-                                                                    <option value="">{{__('Select Child Category')}}</option>
+                                                                    <option value="">{{__('Select Age')}}</option>
                                                                     @if(!empty($listing->child_category_id))
                                                                         @foreach($child_categories as $child_cat)
                                                                             <option value="{{ $child_cat->id }}"  @if($child_cat->id == $listing->child_category_id) selected @endif>{{ $child_cat->name }}</option>
@@ -261,7 +261,10 @@
                                                             </div>
                                                             <!-- Description -->
                                                             <div class="form__input__single mt-4">
-                                                                <label class="form__input__single__label">{{ __('Description') }} <span class="text-danger">*</span> <span class="text-danger">{{ __('minimum 150 characters.') }}</span> </label>
+                                                                <label class="form__input__single__label">{{ __('Description') }} 
+                                                                    {{--<span class="text-danger">*</span> 
+                                                                     <span class="text-danger">{{ __('minimum 150 characters.') }}</span> --}}
+                                                                 </label>
                                                                 <div class="input-form input-form2">
                                                                     <textarea class="textarea--form summernote" name="description" placeholder="{{__('Type Description')}}">{{ $listing->description }}</textarea>
                                                                 </div>
@@ -365,7 +368,7 @@
                                                     <div class="col-lg-8">
                                                         <div class="single-dashboard-input mb-3">
                                                                @if(get_static_option('google_map_settings_on_off') == null)
-                                                                   <div class="d-flex justify-content-between gap-3">
+                                                                   {{-- <div class="d-flex justify-content-between gap-3">
                                                                        <div class="input-form input-form2 w-100">
                                                                            <label class="form__input__single__label">{{ __('Select Your Country') }}</label>
                                                                            <select name="country_id" id="country_id" class="select2_activation">
@@ -400,10 +403,10 @@
                                                                            </select><br>
                                                                            <span class="city_info"></span>
                                                                        </div>
-                                                                   </div>
+                                                                   </div> --}}
                                                                @else
                                                                    <!--Google Map -->
-                                                                   <div class="form__input__single">
+                                                                   {{-- <div class="form__input__single">
                                                                        <label class="form__input__single__label">{{ __('Google Map Location') }}
                                                                            <a href="https://drive.google.com/file/d/1BwDAjSLAeb4LaxzOkrdsgGO_Io2jM6S6/view?usp=sharing" target="_blank">
                                                                                <strong class="text-warning">{{__('Video link')}}</strong>
@@ -415,7 +418,7 @@
                                                                                <div id="map_canvas" style="height: 480px"></div>
                                                                            </div>
                                                                        </div>
-                                                                   </div>
+                                                                   </div> --}}
                                                                @endif
                                                                <!-- Address -->
                                                                <div class="form__input__single">
@@ -588,7 +591,7 @@
                     })
                 });
 
-                // listing sub category and child category
+                // listing sub category and Age
                 $(document).on('change','#subcategory', function() {
                     var sub_cat_id = $(this).val();
                     $.ajax({
@@ -600,8 +603,8 @@
                         success: function(res) {
 
                             if (res.status == 'success') {
-                                var alloptions = "<option value=''>{{__('Select Child Category')}}</option>";
-                                var allList = "<li data-value='' class='option'>{{__('Select Child Category')}}</li>";
+                                var alloptions = "<option value=''>{{__('Select Age')}}</option>";
+                                var allList = "<li data-value='' class='option'>{{__('Select Age')}}</li>";
                                 var allChildCategory = res.child_category;
 
                                 $.each(allChildCategory, function(index, value) {
@@ -613,7 +616,7 @@
 
                                 $("#child_category").html(alloptions);
                                 $(".child_category_wrapper ul.list").html(allList);
-                                $(".child_category_wrapper").find(".current").html("Select Child Category");
+                                $(".child_category_wrapper").find(".current").html("Select Age");
                             }
                         }
                     });

@@ -195,106 +195,190 @@
                                                 <h3 class="head4">{{ __('About Item') }}</h3>
                                                 <form action="#" class="about-item-form">
                                                     <div class="row g-3 mt-3">
+
+
+
                                                         <div class="col-sm-4">
                                                             <div class="item-catagory-wraper">
-                                                                <label for="item-catagory">{{ __('Item Category') }} <span class="text-danger">*</span> </label>
-                                                                <select name="category_id" id="category" class="select-itms select2_activation">
-                                                                    <option value="">{{__('Select Category')}}</option>
-                                                                    @foreach($categories as $cat)
-                                                                        <option value="{{$cat->id}}" @if($cat->id == $listing->category_id) selected @endif>{{ $cat->name }}</option>
+                                                                <label for="item-catagory">{{ __('Gender') }} <span class="text-danger">*</span></label>
+                                                                <select name="gender_id" id="gender" class="select-itms select2_activation">
+                                                                    <option value="">{{ __('Select Gender') }}</option>
+                                                                    @foreach ($genders as $cat)
+                                                                        <option value="{{ $cat->id }}" @if($listing->gender_id == $cat->id) selected @endif>
+                                                                            {{ $cat->name }}
+                                                                        </option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
                                                         </div>
+                                                        
                                                         <div class="col-sm-4">
-                                                            <div class="item-subcatagory-wraper">
-                                                                <label for="item-subcatagory">{{__('Sub Category')}}</label>
-                                                                <select  name="sub_category_id" id="subcategory" class="subcategory select2_activation">
-                                                                    <option value="">{{__('Select Sub Category')}}</option>
-                                                                    @foreach($sub_categories as $sub_cat)
-                                                                        <option value="{{ $sub_cat->id }}" @if($sub_cat->id == $listing->sub_category_id) selected @endif>{{$sub_cat->name}}</option>
+                                                            <div class="item-catagory-wraper">
+                                                                <label for="item-catagory">{{ __('Ethnicity') }} <span class="text-danger">*</span></label>
+                                                                <select name="ethnicity_id" id="ethnicity" class="select-itms select2_activation">
+                                                                    <option value="">{{ __('Select Ethnicity') }}</option>
+                                                                    @foreach ($ethnicities as $item)
+                                                                        <option value="{{ $item->id }}" @if($listing->ethnicity_id == $item->id) selected @endif>
+                                                                            {{ $item->name }}
+                                                                        </option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
                                                         </div>
+                                                        
                                                         <div class="col-sm-4">
-                                                            <div class="item-subcatagory-wraper">
-                                                                <label for="item-subcatagory">{{__('Child Category')}} </label>
-                                                                <select  name="child_category_id" id="child_category" class="select2_activation">
-                                                                    <option value="">{{__('Select Child Category')}}</option>
-                                                                    @if(!empty($listing->child_category_id))
-                                                                        @foreach($child_categories as $child_cat)
-                                                                            <option value="{{$child_cat->id}}"  @if($child_cat->id == $listing->child_category_id) selected @endif>{{ $child_cat->name }}</option>
-                                                                        @endforeach
-                                                                    @endif
+                                                            <div class="item-age-wraper">
+                                                                <label for="item-age">{{ __('Age') }} <span class="text-danger">*</span></label>
+                                                                <select name="age_id" id="age" class="select-itms select2_activation">
+                                                                    <option value="">{{ __('Select Age') }}</option>
+                                                                    @foreach ($ages as $item)
+                                                                        <option value="{{ $item->id }}" @if($listing->age_id == $item->id) selected @endif>
+                                                                            {{ $item->name }}
+                                                                        </option>
+                                                                    @endforeach
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="row mt-3">
-                                                        <div class="col-sm-6">
-                                                            <div class="item-condition-wraper input-filed p-24 mb-sm-0 mb-3">
-                                                                <input type="checkbox" class="custom-check-box" id="item-condition">
-                                                                <label for="item-condition">{{ __('This item has Condition') }}</label>
-                                                                <input type="hidden" id="hiddenCondition" name="hiddenCondition" value="{{ $listing->condition }}">
-                                                                <div class="conditions condition_disable_enable mt-2">
-                                                                    <label>
-                                                                        <input type="radio" id="condition-1" name="condition" value="used" {{ $listing->condition == 'used' ? 'checked' : '' }} class="custom-radio-button radio_disable_color">
-                                                                        <span>{{ __('Used') }}</span>
-                                                                    </label>
-                                                                    <label class="ms-3">
-                                                                        <input type="radio" id="condition-2" name="condition" value="new" {{ $listing->condition == 'new' ? 'checked' : '' }} class="custom-radio-button radio_disable_color">
-                                                                        <span>{{ __('New') }}</span>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                        
 
 
-                                                        <div class="col-sm-6">
-                                                            <div class="item-condition-wraper input-filed p-24">
-                                                                <input type="checkbox" class="custom-check-box" id="item-authenticity">
-                                                                <label for="item-authenticity">{{ __('This item has authenticity') }}</label>
-                                                                <input type="hidden" id="hiddenAuthenticity" name="hiddenAuthenticity" value="{{ $listing->authenticity }}">
-                                                                <div class="conditions authenticity_disable_enable mt-2">
-                                                                    <label>
-                                                                        <input type="radio" id="authenticity-1" name="authenticity" value="original" {{ $listing->authenticity == 'original' ? 'checked' : '' }} class="custom-radio-button radio_disable_color">
-                                                                        <span>{{ __('Original') }}</span>
-                                                                    </label>
-                                                                    <label class="ms-3">
-                                                                        <input type="radio" id="authenticity-2" name="authenticity" value="refurbished" {{ $listing->authenticity == 'refurbished' ? 'checked' : '' }} class="custom-radio-button radio_disable_color">
-                                                                        <span>{{ __('Refurbished') }}</span>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
 
                                                     </div>
-                                                    <div class="row mt-3">
-                                                        <div class="col-12">
-                                                            <div class="brand">
-                                                                <label for="item-catagory">{{ __('Brand') }}</label>
-                                                                <select name="brand_id" id="brand_id" class="select2_activation">
-                                                                    <option value="">{{ __('Select Brand') }}</option>
-                                                                    @foreach($brands as $brand)
-                                                                        <option value="{{ $brand->id }}" @if($brand->id == $listing->brand_id) selected @endif>{{ $brand->title }}</option>
+    
+                                                    <div class="row g-3 mt-3">
+                                                        <div class="col-sm-4">
+                                                            <div class="item-catagory-wraper">
+                                                                <label for="item-catagory">{{ __('Breasts') }} <span class="text-danger">*</span></label>
+                                                                <select name="breasts_id" id="breasts" class="select-itms select2_activation">
+                                                                    <option value="">{{ __('Select Breasts') }}</option>
+                                                                    @foreach ($breasts as $cat)
+                                                                        <option value="{{ $cat->id }}" @if($listing->breast_id == $cat->id) selected @endif>
+                                                                            {{ $cat->name }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    
+                                                        <div class="col-sm-4">
+                                                            <div class="item-catagory-wraper">
+                                                                <label for="item-catagory">{{ __('Caters') }} <span class="text-danger">*</span></label>
+                                                                <select name="cater_id" id="cater" class="select-itms select2_activation">
+                                                                    <option value="">{{ __('Select Cater') }}</option>
+                                                                    @foreach ($caters as $item)
+                                                                        <option value="{{ $item->id }}" @if($listing->cater_id == $item->id) selected @endif>
+                                                                            {{ $item->name }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    
+                                                        <div class="col-sm-4">
+                                                            <div class="item-age-wraper">
+                                                                <label for="item-age">{{ __('Body Type') }} <span class="text-danger">*</span></label>
+                                                                <select name="body_type_id" id="body_type" class="select-itms select2_activation">
+                                                                    <option value="">{{ __('Select Body Type') }}</option>
+                                                                    @foreach ($bodyTypes as $item)
+                                                                        <option value="{{ $item->id }}" @if($listing->body_type_id == $item->id) selected @endif>
+                                                                            {{ $item->name }}
+                                                                        </option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    
+                                                    <div class="row g-3 mt-3">
+                                                        <div class="col-sm-4">
+                                                            <div class="item-catagory-wraper">
+                                                                <label for="item-catagory">{{ __('EyeColor') }} <span class="text-danger">*</span></label>
+                                                                <select name="eye_color_id" id="eyeColor" class="select-itms select2_activation">
+                                                                    <option value="">{{ __('Select EyeColor') }}</option>
+                                                                    @foreach ($eyeColors as $cat)
+                                                                        <option value="{{ $cat->id }}" @if($listing->eyecolor_id == $cat->id) selected @endif>
+                                                                            {{ $cat->name }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    
+                                                        <div class="col-sm-4">
+                                                            <div class="item-catagory-wraper">
+                                                                <label for="item-catagory">{{ __('HairColor') }} <span class="text-danger">*</span></label>
+                                                                <select name="hair_color_id" id="HairColor" class="select-itms select2_activation">
+                                                                    <option value="">{{ __('Select HairColor') }}</option>
+                                                                    @foreach ($hairColors as $item)
+                                                                        <option value="{{ $item->id }}" @if($listing->hair_color_id == $item->id) selected @endif>
+                                                                            {{ $item->name }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    
+                                                        <div class="col-sm-4">
+                                                            <div class="item-age-wraper">
+                                                                <label for="item-age">{{ __('Service Type') }} <span class="text-danger">*</span></label>
+                                                                <select name="service_type_id" id="service_type" class="select-itms select2_activation">
+                                                                    <option value="">{{ __('Select Service Type') }}</option>
+                                                                    @foreach ($serviceTypes as $item)
+                                                                        <option value="{{ $item->id }}" @if($listing->service_type_id == $item->id) selected @endif>
+                                                                            {{ $item->name }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="row g-3 mt-3">
+                                                        <div class="col-sm-4">
+                                                            <div class="item-catagory-wraper">
+                                                                <label for="item-catagory">{{ __('Servicing') }} <span class="text-danger">*</span></label>
+                                                                <select name="servicing_id" id="servicing" class="select-itms select2_activation">
+                                                                    <option value="">{{ __('Select Servicing') }}</option>
+                                                                    @foreach ($servicings as $cat)
+                                                                        <option value="{{ $cat->id }}" @if($listing->servicing_id == $cat->id) selected @endif>
+                                                                            {{ $cat->name }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    
+                                                        <div class="col-sm-4">
+                                                            <div class="item-catagory-wraper">
+                                                                <label for="item-catagory">{{ __('Heights') }} <span class="text-danger">*</span></label>
+                                                                <select name="heights_id" id="heights" class="select-itms select2_activation">
+                                                                    <option value="">{{ __('Select Heights') }}</option>
+                                                                    @foreach ($heights as $item)
+                                                                        <option value="{{ $item->id }}" @if($listing->height_id == $item->id) selected @endif>
+                                                                            {{ $item->name }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+
                                                 </form>
                                             </div>
                                             <div class="description box-shadow1 p-24 mt-4">
-                                                <label for="description">{{ __('Description') }} <span class="text-danger">*</span> <span class="text-danger">{{ __('(minimum 150 characters.)') }}</span> </label>
+                                                <label for="description">{{ __('Description') }}
+                                                    {{-- <span class="text-danger">*</span> 
+                                                     <span class="text-danger">{{ __('(minimum 150 characters.)') }}</span> --}}
+                                                 </label>
                                                 <textarea name="description" id="description" rows="6" class="input-filed w-100 textarea--form summernote" placeholder="{{__('Enter a Description')}}">{{ $listing->description }}</textarea>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="right-sidebar">
-                                            <div class="box-shadow1 price p-24">
-                                                <div class="price-wraper">
+                                            {{-- <div class="box-shadow1 price p-24"> --}}
+                                                {{-- <div class="price-wraper">
                                                     <label for="price">{{ __('Price') }} <span class="text-danger">*</span> </label>
                                                     <input type="number" name="price" id="price" value="{{$listing->price}}" class="input-filed w-100 mb-3" placeholder="{{__('0.00')}}">
                                                     <div class="negotiable">
@@ -303,8 +387,8 @@
                                                             <span class="ms-2">{{ __('Negotiable') }}</span>
                                                         </label>
                                                     </div>
-                                                </div>
-                                            </div>
+                                                </div> --}}
+                                            {{-- </div> --}}
                                             <div class="box-shadow1 hode-phone-number p-24 mt-3">
                                                 <label class="hide-number">
                                                     <input type="checkbox" name="phone_hidden" id="phone_hidden" value="{{$listing->phone_hidden}}" @if($listing->phone_hidden == 1) checked @endif class="custom-check-box" >
@@ -387,7 +471,7 @@
                                     <div class="col-xl-6">
                                         <div class="address box-shadow1 p-24">
                                             @if(get_static_option('google_map_settings_on_off') == null)
-                                                <div class="address-wraper">
+                                                {{-- <div class="address-wraper">
                                                     <div class="row g-3">
                                                         <div class="col-sm-4">
                                                             <div class="country">
@@ -428,10 +512,10 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                             @else
                                                 <!--Google Map -->
-                                                <div class="location-map mt-3">
+                                                {{-- <div class="location-map mt-3">
                                                     <label class="infoTitle">{{ __('Google Map Location') }}
                                                         <a href="https://drive.google.com/file/d/1BwDAjSLAeb4LaxzOkrdsgGO_Io2jM6S6/view?usp=sharing" target="_blank">
                                                             <strong class="text-warning">{{__('Video link')}}</strong>
@@ -443,14 +527,25 @@
                                                             <div id="map_canvas" style="height: 480px"></div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                             @endif
                                             <div class="address-text mt-3">
+                                                <div class="city">
+                                                    <label for="city">{{ __('Select Your City') }}</label>
+                                                    <select name="city_id" id="city_id" class="select2_activation">
+                                                        <option value="">{{ __('Select City') }}</option>
+                                                        @foreach ($all_cities as $city)
+                                                            <option @if($listing->city_id == $city->id) selected @endif value="{{ $city->id }}">{{ $city->city }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            {{-- <div class="address-text mt-3">
                                                 <input type="hidden" name="latitude" id="latitude" value="{{$listing->lat}}">
                                                 <input type="hidden" name="longitude" id="longitude" value="{{$listing->lon}}">
                                                 <label for="address-text">{{ __('Address') }}</label>
                                                 <input type="text" class="w-100 input-filed" name="address" id="user_address" value="{{ $listing->address }}" placeholder="{{__('Address')}}">
-                                            </div>
+                                            </div> --}}
                                         </div>
                                         <div class="video box-shadow1 p-24 mt-3 mb-3">
                                             <label for="vedio-link">{{ __('Video Url') }}</label>
@@ -608,7 +703,7 @@
                     })
                 });
 
-                // listing sub category and child category
+                // listing sub category and Age
                 $(document).on('change','#subcategory', function() {
                     var sub_cat_id = $(this).val();
                     $.ajax({
@@ -620,8 +715,8 @@
                         success: function(res) {
 
                             if (res.status == 'success') {
-                                var alloptions = "<option value=''>{{__('Select Child Category')}}</option>";
-                                var allList = "<li data-value='' class='option'>{{__('Select Child Category')}}</li>";
+                                var alloptions = "<option value=''>{{__('Select Age')}}</option>";
+                                var allList = "<li data-value='' class='option'>{{__('Select Age')}}</li>";
                                 var allChildCategory = res.child_category;
 
                                 $.each(allChildCategory, function(index, value) {
@@ -633,7 +728,7 @@
 
                                 $("#child_category").html(alloptions);
                                 $(".child_category_wrapper ul.list").html(allList);
-                                $(".child_category_wrapper").find(".current").html("Select Child Category");
+                                $(".child_category_wrapper").find(".current").html("Select Age");
                             }
                         }
                     });

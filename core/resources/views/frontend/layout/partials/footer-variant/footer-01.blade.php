@@ -1,5 +1,5 @@
 <footer>
-    <div class="footerWrapper footerStyleOne plr">
+    <div class="footerWrapper footerStyleOne plr" style="z-index: 0 !important">
         <div class="footer-area footer-padding" >
             <div class="container-fluid">
                 <div class="row justify-content-between">

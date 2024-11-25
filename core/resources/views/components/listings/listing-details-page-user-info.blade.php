@@ -37,7 +37,7 @@
 @endif
 
 @if(empty($listing->admin_id))
-    <div class="seller-details box-shadow1">
+    {{-- <div class="seller-details box-shadow1">
         <div class="seller-details-wraper">
             @if($listing->user_id === 0)
                 <div class="seller-img">
@@ -79,5 +79,5 @@
 
             </div>
         </div>
-    </div>
+    </div> --}}
 @endif

@@ -119,17 +119,17 @@
                @canany(['category-list', 'category-add'])
                 <li class="dashboard__bottom__list__item has-children @if(request()->is('admin/category/*')) active open @endif">
                     <a href="javascript:void(0)"><i class="las la-th-list"></i>
-                        <span class="icon_title">{{ __('Categories') }}</span>
+                        <span class="icon_title">{{ __('Genders') }}</span>
                     </a>
                     <ul class="submenu" style="@if(request()->is('admin/category/*')) display:block; @endif">
                         @can('category-list')
                         <li class="dashboard__bottom__list__item @if(request()->is('admin/category/index')) selected @endif">
-                            <a href="{{ route('admin.category') }}">{{ __('All Category') }}</a>
+                            <a href="{{ route('admin.category') }}">{{ __('All Gender') }}</a>
                         </li>
                         @endcan
                        @can('category-add')
                         <li class="dashboard__bottom__list__item @if(request()->is('admin/category/add-new-category')) selected @endif">
-                            <a href="{{ route('admin.category.new') }}">{{ __('Add New Category') }}</a>
+                            <a href="{{ route('admin.category.new') }}">{{ __('Add New Gender') }}</a>
                         </li>
                         @endcan
                     </ul>
@@ -139,39 +139,39 @@
               @canany(['subcategory-list', 'subcategory-add'])
                 <li class="dashboard__bottom__list__item has-children @if(request()->is('admin/subcategory/*')) active open @endif">
                     <a href="javascript:void(0)"><i class="las la-th-list"></i>
-                        <span class="icon_title">{{ __('Subcategories') }}</span>
+                        <span class="icon_title">{{ __('Ethnicities') }}</span>
                     </a>
                     <ul class="submenu" style="@if(request()->is('admin/subcategory/*')) display:block; @endif">
                         @can('subcategory-list')
                         <li class="dashboard__bottom__list__item @if(request()->is('admin/subcategory/index')) selected @endif">
-                            <a href="{{ route('admin.subcategory') }}">{{ __('All Subcategories') }}</a>
+                            <a href="{{ route('admin.subcategory') }}">{{ __('All Ethnicities') }}</a>
                         </li>
                         @endcan
                         @can('subcategory-add')
                         <li class="dashboard__bottom__list__item @if(request()->is('admin/subcategory/add-new-subcategory')) selected @endif">
-                            <a href="{{ route('admin.subcategory.new') }}">{{ __('Add New Subcategory') }}</a>
+                            <a href="{{ route('admin.subcategory.new') }}">{{ __('Add New Ethnicity') }}</a>
                         </li>
                        @endcan
                     </ul>
                   </li>
                 @endcanany
 
-                    <!-- Child Categories Manage -->
+                    <!-- Ages Manage -->
                     @canany(['child-category-list', 'child-category-add'])
                         <li class="dashboard__bottom__list__item has-children @if(request()->is('admin/child-category/*')) active open @endif">
                             <a href="javascript:void(0)">
                                 <i class="las la-th-list"></i>
-                                <span class="icon_title">{{ __('Child Categories') }}</span>
+                                <span class="icon_title">{{ __('Ages') }}</span>
                             </a>
                             <ul class="submenu" style="@if(request()->is('admin/child-category/*')) display:block; @endif">
                                 @can('child-category-list')
                                     <li class="dashboard__bottom__list__item @if(request()->is('admin/child-category/index')) selected @endif">
-                                        <a href="{{ route('admin.child.category') }}">{{ __('All Child Categories') }}</a>
+                                        <a href="{{ route('admin.child.category') }}">{{ __('All Ages') }}</a>
                                     </li>
                                 @endcan
                                 @can('child-category-add')
                                     <li class="dashboard__bottom__list__item @if(request()->is('admin/child-category/add-new-child-category')) selected @endif">
-                                        <a href="{{ route('admin.child.category.new') }}">{{ __('Add New Child Category') }}</a>
+                                        <a href="{{ route('admin.child.category.new') }}">{{ __('Add New Age') }}</a>
                                     </li>
                                 @endcan
                             </ul>

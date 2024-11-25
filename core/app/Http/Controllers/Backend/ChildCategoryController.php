@@ -59,7 +59,7 @@ class ChildCategoryController extends Controller
                 'twitter_meta_image'=> $request->twitter_meta_image,
             ];
             $child_category->metaData()->create($Metas);
-            return redirect()->back()->with(FlashMsg::item_new(__('Child Category Added')));
+            return redirect()->back()->with(FlashMsg::item_new(__('Age Added')));
         }
         $categories = Category::all();
         $sub_categories = SubCategory::all();
@@ -99,7 +99,7 @@ class ChildCategoryController extends Controller
                     'slug' => 'max:191|unique:child_categories,slug,' . $request->id,
                 ],
                 [
-                    'name.unique' => __('Child Category Already Exists.'),
+                    'name.unique' => __('Age Already Exists.'),
                     'slug.unique' => __('Slug Already Exists.'),
                 ]
             );
@@ -138,7 +138,7 @@ class ChildCategoryController extends Controller
                 $child_category_meta_update->metaData()->update($Metas);
             }
 
-            return redirect()->back()->with(FlashMsg::item_new('Child Category Update Success'));
+            return redirect()->back()->with(FlashMsg::item_new('Age Update Success'));
         }
 
         $child_category = ChildCategory::find($id);
@@ -150,7 +150,7 @@ class ChildCategoryController extends Controller
 
     public function deleteChildcategory($id){
         ChildCategory::find($id)->delete();
-        return redirect()->back()->with(FlashMsg::item_new('Child Category Deleted Success'));
+        return redirect()->back()->with(FlashMsg::item_new('Age Deleted Success'));
     }
 
     public function bulkAction(Request $request){

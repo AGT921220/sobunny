@@ -8,10 +8,10 @@
         </th>
     @endcan
     <th>{{__('ID')}}</th>
-    <th>{{__('Child Category')}}</th>
+    <th>{{__('Age')}}</th>
     <th>{{__('Image')}}</th>
-    <th>{{__('Subcategory')}}</th>
-    <th>{{__('Main Category')}}</th>
+    <th>{{__('Ethnicity')}}</th>
+    <th>{{__('Main Age')}}</th>
     <th>{{__('Status')}}</th>
     <th>{{__('Create Date')}}</th>
     <th>{{__('Action')}}</th>

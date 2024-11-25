@@ -1,6 +1,6 @@
 @extends('backend.admin-master')
 @section('site-title')
-    {{__('Edit Child Category')}}
+    {{__('Edit Age')}}
 @endsection
 @section('style')
     <x-media.css/>
@@ -20,10 +20,10 @@
             <div class="dashboard__card bg__white padding-20 radius-10">
                 <div class="header-wrap d-flex justify-content-between mb-3">
                     <div class="left-content">
-                        <h4 class="header-title">{{__('Edit Child Category')}}   </h4>
+                        <h4 class="header-title">{{__('Edit Age')}}   </h4>
                     </div>
                     <div class="right-content">
-                        <a class="cmnBtn btn_5 btn_bg_info radius-5" href="{{route('admin.child.category')}}">{{__('All Child Categories')}}</a>
+                        <a class="cmnBtn btn_5 btn_bg_info radius-5" href="{{route('admin.child.category')}}">{{__('All Ages')}}</a>
                     </div>
                 </div>
                 <x-validation.error/>
@@ -51,8 +51,8 @@
                         </div>
 
                         <div class="form__input__single">
-                            <label for="name" class="form__input__single__label">{{__('Child Category Name')}}</label>
-                            <input type="text" class="form__control radius-5" name="name" id="name" value="{{$child_category->name}}" placeholder="{{__('Child Category Name')}}">
+                            <label for="name" class="form__input__single__label">{{__('Age Name')}}</label>
+                            <input type="text" class="form__control radius-5" name="name" id="name" value="{{$child_category->name}}" placeholder="{{__('Age Name')}}">
                         </div>
 
                         <div class="form__input__single permalink_label">
@@ -73,7 +73,7 @@
                         </div>
 
                         <div class="form__input__single">
-                            <label for="image" class="form__input__single__label">{{__('Upload Child Category Image')}}</label>
+                            <label for="image" class="form__input__single__label">{{__('Upload Age Image')}}</label>
                             <div class="media-upload-btn-wrapper">
                                 <div class="img-wrap">
                                     {!! render_image_markup_by_attachment_id($child_category->image,'','thumb') !!}

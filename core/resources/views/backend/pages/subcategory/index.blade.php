@@ -1,6 +1,6 @@
 @extends('backend.admin-master')
 @section('site-title')
-    {{__('All Subcategories')}}
+    {{__('All Ethnicities')}}
 @endsection
 @section('style')
     <x-media.css/>
@@ -12,7 +12,7 @@
                 <div class="dashboard__inner__header">
                     <div class="dashboard__inner__header__flex">
                         <div class="dashboard__inner__header__left">
-                            <h4 class="dashboard__inner__header__title">{{ __('All Subcategories') }}</h4>
+                            <h4 class="dashboard__inner__header__title">{{ __('All Ethnicities') }}</h4>
                             @can('subcategory-bulk-delete')
                             <x-bulk-action.bulk-action/>
                             @endcan
@@ -20,7 +20,7 @@
                         <div class="dashboard__inner__header__right">
                             @can('subcategory-add')
                                 <div class="btn-wrapper">
-                                    <a href="{{ route('admin.subcategory.new') }}" class="cmnBtn btn_5 btn_bg_blue radius-5">{{ __('Add Subcategory') }}</a>
+                                    <a href="{{ route('admin.subcategory.new') }}" class="cmnBtn btn_5 btn_bg_blue radius-5">{{ __('Add Ethnicity') }}</a>
                                 </div>
                             @endcan
                             <div class="d-flex text-right w-100 mt-3">

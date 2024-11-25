@@ -220,7 +220,7 @@
                                         <span class="editProduct__contents__sku__para"><strong>{{ __('Sub Category:') }}</strong> {{ optional($listing->subcategory)->name }}</span>
                                     </div>
                                     <div class="editProduct__contents__category mt-3">
-                                        <span class="editProduct__contents__sku__para"><strong>{{ __('Child Category:') }}</strong> {{ optional($listing->childcategory)->name }}</span>
+                                        <span class="editProduct__contents__sku__para"><strong>{{ __('Age:') }}</strong> {{ optional($listing->childcategory)->name }}</span>
                                     </div>
                                     <div class="editProduct__contents__brand mt-3">
                                         <span class="editProduct__contents__sku__para"><strong>{{ __('Brand:') }}</strong> {{ optional($listing->brand)->title }}</span>

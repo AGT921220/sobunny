@@ -15,6 +15,7 @@ use App\Http\Controllers\Frontend\UserReviewController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Frontend\CustomSearchListingController;
 use \App\Http\Controllers\Frontend\User\MediaUploadController;
 use \App\Http\Controllers\Frontend\FrontendListingController;
 use \App\Http\Controllers\Frontend\FrontendUserProfileController;
@@ -22,7 +23,7 @@ use \App\Http\Controllers\Frontend\FrontendUserProfileController;
 require_once __DIR__ . '/admin.php';
 require_once __DIR__ . '/user.php';
 
-
+Route::resource('custom-search-listings', CustomSearchListingController::class);
 Route::group(['middleware' => ['globalVariable','setlang']], function () {
     Route::controller(LoginController::class)->group(function(){
         Route::get('/admin', 'showLoginForm')->name('admin.login');
@@ -150,3 +151,4 @@ Route::group(['middleware' => ['globalVariable', 'maintains_mode','setlang']], f
         });
     });
 });
+

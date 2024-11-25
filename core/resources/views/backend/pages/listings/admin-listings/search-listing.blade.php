@@ -51,9 +51,9 @@
             <!--published -->
             <td>
                 @if($data->is_published === 1)
-                    <span class="alert alert-success">{{__('Published')}}</span>
+                    <span class="alert alert-success">{{__('ON')}}</span>
                 @else
-                    <span class="alert alert-warning">{{__('Unpublished')}}</span>
+                    <span class="alert alert-warning">{{__('OFF')}}</span>
                 @endif
                 @can('admin-listing-published-status-change')
                      <span class="my-2"><x-status.admin-listing-published-change :url="route('admin.listings.published.status.change.by',$data->id)"/></span>

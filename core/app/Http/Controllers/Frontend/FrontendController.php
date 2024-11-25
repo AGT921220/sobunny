@@ -9,6 +9,7 @@ use App\Models\Backend\StaticOption;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Modules\Blog\app\Models\Blog;
+use Modules\CountryManage\app\Models\City;
 
 class FrontendController extends Controller
 {
@@ -19,7 +20,8 @@ class FrontendController extends Controller
         if (empty($page_details)){
             // show any notice or
         }
-        return view('frontend.pages.frontend-home',compact('page_details'));
+        $all_cities = City::where('status', 1)->get();
+        return view('frontend.pages.frontend-home',compact('page_details','all_cities'));
 
     }
 

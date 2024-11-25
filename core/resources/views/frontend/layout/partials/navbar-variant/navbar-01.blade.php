@@ -8,16 +8,16 @@
                     </a>
                 </div>
             </div>
-            <div class="NavWrapper">
+            {{-- <div class="NavWrapper">
                 <!-- Main Menu -->
                 <div class="collapse navbar-collapse" id="bizcoxx_main_menu">
                     <ul class="navbar-nav">
                         {!! render_frontend_menu($primary_menu) !!}
                     </ul>
                 </div>
-            </div>
+            </div> --}}
             <!-- Menu Right -->
-            <div class="nav-right-content active">
+            <div class="active">
               @include('frontend.layout.partials.navbar-variant.user-menu')
               @include('frontend.layout.partials.navbar-variant.mobile-responsive-icon')
             </div>

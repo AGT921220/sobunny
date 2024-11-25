@@ -21,7 +21,7 @@
                         <h4 class="header-title">{{__('Edit Category')}}   </h4>
                     </div>
                     <div class="right-content">
-                        <a class="cmnBtn btn_5 btn_bg_info radius-5" href="{{route('admin.category')}}">{{__('All Categories')}}</a>
+                        <a class="cmnBtn btn_5 btn_bg_info radius-5" href="{{route('admin.category')}}">{{__('All Genders')}}</a>
                     </div>
                 </div>
                 <x-validation.error/>
@@ -51,7 +51,7 @@
                         </div>
 
                         <div class="form__input__single">
-                            <label for="icon" class="d-block form__input__single__label">{{__('Category Icon')}}</label>
+                            <label for="icon" class="d-block form__input__single__label">{{__('Gender Icon')}}</label>
                             <div class="btn-group icon">
                                 <button type="button" class="btn btn-primary iconpicker-component">
                                     <i class="{{$category->icon}}"></i>

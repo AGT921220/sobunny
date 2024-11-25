@@ -35,18 +35,31 @@
                 <form  action="{{get_static_option('listing_filter_page_url') ?? '/listings'}}" class="d-flex align-items-center banner-search-location" method="get">
                     <div class="banner-form-wraper align-items-center">
                         @if(!empty(get_static_option('google_map_settings_on_off')))
-                            <div class="new_banner__search__input">
+                            {{-- <div class="new_banner__search__input">
                                 <div class="new_banner__search__location_left" id="myLocationGetAddress">
                                     <i class="fa-solid fa-location-crosshairs fs-4"></i>
                                 </div>
                                 <input class="form--control" name="change_address_new" id="change_address_new" type="hidden" value="">
-                                <input class="banner-input-field w-100" name="autocomplete" id="autocomplete" type="text" placeholder="{{ __('Search location here') }}">
-                            </div>
+                                <input class="banner-input-field w-100" name="autocomplete" id="autocompleteSearchText" type="text" placeholder="{{ __('Search location here') }}">
+                            </div> --}}
                         @endif
-                        <div class="search-with-any-texts">
+
+                        
+                        <div class="address-text">
+                            <div class="city">
+                                {{-- <label for="city">{{ __('Select Your City') }}</label> --}}
+                                <select name="city_id" id="city_id" class="select2_activation">
+                                    <option value="">{{ __('Select City') }}</option>
+                                    @foreach ($cities as $city)
+                                        <option value="{{ $city->id }}">{{ $city->city }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        {{-- <div class="search-with-any-texts">
                             <input class="banner-input-field w-100" type="text" name="home_search" id="home_search" placeholder="{{ __('What are you looking for?') }}">
                             <span id="all_search_result" class="search_with_text_section"></span>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="banner-btn">
                         <button type="submit" class="new-cmn-btn rounded-red-btn setLocation_btn border-0">{{ get_static_option('search_button_title') ?? __('Search') }} </button>
@@ -57,3 +70,6 @@
     </div> 
 </div>
 <!--Banner part End-->
+
+
+{{-- <input id="autocompleteSearchText" type="text" placeholder="Escribe una ubicación" style="width: 300px;" /> --}}

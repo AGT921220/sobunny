@@ -1,6 +1,6 @@
 @extends('backend.admin-master')
 @section('site-title')
-    {{__('Edit Subcategory')}}
+    {{__('Edit Ethnicity')}}
 @endsection
 @section('style')
     <x-media.css/>
@@ -20,10 +20,10 @@
             <div class="dashboard__card bg__white padding-20 radius-10">
                 <div class="header-wrap d-flex justify-content-between mb-3">
                     <div class="left-content">
-                        <h4 class="header-title">{{__('Edit Subcategory')}}   </h4>
+                        <h4 class="header-title">{{__('Edit Ethnicity')}}   </h4>
                     </div>
                     <div class="right-content">
-                        <a class="cmnBtn btn_5 btn_bg_info radius-5" href="{{route('admin.subcategory')}}">{{__('All Subcategories')}}</a>
+                        <a class="cmnBtn btn_5 btn_bg_info radius-5" href="{{route('admin.subcategory')}}">{{__('All Ethnicities')}}</a>
                     </div>
                 </div>
                 <x-validation.error/>
@@ -32,7 +32,7 @@
                     <div class="form__input__flex">
 
                         <div class="form__input__single">
-                            <label for="icon" class="d-block form__input__single__label">{{__('Parent Category')}}</label>
+                            <label for="icon" class="d-block form__input__single__label">{{__('Parent Ethnicity')}}</label>
                             <div class="select2_item mt-4">
                                 <select name="category_id" id="category_id" class="select2_activation">
                                     @foreach($categories as $cat)
@@ -43,8 +43,8 @@
                         </div>
 
                         <div class="form__input__single">
-                            <label for="name" class="form__input__single__label">{{__('Sub Category Name')}}</label>
-                            <input type="text" class="form__control radius-5" name="name" id="name" value="{{$subcategory->name}}" placeholder="{{__('Sub Category Name')}}">
+                            <label for="name" class="form__input__single__label">{{__('Sub Ethnicity Name')}}</label>
+                            <input type="text" class="form__control radius-5" name="name" id="name" value="{{$subcategory->name}}" placeholder="{{__('Sub Ethnicity Name')}}">
                         </div>
 
                         <div class="form__input__single permalink_label">

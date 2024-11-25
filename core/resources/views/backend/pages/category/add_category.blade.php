@@ -1,6 +1,6 @@
 @extends('backend.admin-master')
 @section('site-title')
-    {{__('Add New Category')}}
+    {{__('Add New Gender')}}
 @endsection
 @section('style')
     <link rel="stylesheet" href="{{asset('assets/backend/css/bootstrap-tagsinput.css')}}">
@@ -19,10 +19,10 @@
             <div class="dashboard__card bg__white padding-20 radius-10">
                 <div class="header-wrap d-flex justify-content-between mb-4">
                     <div class="left-content">
-                        <h4 class="header-title">{{__('Add New Category')}}   </h4>
+                        <h4 class="header-title">{{__('Add New Gender')}}   </h4>
                     </div>
                     <div class="right-content">
-                        <a class="cmnBtn btn_5 btn_bg_info radius-5" href="{{route('admin.category')}}">{{__('All Categories')}}</a>
+                        <a class="cmnBtn btn_5 btn_bg_info radius-5" href="{{route('admin.category')}}">{{__('All Genders')}}</a>
                     </div>
                 </div>
                 <x-validation.error/>
@@ -52,7 +52,7 @@
                         <x-icon.icon-add/>
 
                         <div class="form__input__single">
-                            <label for="image" class="form__input__single__label">{{__('Upload Category Image')}}</label>
+                            <label for="image" class="form__input__single__label">{{__('Upload Gender Image')}}</label>
                             <div class="media-upload-btn-wrapper">
                                 <div class="img-wrap"></div>
                                 <input type="hidden" name="image">

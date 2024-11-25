@@ -158,27 +158,35 @@ class RegisterController extends Controller
     public function userRegister(Request $request){
 
         if($request->isMethod('POST')){
+            $request->validate([
+                'first_name' => 'required|max:191',
+                'last_name' => 'required|max:191',
+                'email' => 'required|email|unique:users|max:191',
+                'username' => 'required|unique:users|max:191',
+                'phone' => 'required|unique:users|max:191',
+                'password' => 'required|min:6|max:191',
+            ]);
 
-            if(!empty(get_static_option('site_google_captcha_enable'))){
-                $request->validate([
-                    'first_name' => 'required|max:191',
-                    'last_name' => 'required|max:191',
-                    'email' => 'required|email|unique:users|max:191',
-                    'username' => 'required|unique:users|max:191',
-                    'phone' => 'required|unique:users|max:191',
-                    'password' => 'required|min:6|max:191',
-                    'g-recaptcha-response' => 'required',
-                ]);
-            }else{
-                $request->validate([
-                    'first_name' => 'required|max:191',
-                    'last_name' => 'required|max:191',
-                    'email' => 'required|email|unique:users|max:191',
-                    'username' => 'required|unique:users|max:191',
-                    'phone' => 'required|unique:users|max:191',
-                    'password' => 'required|min:6|max:191',
-                ]);
-            }
+            // if(!empty(get_static_option('site_google_captcha_enable'))){
+            //     $request->validate([
+            //         'first_name' => 'required|max:191',
+            //         'last_name' => 'required|max:191',
+            //         'email' => 'required|email|unique:users|max:191',
+            //         'username' => 'required|unique:users|max:191',
+            //         'phone' => 'required|unique:users|max:191',
+            //         'password' => 'required|min:6|max:191',
+            //         'g-recaptcha-response' => 'required',
+            //     ]);
+            // }else{
+            //     $request->validate([
+            //         'first_name' => 'required|max:191',
+            //         'last_name' => 'required|max:191',
+            //         'email' => 'required|email|unique:users|max:191',
+            //         'username' => 'required|unique:users|max:191',
+            //         'phone' => 'required|unique:users|max:191',
+            //         'password' => 'required|min:6|max:191',
+            //     ]);
+            // }
 
             if($request->password != $request->confirm_password){
                 toastr_warning(__('Password does not match'));
@@ -187,8 +195,11 @@ class RegisterController extends Controller
             $email_verify_tokn = sprintf("%d", random_int(123456, 999999));
 
             // phone number check
-            $phone_number = Str::replace(['-', '(' , ')' ,' '], '', $request->country_code ?? $request->phone);
+            // $phone_number = Str::replace(['-', '(' , ')' ,' '], '', $request->country_code ?? $request->phone);
+            $phone_number = Str::replace(['-', '(' , ')' ,' '], '','+'.$request->country_code. $request->phone);
+
             if (!empty($phone_number)){
+                info(User::where('phone', $phone_number)->toRawSql());
                 $existingUser = User::where('phone', $phone_number)->first();
                 if ($existingUser) {
                     return redirect()->back()->withErrors(['phone' => __('Phone number is already taken')]);

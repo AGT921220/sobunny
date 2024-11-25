@@ -55,9 +55,9 @@
             <!--published -->
             <td>
                 @if($data->is_published === 1)
-                    <span class="alert alert-success">{{__('Published')}}</span>
+                    <span class="alert alert-success">{{__('ON')}}</span>
                 @else
-                    <span class="alert alert-warning">{{__('Unpublished')}}</span>
+                    <span class="alert alert-warning">{{__('OFF')}}</span>
                 @endif
 
                 @can('user-listing-published-status-change')

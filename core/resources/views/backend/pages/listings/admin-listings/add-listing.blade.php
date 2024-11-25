@@ -193,9 +193,9 @@
 
 
                                                                 <div class="form__input__single child_category_wrapper">
-                                                                    <label for="child_category" class="form__input__single__label"> {{__('Child Category')}} </label>
+                                                                    <label for="child_category" class="form__input__single__label"> {{__('Age')}} </label>
                                                                     <select  name="child_category_id" id="child_category" class="select2_activation">
-                                                                        <option value="">{{__('Select Child Category')}}</option>
+                                                                        <option value="">{{__('Select Age')}}</option>
                                                                     </select>
                                                                 </div>
                                                             </div>
@@ -256,7 +256,10 @@
 
                                                         <!-- Description -->
                                                         <div class="form__input__single mt-3">
-                                                            <label class="form__input__single__label">{{ __('Description') }} <span class="text-danger">*</span> <span class="text-danger">{{ __('minimum 150 characters.') }}</span> </label>
+                                                            <label class="form__input__single__label">{{ __('Description') }} 
+                                                                {{--<span class="text-danger">*</span> 
+                                                                 <span class="text-danger">{{ __('minimum 150 characters.') }}</span> --}}
+                                                             </label>
                                                             <div class="input-form input-form2">
                                                                 <textarea class="textarea--form summernote" name="description" placeholder="{{__('Type Description')}}">{{ old('description') }}</textarea>
                                                             </div>
@@ -364,7 +367,7 @@
                                             <div class="row">
                                                 <div class="col-8">
                                                     @if(get_static_option('google_map_settings_on_off') == null)
-                                                        <div class="d-flex justify-content-between gap-3">
+                                                        {{-- <div class="d-flex justify-content-between gap-3">
                                                             <div class="input-form input-form2 w-100">
                                                                 <label class="form__input__single__label">{{ __('Select Your Country') }}</label>
                                                                 <select name="country_id" id="country_id" class="select2_activation">
@@ -396,10 +399,10 @@
                                                                 </select><br>
                                                                 <span class="city_info"></span>
                                                             </div>
-                                                        </div>
+                                                        </div> --}}
                                                     @else
                                                         <!--Google Map -->
-                                                        <label class="form__input__single__label">{{ __('Google Map Location') }}
+                                                        {{-- <label class="form__input__single__label">{{ __('Google Map Location') }}
                                                             <a href="https://drive.google.com/file/d/1BwDAjSLAeb4LaxzOkrdsgGO_Io2jM6S6/view?usp=sharing" target="_blank">
                                                                 <strong class="text-warning">{{__('Video link')}}</strong>
                                                             </a><small class="text-info">{{__('Search your location, pick a location')}} </small>
@@ -409,7 +412,7 @@
                                                                 <input id="pac-input" class="controls rounded" type="text" placeholder="{{ __('Search your location')}}"/>
                                                                 <div id="map_canvas" style="height: 480px"></div>
                                                             </div>
-                                                        </div>
+                                                        </div> --}}
                                                     @endif
 
                                                     <!-- Address -->
@@ -589,7 +592,7 @@
                     })
                 });
 
-                // listing sub category and child category
+                // listing sub category and Age
                 $(document).on('change','#subcategory', function() {
                     var sub_cat_id = $(this).val();
                     $.ajax({
@@ -601,8 +604,8 @@
                         success: function(res) {
 
                             if (res.status == 'success') {
-                                var alloptions = "<option value=''>{{__('Select Child Category')}}</option>";
-                                var allList = "<li data-value='' class='option'>{{__('Select Child Category')}}</li>";
+                                var alloptions = "<option value=''>{{__('Select Age')}}</option>";
+                                var allList = "<li data-value='' class='option'>{{__('Select Age')}}</li>";
                                 var allChildCategory = res.child_category;
 
                                 $.each(allChildCategory, function(index, value) {
@@ -614,7 +617,7 @@
 
                                 $("#child_category").html(alloptions);
                                 $(".child_category_wrapper ul.list").html(allList);
-                                $(".child_category_wrapper").find(".current").html("Select Child Category");
+                                $(".child_category_wrapper").find(".current").html("Select Age");
                             }
                         }
                     });

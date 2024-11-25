@@ -2,6 +2,17 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Feature\Age\UseCases\GetAllAges;
+use App\Feature\BodyType\UseCases\GetAllBodyTypes;
+use App\Feature\Breast\UseCases\GetAllBreasts;
+use App\Feature\Cater\UseCases\GetAllCaters;
+use App\Feature\Ethnicity\UseCases\GetAllEthnicitys;
+use App\Feature\EyeColor\UseCases\GetAllEyeColors;
+use App\Feature\Geneder\UseCases\GetAllGenders;
+use App\Feature\HairColor\UseCases\GetAllHairColors;
+use App\Feature\Height\UseCases\GetAllHeights;
+use App\Feature\ServiceType\UseCases\GetAllServiceTypes;
+use App\Feature\Servicing\UseCases\GetAllServicings;
 use App\Helpers\FlashMsg;
 use App\Http\Controllers\Controller;
 use App\Mail\BasicMail;
@@ -28,19 +39,59 @@ use Modules\CountryManage\app\Models\State;
 class AdminListingController extends Controller
 {
 
-   public function adminAllListings(){
-       $all_listings = Listing::adminListings()->latest()->paginate(10);
-       return view('backend.pages.listings.admin-listings.admin-all-listings', compact('all_listings'));
-   }
+    private $getAllGenders;
+    private $getAllEthnicitys;
+    private $getAllAges;
+    private $getAllBreasts;
+    private $getAllCaters;
+    private $getAllBodyTypes;
+    private $getAllEyeColors;
+    private $getAllHairColors;
+    private $getAllHeighs;
+    private $getAllServiceTypes;
+    private $getAllServicings;
+    public function __construct(
+        GetAllGenders $getAllGenders,
+        GetAllEthnicitys $getAllEthnicitys,
+        GetAllAges $getAllAges,
+        GetAllCaters $getAllCaters,
+        GetAllBreasts $getAllBreasts,
+        GetAllEyeColors $getAllEyeColors,
+        GetAllHairColors $getAllHairColors,
+        GetAllHeights $getAllHeighs,
+        GetAllServiceTypes $getAllServiceTypes,
+        GetAllServicings $getAllServicings,
+        GetAllBodyTypes $getAllBodyTypes
 
-    public function adminChangeStatus($id){
-        $listing = Listing::select('id','status')->where('id',$id)->first();
-        if($listing->status==1){
+    ) {
+        $this->getAllGenders = $getAllGenders;
+        $this->getAllEthnicitys = $getAllEthnicitys;
+        $this->getAllAges = $getAllAges;
+        $this->getAllBreasts = $getAllBreasts;
+        $this->getAllCaters = $getAllCaters;
+        $this->getAllBodyTypes = $getAllBodyTypes;
+        $this->getAllEyeColors = $getAllEyeColors;
+        $this->getAllHairColors = $getAllHairColors;
+        $this->getAllHeighs = $getAllHeighs;
+        $this->getAllServiceTypes = $getAllServiceTypes;
+        $this->getAllServicings = $getAllServicings;
+    }
+
+    public function adminAllListings()
+    {
+        $all_listings = Listing::adminListings()->latest()->paginate(10);
+        return view('backend.pages.listings.admin-listings.admin-all-listings', compact('all_listings'));
+    }
+
+    public function adminChangeStatus($id)
+    {
+        $listing = Listing::select('id', 'status')->where('id', $id)->first();
+        if ($listing->status == 1) {
             $status = 0;
-        }else{
+        } else {
             $status = 1;
         }
-        Listing::where('id',$id)->update(['status'=>$status]);
+        Listing::where('id', $id)->update(['status' => $status]);
         return redirect()->back()->with(FlashMsg::item_new(__('Status Change Success')));
     }
 
@@ -71,7 +122,8 @@ class AdminListingController extends Controller
         return redirect()->back();
     }
 
-    public function adminListingDelete($id){
+    public function adminListingDelete($id)
+    {
         try {
             $listing = Listing::findOrFail($id);
             // Delete listing reports
@@ -94,22 +146,25 @@ class AdminListingController extends Controller
     // search category
     public function adminSearchListing(Request $request)
     {
-        $all_listings = Listing::adminListings()->where('title', 'LIKE', "%". strip_tags($request->string_search) ."%")->latest()->paginate(10);
-        return $all_listings->total() >= 1 ? view('backend.pages.listings.admin-listings.search-listing',
-            compact('all_listings'))->render() : response()->json(['status'=>__('nothing')]);
+        $all_listings = Listing::adminListings()->where('title', 'LIKE', "%" . strip_tags($request->string_search) . "%")->latest()->paginate(10);
+        return $all_listings->total() >= 1 ? view(
+            'backend.pages.listings.admin-listings.search-listing',
+            compact('all_listings')
+        )->render() : response()->json(['status' => __('nothing')]);
     }
 
     // pagination
     function adminPaginate(Request $request)
     {
-        if($request->ajax()){
+        if ($request->ajax()) {
             $all_listings = Listing::adminListings()->latest()->paginate(10);
             return view('backend.pages.listings.admin-listings.search-listing', compact('all_listings'))->render();
         }
     }
 
-    public function bulkAction(Request $request){
-        Listing::adminListings()->whereIn('id',$request->ids)->delete();
+    public function bulkAction(Request $request)
+    {
+        Listing::adminListings()->whereIn('id', $request->ids)->delete();
         return response()->json(['status' => 'ok']);
     }
 
@@ -136,15 +191,15 @@ class AdminListingController extends Controller
             $admin = Admin::where('id', Auth::guard('admin')->user()->id)->first();
             $slug = !empty($request->slug) ? $request->slug : $request->title;
 
-            if(get_static_option('listing_create_status_settings') == 'approved'){
+            if (get_static_option('listing_create_status_settings') == 'approved') {
                 $status = 1;
-            }else{
+            } else {
                 $status = 0;
             }
 
             // video url
             $video_url = null;
-            if(!empty($request->video_url)){
+            if (!empty($request->video_url)) {
                 $video_url = getYoutubeEmbedUrl($request->video_url);
             }
 
@@ -163,7 +218,7 @@ class AdminListingController extends Controller
             $listing->city_id = $request->city_id;
             $listing->brand_id = $request->brand_id;
             $listing->title = $request->title;
-            $listing->slug = Str::slug(purify_html($slug),'-',null);
+            $listing->slug = Str::slug(purify_html($slug), '-', null);
             $listing->description = $request->description;
             $listing->price = $request->price;
             $listing->negotiable = $request->negotiable ?? 0;
@@ -220,8 +275,40 @@ class AdminListingController extends Controller
         $user = Auth::guard('admin')->user();
         $brands = Brand::where('status', 1)->get();
 
-        return view('backend.pages.listings.admin-listings.add-listing', compact('user', 'brands','categories', 'sub_categories', 'all_countries', 'all_states', 'all_cities', 'tags'));
 
+        $genders = $this->getAllGenders->__invoke();
+        $ethnicities = $this->getAllEthnicitys->__invoke();
+        $ages = $this->getAllAges->__invoke();
+        $breasts = $this->getAllBreasts->__invoke();
+        $caters = $this->getAllCaters->__invoke();
+        $bodyTypes = $this->getAllBodyTypes->__invoke();
+        $eyeColors = $this->getAllEyeColors->__invoke();
+        $hairColors = $this->getAllHairColors->__invoke();
+        $serviceTypes = $this->getAllServiceTypes->__invoke();
+        $servicings = $this->getAllServicings->__invoke();
+        $heights = $this->getAllHeighs->__invoke();
+        //AQUI
+        return view('backend.pages.listings.admin-listings.add-listing', compact(
+            'user',
+            'brands',
+            'categories',
+            'sub_categories',
+            'all_countries',
+            'all_states',
+            'all_cities',
+            'tags',
+            'genders',
+            'ethnicities',
+            'ages',
+            'breasts',
+            'caters',
+            'bodyTypes',
+            'eyeColors',
+            'hairColors',
+            'serviceTypes',
+            'servicings',
+            'heights'
+        ));
     }
 
     public function adminEditListing(Request $request, $id)
@@ -248,15 +335,15 @@ class AdminListingController extends Controller
             $admin = Admin::where('id', Auth::guard('admin')->user()->id)->first();
             $slug = !empty($request->slug) ? $request->slug : Str::slug($request->title);
 
-            if(get_static_option('listing_create_status_settings') == 'approved'){
+            if (get_static_option('listing_create_status_settings') == 'approved') {
                 $status = 1;
-            }else{
+            } else {
                 $status = 0;
             }
 
             // video url
             $video_url = null;
-            if(!empty($request->video_url)){
+            if (!empty($request->video_url)) {
                 $video_url = getYoutubeEmbedUrl($request->video_url);
             }
 
@@ -274,7 +361,7 @@ class AdminListingController extends Controller
             $listing->city_id = $request->city_id;
             $listing->brand_id = $request->brand_id;
             $listing->title = $request->title;
-            $listing->slug = Str::slug(purify_html($slug),'-',null);
+            $listing->slug = Str::slug(purify_html($slug), '-', null);
             $listing->description = $request->description;
             $listing->price = $request->price;
             $listing->negotiable = $request->negotiable ?? 0;
@@ -334,7 +421,6 @@ class AdminListingController extends Controller
         $brands = Brand::where('status', 1)->get();
         $tags = Tag::where('status', 'publish')->get();
 
-        return view('backend.pages.listings.admin-listings.edit-listing', compact('listing', 'brands', 'categories', 'sub_categories', 'child_categories','all_countries', 'all_states', 'all_cities', 'tags'));
-
+        return view('backend.pages.listings.admin-listings.edit-listing', compact('listing', 'brands', 'categories', 'sub_categories', 'child_categories', 'all_countries', 'all_states', 'all_cities', 'tags'));
     }
 }

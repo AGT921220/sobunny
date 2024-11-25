@@ -141,9 +141,14 @@
 
             <div class="catabody-wraper">
                 <!-- Left Content -->
+                @php
+                $test = false;
+                @endphp
+                @if($test)
                 <div class="cateLeftContent">
                     <div class="cateSidebar1">
 
+                        
                         <!--Search any title filter start -->
                         @if(!empty($listing_search_by_text_on_off))
                             <div class="catagoriesWraper mb-4">
@@ -195,41 +200,6 @@
                             @endif
                         @endif
                         <!--google map Distance filter end -->
-
-                        <!-- All Categories -->
-                        <div class="catagoriesWraper mb-4">
-                            @if(!empty($category_on_off))
-                                <div class="catagories w-100">
-                                    <select id="search_by_category" name="cat" class="categorySelect">
-                                        <option value="">{{$category_text}}</option>
-                                        @foreach($categories as $cat)
-                                            <option @if(!empty(request()->get("cat")) && request()->get("cat") == $cat->id) selected @endif value="{{$cat->id}}">{{$cat->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            @endif
-                           @if(!empty($subcategory_on_off))
-                                <div class="catagories w-100">
-                                    <select id="search_by_subcategory" name="subcat" class="categorySelect">
-                                        <option value="">{{$subcategory_text}}</option>
-                                        @foreach($sub_categories as $sub_cat)
-                                            <option @if(!empty(request()->get("subcat")) && request()->get("subcat") == $sub_cat->id) selected @endif value="{{$sub_cat->id}}">{{$sub_cat->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                             @endif
-                           @if(!empty($child_category_on_off))
-                                <div class="catagories">
-                                    <select id="search_by_child_category" name="child_cat" class="categorySelect">
-                                        <option value="">{{$child_category_text}}</option>
-                                        @foreach($child_categories as $child_cat)
-                                            <option @if(!empty(request()->get("child_cat")) &&  request()->get("child_cat") == $child_cat->id) selected @endif value="{{$child_cat->id}}">{{$child_cat->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                             @endif
-                        </div>
-
                         <!-- Location -->
                         @if(empty(get_static_option("google_map_settings_on_off")))
                             <div class="locaton catagoriesWraper mb-4">
@@ -286,77 +256,8 @@
                             </div>
                         @endif
 
-                        <!--price range filter -->
-                        @if(!empty($price_range_on_off))
-                            <div class="catagoriesWraper mb-4">
-                                <div class="catagories priceRange">
-                                    <h5 class="cateTitle mb-2 postdateTitle">{{ __('Price Range') }}</h5>
-                                    <input type="hidden" name="price_range_value" id="price_range_value">
-                                    <div class="price-input">
-                                        <div class="field">
-                                            <div class="min_price_range priceRangeWraper">
-                                                <span class="site_currency_symbol">{{ site_currency_symbol() }}</span>
-                                                <input type="number" class="input-min">
-                                            </div>
-                                        </div>
-                                        <div class="separator">-</div>
-                                        <div class="field">
-                                            <div class="max_price_range priceRangeWraper">
-                                                <span class="site_currency_symbol">{{ site_currency_symbol() }}</span>
-                                                <input type="number" class="input-max">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="price_range_setup">
-                                        <div class="progress"></div>
-                                    </div>
-                                    <!-- cancel and apply button start -->
-                                    <div class="cancel_apply_section_start mt-3">
-                                        <button type="button" class="filter-btn w-100" id="price_wise_filter_apply">{{ __('Filter') }}</button>
-                                    </div>
-                                </div>
-                            </div>
-                        @endif
-                        <!--price range filter end -->
+                        {{-- @include('filters.filtersListing')   --}}
 
-                        @if(!empty($listing_type_preferences))
-                            <div class="catagoriesWraper mb-4">
-                                <div class="catagories">
-                                    <h5 class="cateTitle mb-2 postdateTitle">{{ $listing_type_preferences_title }}</h5>
-                                    <ul class="postdate">
-                                        <li @if($listing_type_preferences_value == 'featured') class="active" @endif><a href="javascript:void(0)" id="featured">{{ __('Featured') }}</a></li>
-                                        <li @if($listing_type_preferences_value == 'top_listing') class="active" @endif><a href="javascript:void(0)" id="top_listing">{{ __('Top Listing') }}</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        @endif
-
-                        @if(!empty($listing_condition))
-                            <div class="catagoriesWraper mb-4">
-                                <div class="catagories">
-                                    <h5 class="cateTitle mb-2 postdateTitle">{{ $listing_condition_title }}</h5>
-                                    <ul class="postdate">
-                                        <li @if($listing_condition_value == 'new') class="active" @endif><a href="javascript:void(0)" id="new">{{ __('New') }}</a></li>
-                                        <li @if($listing_condition_value == 'used') class="active" @endif><a href="javascript:void(0)" id="used">{{ __('Used') }}</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        @endif
-
-                        @if(!empty($date_posted))
-                            <div class="catagoriesWraper mb-4">
-                                <div class="catagories">
-                                    <h5 class="cateTitle mb-2 postdateTitle">{{ $date_posted_title }}</h5>
-                                    <ul class="postdate">
-                                        <li @if($date_posted_value == 'today') class="active" @endif><a href="javascript:void(0)" id="today">{{ __('Today') }}</a></li>
-                                        <li @if($date_posted_value == 'yesterday') class="active" @endif><a href="javascript:void(0)" id="yesterday">{{ __('Yesterday') }}</a></li>
-                                        <li @if($date_posted_value == 'last_week') class="active" @endif><a href="javascript:void(0)" id="last_week">{{ __('Last Week') }}</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        @endif
-
-                        <!-- Sort-by filter start -->
                         @if(!empty($sort_by_on_off))
                             <div class="catagoriesWraper px-0">
                                 <div class="catagories mx-3">
@@ -372,7 +273,7 @@
 
                     </div>
                 </div>
-
+                @endif
                 <!-- Right Content -->
                 <div class="cateRightContent @if(!empty(get_static_option('google_map_settings_on_off'))) active-map @endif ">
 
@@ -393,7 +294,7 @@
                                                 <div class="reset-btn cmn-filter-btn">
                                                     <a href="{{ url()->current() }}">
                                                         <button type="button">
-                                                            <i class="las la-undo-alt"></i> {{ __('Reset Filter') }}
+                                                            <i class="las la-undo-alt"></i> {{ __('Reset Filters') }}
                                                         </button>
                                                     </a>
                                                 </div>
@@ -442,14 +343,14 @@
                                             <div class="loader"></div>
                                         </div>
                                         <!--google map section start -->
-                                        <div class="service-locationMap" id="map-container">
+                                        {{-- <div class="service-locationMap" id="map-container">
                                             <div class="fullwidth-sidebar-container">
                                                 <div class="sidebar top-sidebar">
                                                     <div id="map-canvas" class="map-canvas"  style="height: 700px; width: 450px; position: relative; overflow: hidden;">
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                    </div>
                                 @endif
                             @endif
@@ -508,7 +409,6 @@
                                               </a>
                                            </h4>
                                            <span class="featurePricing d-flex justify-content-between align-items-center">
-                                           <span class="money">`+place.listing_main_price+`</span>
                                            <span class="date">`+place.listing_published_at+`</span>
                                           </span>
                                     </div>

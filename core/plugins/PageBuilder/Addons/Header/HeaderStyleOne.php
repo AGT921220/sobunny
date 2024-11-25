@@ -3,6 +3,7 @@
 
 namespace plugins\PageBuilder\Addons\Header;
 
+use Modules\CountryManage\app\Models\City;
 use plugins\PageBuilder\Fields\ColorPicker;
 use plugins\PageBuilder\Fields\IconPicker;
 use plugins\PageBuilder\Fields\Image;
@@ -134,6 +135,7 @@ class HeaderStyleOne extends PageBuilderBase
         $banner_left_images_01 = $settings['banner_left_images_01'] ?? '';
         $banner_right_images_02 = $settings['banner_right_images_02'] ?? '';
 
+        $cities = City::where('status', 1)->get();
 
     return $this->renderBlade('headers.style-one',[
         'padding_top' => $padding_top,
@@ -147,6 +149,7 @@ class HeaderStyleOne extends PageBuilderBase
         'search_button_title' => $search_button_title,
         'banner_left_images_01' => $banner_left_images_01,
         'banner_right_images_02' => $banner_right_images_02,
+        'cities' => $cities
 
     ]);
 

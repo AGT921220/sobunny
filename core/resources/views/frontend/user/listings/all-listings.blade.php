@@ -41,7 +41,7 @@
                                                     <h5 class="add-heading head4 oneLine">
                                                         <a href="{{route('frontend.listing.details', $listing->slug ?? 'x')}}" target="_blank"> {{ $listing->title }}</a>
                                                     </h5>
-                                                    <div class="pricing head4">{{ amount_with_currency_symbol($listing->price)}}</div>
+                                                    {{-- <div class="pricing head4">{{ amount_with_currency_symbol($listing->price)}}</div> --}}
                                                     <div class="btn-wrapper">
                                                         @if($listing->is_featured === 1)
                                                             <span class="pro-btn2">
@@ -82,9 +82,9 @@
                                             <div class="right-buttons">
                                                 <span class="text">
                                                     @if($listing->is_published === 1)
-                                                        {{ __('Published') }}
+                                                        {{ __('ON') }}
                                                     @else
-                                                        {{ __('Unpublished') }}
+                                                        {{ __('OFF') }}
                                                     @endif
                                                 </span>
                                                     <div class="publish-btn">
@@ -236,7 +236,7 @@
                     })
                 });
 
-                // listing sub category and child category
+                // listing sub category and Age
                 $(document).on('click','#subcategory', function() {
                     var sub_cat_id = $(this).val();
                     $.ajax({
@@ -248,8 +248,8 @@
                         success: function(res) {
 
                             if (res.status == 'success') {
-                                var alloptions = "<option value=''>{{__('Select Child Category')}}</option>";
-                                var allList = "<li data-value='' class='option'>{{__('Select Child Category')}}</li>";
+                                var alloptions = "<option value=''>{{__('Select Age')}}</option>";
+                                var allList = "<li data-value='' class='option'>{{__('Select Age')}}</li>";
                                 var allChildCategory = res.child_category;
 
                                 $.each(allChildCategory, function(index, value) {
@@ -261,7 +261,7 @@
 
                                 $("#child_category").html(alloptions);
                                 $(".child_category_wrapper ul.list").html(allList);
-                                $(".child_category_wrapper").find(".current").html("Select Child Category");
+                                $(".child_category_wrapper").find(".current").html("Select Age");
                             }
                         }
                     });

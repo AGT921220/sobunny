@@ -17,8 +17,12 @@ class MediaUploadController extends Controller
 
     public function uploadMediaFile(Request $request)
     {
+
+        ini_set('memory_limit', '256M'); // O un valor que consideres adecuado
+
         $this->validate($request, [
-            'file' => 'nullable|mimes:jpg,jpeg,png,gif,webp|max:11000'
+            'file' => 'nullable|mimes:jpg,jpeg,png,gif,webp'
+            //|max:11000'
         ]);
         MediaHelper::insert_media_image($request,'web');
     }
