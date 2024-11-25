@@ -54,7 +54,7 @@ trait Filters
 		$this->applyKeywordFilter();
 		
 		// Location
-		$this->applyLocationFilter();
+		// $this->applyLocationFilter();
 		
 		// Tag
 		$this->applyTagFilter();
