@@ -6483,18 +6483,18 @@ object {
 }
 @media (min-width: 320px) and (max-width: 991.98px) {
   .navbar-area .nav-container .nav-right-content {
-    visibility: hidden;
-    opacity: 0;
+    /* visibility: hidden; */
+    /* opacity: 0; */
     margin-left: auto !important;
     -webkit-transition: all 0.3s;
     transition: all 0.3s;
-    margin-top: -40px !important;
+    /* margin-top: -40px !important; */
     background: transparent;
   }
   .navbar-area .nav-container .nav-right-content.active {
     visibility: visible;
     opacity: 1;
-    margin-top: 10px !important;
+    /* margin-top: 10px !important; */
   }
 }
 .navbar-area .nav-container .nav-right-content .info-bar-item {
@@ -7212,7 +7212,7 @@ object {
   .navbar-area .nav-container .responsive-mobile-menu {
     display: block;
     position: relative;
-    width: 100%;
+    /* width: 100%; */
   }
   .navbar-area .nav-container .responsive-mobile-menu .navbar-toggler {
     position: absolute;
@@ -10233,6 +10233,10 @@ object {
   max-width: 456px;
 }
 
+.footerWrapper
+{
+  z-index: 0 !important;
+}
 .footerWrapper {
   background: var(--main-color-two);
 }
@@ -10349,7 +10353,7 @@ object {
 }
 .footerWrapper .footer-area .footer-form {
   position: relative;
-  z-index: 1;
+  z-index: 0;
 }
 .footerWrapper .footer-area .footer-form .newsletter-footer {
   position: relative;
@@ -19253,7 +19257,7 @@ object {
       .sidebar-menu-wraper{
         position: absolute;
         width: 234px;
-        left: -100%;
+        left: -200%;
         top: 0;
         z-index: 99999;
         background: #fff;
