@@ -10,7 +10,7 @@ services:
     restart: always
     ports:
       - "${PORT_NGINX:-80}:80"
-      - "${PORT_SSL:-443}:443"  # Habilita el puerto 443 para SSL
+      # - "${PORT_SSL:-443}:443"  # Habilita el puerto 443 para SSL
     volumes:
       - ./:/var/www/html
       - ./docker/nginx/${NGINX_CONF_FILE:-default.conf}:/etc/nginx/conf.d/default.conf
@@ -22,44 +22,44 @@ services:
     networks:
       - appnetwork
 
-  mysql:
-    image: mysql:5.7.32
-    container_name: mysql-sobunny
-    restart: always
-    tty: true
-    ports:
-      - "${PORT_MYSQL:-3306}:3306"
-    environment:
-      - MYSQL_ROOT_PASSWORD=pA7kE3xW!s9QmL2z
-      - MYSQL_USER=user
-      - MYSQL_PASSWORD=pA7kE3xW!s9QmL2z
-      - MYSQL_DATABASE=sobynny_db
-    volumes:
-      - mysql_data:/var/lib/mysql
-      - ./docker/mysql/sobunny.sql:/docker-entrypoint-initdb.d/sobunny.sql
-    networks:
-      - appnetwork
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 10s
-      timeout: 10s
-      retries: 5
+  # mysql:
+  #   image: mysql:5.7.32
+  #   container_name: mysql-sobunny
+  #   restart: always
+  #   tty: true
+  #   ports:
+  #     - "${PORT_MYSQL:-3306}:3306"
+  #   environment:
+  #     - MYSQL_ROOT_PASSWORD=pA7kE3xW!s9QmL2z
+  #     - MYSQL_USER=user
+  #     - MYSQL_PASSWORD=pA7kE3xW!s9QmL2z
+  #     - MYSQL_DATABASE=sobynny_db
+  #   volumes:
+  #     - mysql_data:/var/lib/mysql
+  #     - ./docker/mysql/sobunny.sql:/docker-entrypoint-initdb.d/sobunny.sql
+  #   networks:
+  #     - appnetwork
+  #   healthcheck:
+  #     test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+  #     interval: 5s
+  #     timeout: 10s
+  #     retries: 5
 
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    container_name: pma-sobunny
-    environment:
-      PMA_HOST: mysql-sobunny
-      PMA_PORT: 3306
-      PMA_ARBITRARY: 1
-    restart: always
-    ports:
-      - "${PORT_PHPMYADMIN:-81}:80"      
-    networks:
-      - appnetwork
-    depends_on:
-      mysql:
-        condition: service_healthy
+  # phpmyadmin:
+  #   image: phpmyadmin/phpmyadmin
+  #   container_name: pma-sobunny
+  #   environment:
+  #     PMA_HOST: mysql-sobunny
+  #     PMA_PORT: 3306
+  #     PMA_ARBITRARY: 1
+  #   restart: always
+  #   ports:
+  #     - "${PORT_PHPMYADMIN:-81}:80"      
+  #   networks:
+  #     - appnetwork
+  #   depends_on:
+  #     mysql:
+  #       condition: service_healthy
 
   php:
     build:
@@ -75,9 +75,9 @@ services:
       - "${PORT_PHP:-9000}:9000"
     networks:
       - appnetwork
-    depends_on:
-      mysql:
-        condition: service_healthy
+    # depends_on:
+    #   mysql:
+    #     condition: service_healthy
   
-volumes:
-  mysql_data:
+# volumes:
+#   mysql_data:
