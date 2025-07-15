@@ -1,7 +1,3 @@
-networks:
-  appnetwork:
-    name: appnetwork  # Esto fuerza el nombre exacto sin prefijos
-
 services:
 
   nginx:
